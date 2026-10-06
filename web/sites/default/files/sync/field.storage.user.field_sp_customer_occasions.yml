@@ -1,0 +1,36 @@
+uuid: 519fb47f-517d-4129-b6d2-378a4db8ae5b
+langcode: es
+status: true
+dependencies:
+  module:
+    - options
+    - user
+id: user.field_sp_customer_occasions
+field_name: field_sp_customer_occasions
+entity_type: user
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: cumpleanos
+      label: Cumpleanos
+    -
+      value: regalo
+      label: Regalos
+    -
+      value: oficina
+      label: Oficina
+    -
+      value: familia
+      label: Familia
+    -
+      value: capricho
+      label: Caprichos
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

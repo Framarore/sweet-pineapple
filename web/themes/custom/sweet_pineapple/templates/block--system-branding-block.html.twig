@@ -1,0 +1,16 @@
+{% extends "block.html.twig"%}
+{% block content %}
+{% set theme_path = base_path ~ active_theme_path() %}
+{% if site_logo or site_name %}
+<div class="ttr_header_logo">
+<a href="{{ path('<front>') }}" target="_self">
+<img src="{{ theme_path ~ '/images/sweet-pineapple-profile.jpg' }}" alt="{{ site_name|default('Home'|t) }}">
+{% if site_name %}
+<span class="ttr_header_logo_text">{{ site_name }}</span>
+{% endif %}
+</a>
+</div>
+{% endif %}
+{% if site_name or site_slogan %}
+{% endif %}
+{% endblock %}

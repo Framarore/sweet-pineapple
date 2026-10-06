@@ -1,0 +1,846 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sitecontent>
+  <menu>
+    <menu_item>
+      <menu_item_title>Home</menu_item_title>
+      <menu_item_path>home</menu_item_path>
+      <menu_item_slug>home</menu_item_slug>
+      <menu_item_status>1</menu_item_status>
+    </menu_item>
+    <menu_item>
+      <menu_item_title>About Us</menu_item_title>
+      <menu_item_path>about us</menu_item_path>
+      <menu_item_slug>about-us</menu_item_slug>
+      <menu_item_status>1</menu_item_status>
+    </menu_item>
+    <menu_item>
+      <menu_item_title>Services</menu_item_title>
+      <menu_item_path>services</menu_item_path>
+      <menu_item_slug>services</menu_item_slug>
+      <menu_item_status>1</menu_item_status>
+    </menu_item>
+    <menu_item>
+      <menu_item_title>Shop</menu_item_title>
+      <menu_item_path>shop</menu_item_path>
+      <menu_item_slug>shop</menu_item_slug>
+      <menu_item_status>1</menu_item_status>
+    </menu_item>
+    <menu_item>
+      <menu_item_title>Contact</menu_item_title>
+      <menu_item_path>contact</menu_item_path>
+      <menu_item_slug>contact</menu_item_slug>
+      <menu_item_status>1</menu_item_status>
+    </menu_item>
+    <menu_item>
+      <menu_item_title>Blog-wp</menu_item_title>
+      <menu_item_path>blog</menu_item_path>
+      <menu_item_slug>blog-wp</menu_item_slug>
+      <menu_item_status>1</menu_item_status>
+    </menu_item>
+  </menu>
+  <pages>
+    <content>
+      <meta_ID>tt_page1</meta_ID>
+      <page_title>Home</page_title>
+      <alias>home</alias>
+      <page_name>Home</page_name>
+      <page_header_id>home</page_header_id>
+      <state>1</state>
+      <featured>1</featured>
+      <created>07/08/2021 00:00:00</created>
+      <created_by_alias>SuperUser</created_by_alias>
+      <page_title_visibility>false</page_title_visibility>
+      <introtext><![CDATA[<div class="ttr_home_html_row0 row" >
+<div class="post_column col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 col-12">
+<div class="ttr_home_html_column00">
+<div class="margin_collapsetop"></div>
+<div class="html_content"><p style="text-align:Center; display:block; "><span style="font-family:'Great Vibes','Arial';font-size:1.786em;color:rgba(62,96,107,1);">Cakes &amp; Bakes</span></p><p style="text-align:Center; display:block; "><span style="font-family:'Lobster Two','Arial';font-weight:700;font-size:3.571em;color:rgba(62,96,107,1);">Feel The Taste</span></p></div>
+<div class="margin_collapsetop"></div>
+<div style="clear:both;width:0px;"></div>
+</div>
+</div>
+<div class=" visible-lg-block d-xl-block d-lg-block visible-md-block d-md-block visible-sm-block d-sm-block visible-xs-block d-block" style="clear: both;width:0px;"></div>
+<div class="post_column col-xl-4 col-lg-4 col-md-4 col-sm-12 col-xs-12 col-12">
+<div class="ttr_home_html_column01">
+<div class="margin_collapsetop"></div>
+<div class="html_content"><p style="margin:5px 0px 20px 0px;text-align:Center; display:block; line-height:3.11em;"><span class="ttr_image" style="float:none;display:block;overflow:hidden;text-align:center;margin:0px 0px 0px 0px;"><span><img class="ttr_uniform" style="max-height:1000px;max-width:800px;margin:0px 0px 20px 0px;" src="~base_path~sites/default/files/inline-images/kobbymendezWXJ33HOrzvEunsplash.jpg" alt="c" /></span></span><span style="font-family:'Lobster Two','Arial';font-size:2.143em;color:rgba(62,96,107,1);">Dry Fruit Cake</span></p><p style="text-align:Center; display:block; "><span style="font-family:'Poppins','Arial';">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore</span></p><p style="margin:20px 0px 20px 0px;text-align:Center; display:block; "><span><a href="https://templatetoaster.com" target="_self" class="btn btn-sm btn-primary">Shop Now</a></span></p></div>
+<div class="margin_collapsetop"></div>
+<div style="clear:both;width:0px;"></div>
+</div>
+</div>
+<div class=" visible-sm-block d-sm-block visible-xs-block d-block" style="clear: both;width:0px;"></div>
+<div class="post_column col-xl-4 col-lg-4 col-md-4 col-sm-12 col-xs-12 col-12">
+<div class="ttr_home_html_column02">
+<div class="margin_collapsetop"></div>
+<div class="html_content"><p style="margin:5px 0px 20px 0px;text-align:Center; display:block; line-height:3.11em;"><span class="ttr_image" style="float:none;display:block;overflow:hidden;text-align:center;margin:0px 0px 0px 0px;"><span><img class="ttr_uniform" style="max-height:1000px;max-width:800px;margin:0px 0px 20px 0px;" src="~base_path~sites/default/files/inline-images/anniesprattAjTclDIadpgunsplash1.jpg" alt="tu" /></span></span><span style="font-family:'Lobster Two','Arial';font-size:2.143em;color:rgba(62,96,107,1);">Creamy Cup Cake</span></p><p style="text-align:Center; display:block; "><span style="font-family:'Poppins','Arial';">Lorem ipsum dolor sit amet, consectetu adipiscing elit, sed do eiusmod temporincididunt ut labore et dolore</span></p><p style="margin:20px 0px 20px 0px;text-align:Center; display:block; "><span><a href="https://templatetoaster.com" target="_self" class="btn btn-sm btn-primary">Shop Now</a></span></p></div>
+<div class="margin_collapsetop"></div>
+<div style="clear:both;width:0px;"></div>
+</div>
+</div>
+<div class=" visible-sm-block d-sm-block visible-xs-block d-block" style="clear: both;width:0px;"></div>
+<div class="post_column col-xl-4 col-lg-4 col-md-4 col-sm-12 col-xs-12 col-12">
+<div class="ttr_home_html_column03">
+<div class="margin_collapsetop"></div>
+<div class="html_content"><p style="margin:5px 0px 20px 0px;text-align:Center; display:block; line-height:3.11em;"><span class="ttr_image" style="float:none;display:block;overflow:hidden;text-align:center;margin:0px 0px 0px 0px;"><span><img class="ttr_uniform" style="max-height:1000px;max-width:800px;margin:0px 0px 20px 0px;" src="~base_path~sites/default/files/inline-images/marinashanaTYmwXoBz9uMunsplash.jpg" alt="rtu" /></span></span><span style="font-family:'Lobster Two','Arial';font-size:2.143em;color:rgba(62,96,107,1);">Fruit Cake</span></p><p style="text-align:Center; display:block; "><span style="font-family:'Poppins','Arial';">Lorem ipsum dolor sit amet, consecteturadipiscing elit,sed do eiusmod temporincididunt ut labore et dolore</span></p><p style="margin:20px 0px 20px 0px;text-align:Center; display:block; "><span><a href="https://templatetoaster.com" target="_self" class="btn btn-sm btn-primary">Shop Now</a></span></p></div>
+<div class="margin_collapsetop"></div>
+<div style="clear:both;width:0px;"></div>
+</div>
+</div>
+<div class=" visible-lg-block d-xl-block d-lg-block visible-md-block d-md-block visible-sm-block d-sm-block visible-xs-block d-block" style="clear: both;width:0px;"></div>
+</div>
+<div class="ttr_home_html_row1 row" >
+<div class="post_column col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12 col-12">
+<div class="ttr_home_html_column10">
+<div class="margin_collapsetop"></div>
+<div class="html_content"><p style="line-height:3.93em;"><span style="font-family:'Lobster Two','Arial';font-size:2.714em;color:rgba(62,96,107,1);">Best selling Products </span></p><p style="line-height:1.07em;"><br style="font-family:'Playfair Display','Arial';" /></p><p style="margin:0px 0px 5px 0px;line-height:1.9em;"><span style="font-family:'Playfair Display','Arial';font-style:italic;font-size:1.286em;color:rgba(0,0,0,1);">Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur uis autem vel eum.</span></p><br style="line-height:1.07em;" /><p style="line-height:1.07em;"><span style="font-family:'Lato','Arial';">Nor again is there anyone who loves or pursues or desires to obtain pain of</span></p><p style="line-height:1.07em;"><span style="font-family:'Lato','Arial';">itself, because it is pain, but because occasionally circumstances occur in</span></p><p style="line-height:1.07em;"><span style="font-family:'Lato','Arial';">which toil and pain can procure him some great pleasure. To take a trivial</span></p><p style="line-height:1.07em;"><span style="font-family:'Lato','Arial';">example, which of us ever undertakes laborious physical exercise.</span></p><p style="margin:30px 0px 5px 0px;line-height:1.8em;"><span><a href="http://templatetoaster.com" target="_self" class="btn btn-md btn-primary">Learn More</a></span></p></div>
+<div class="margin_collapsetop"></div>
+<div style="clear:both;width:0px;"></div>
+</div>
+</div>
+<div class=" visible-sm-block d-sm-block visible-xs-block d-block" style="clear: both;width:0px;"></div>
+<div class="post_column col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12 col-12">
+<div class="ttr_home_html_column11">
+<div class="margin_collapsetop"></div>
+<div class="html_content"><p><span class="ttr_image" style="float:none;display:block;overflow:hidden;text-align:center;margin:0px 0px 0px 0px;"><span><img class="ttr_uniform" style="max-height:533px;max-width:800px;margin:0px 0px 0px 0px;" src="~base_path~sites/default/files/inline-images/ibrahimboranweg93vRGgGkunsplash.jpg" alt="gh" /></span></span></p></div>
+<div class="margin_collapsetop"></div>
+<div style="clear:both;width:0px;"></div>
+</div>
+</div>
+<div class=" visible-lg-block d-xl-block d-lg-block visible-md-block d-md-block visible-sm-block d-sm-block visible-xs-block d-block" style="clear: both;width:0px;"></div>
+</div>
+<div class="ttr_home_html_row2 row" >
+<div class="post_column col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 col-12">
+<div class="ttr_home_html_column20">
+<div class="margin_collapsetop"></div>
+<div class="html_content"><p style="text-align:Center; display:block; line-height:5.14em;"><span style="font-family:'Lobster Two','Arial';font-weight:700;font-size:3.571em;color:rgba(62,96,107,1);">Trending</span></p></div>
+<div class="margin_collapsetop"></div>
+<div style="clear:both;width:0px;"></div>
+</div>
+</div>
+<div class=" visible-lg-block d-xl-block d-lg-block visible-md-block d-md-block visible-sm-block d-sm-block visible-xs-block d-block" style="clear: both;width:0px;"></div>
+</div>
+<div class="ttr_home_html_row3 row" >
+<div class="post_column col-xl-3 col-lg-3 col-md-6 col-sm-12 col-xs-12 col-12">
+<div class="ttr_home_html_column30">
+<div class="margin_collapsetop"></div>
+<div class="html_content"><p style="text-align:Center; display:block; line-height:2.1em;"><span class="ttr_image" style="float:none;display:block;overflow:hidden;text-align:center;margin:0px 0px 0px 0px;"><span><img class="ttr_uniform" style="max-height:260px;max-width:260px;margin:0px 0px 20px 0px;" src="~base_path~sites/default/files/inline-images/ezgif.comwebptopng541.png" alt="h" /></span></span><span style="font-family:'Lobster Two','Arial';font-size:1.429em;color:rgba(62,96,107,1);">Strawberry Muffin</span></p><p style="text-align:Center; display:block; line-height:1.8em;"><span style="font-family:'Lobster Two','Arial';font-size:1.214em;color:rgba(62,96,107,1);">$65.00</span></p></div>
+<div class="margin_collapsetop"></div>
+<div style="clear:both;width:0px;"></div>
+</div>
+</div>
+<div class=" visible-sm-block d-sm-block visible-xs-block d-block" style="clear: both;width:0px;"></div>
+<div class="post_column col-xl-3 col-lg-3 col-md-6 col-sm-12 col-xs-12 col-12">
+<div class="ttr_home_html_column31">
+<div class="margin_collapsetop"></div>
+<div class="html_content"><p style="text-align:Center; display:block; line-height:2.1em;"><span class="ttr_image" style="float:none;display:block;overflow:hidden;text-align:center;margin:0px 0px 0px 0px;"><span><img class="ttr_uniform" style="max-height:260px;max-width:260px;margin:0px 0px 20px 0px;" src="~base_path~sites/default/files/inline-images/ezgif.comwebptopng53.png" alt="fgh" /></span></span><span style="font-family:'Lobster Two','Arial';font-size:1.429em;color:rgba(62,96,107,1);">Party Celebration Cake</span></p><p style="text-align:Center; display:block; line-height:1.8em;"><span style="font-family:'Lobster Two','Arial';font-size:1.214em;color:rgba(62,96,107,1);">$42.00</span></p></div>
+<div class="margin_collapsetop"></div>
+<div style="clear:both;width:0px;"></div>
+</div>
+</div>
+<div class=" visible-md-block d-md-block visible-sm-block d-sm-block visible-xs-block d-block" style="clear: both;width:0px;"></div>
+<div class="post_column col-xl-3 col-lg-3 col-md-6 col-sm-12 col-xs-12 col-12">
+<div class="ttr_home_html_column32">
+<div class="margin_collapsetop"></div>
+<div class="html_content"><p style="text-align:Center; display:block; line-height:2.1em;"><span class="ttr_image" style="float:none;display:block;overflow:hidden;text-align:center;margin:0px 0px 0px 0px;"><span><img class="ttr_uniform" style="max-height:260px;max-width:260px;margin:0px 0px 20px 0px;" src="~base_path~sites/default/files/inline-images/ezgif.comwebptopng52.png" alt="gh" /></span></span><span style="font-family:'Lobster Two','Arial';font-size:1.429em;color:rgba(62,96,107,1);">Cereal Donut</span></p><p style="text-align:Center; display:block; line-height:1.8em;"><span style="font-family:'Lobster Two','Arial';font-size:1.214em;color:rgba(62,96,107,1);">$23.00</span></p></div>
+<div class="margin_collapsetop"></div>
+<div style="clear:both;width:0px;"></div>
+</div>
+</div>
+<div class=" visible-sm-block d-sm-block visible-xs-block d-block" style="clear: both;width:0px;"></div>
+<div class="post_column col-xl-3 col-lg-3 col-md-6 col-sm-12 col-xs-12 col-12">
+<div class="ttr_home_html_column33">
+<div class="margin_collapsetop"></div>
+<div class="html_content"><p style="text-align:Center; display:block; line-height:2.1em;"><span class="ttr_image" style="float:none;display:block;overflow:hidden;text-align:center;margin:0px 0px 0px 0px;"><span><img class="ttr_uniform" style="max-height:260px;max-width:260px;margin:0px 0px 20px 0px;" src="~base_path~sites/default/files/inline-images/ezgif.comwebptopng51.png" alt="vbn" /></span></span><span style="font-family:'Lobster Two','Arial';font-size:1.429em;color:rgba(62,96,107,1);">Cupcake Basket</span></p><p style="text-align:Center; display:block; line-height:1.8em;"><span style="font-family:'Lobster Two','Arial';font-size:1.214em;color:rgba(62,96,107,1);">$60.00</span></p></div>
+<div class="margin_collapsetop"></div>
+<div style="clear:both;width:0px;"></div>
+</div>
+</div>
+<div class=" visible-lg-block d-xl-block d-lg-block visible-md-block d-md-block visible-sm-block d-sm-block visible-xs-block d-block" style="clear: both;width:0px;"></div>
+</div>
+<div class="ttr_home_html_row4 row" >
+<div class="post_column col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 col-12">
+<div class="ttr_home_html_column40">
+<div class="margin_collapsetop"></div>
+<div class="html_content"><p style="margin:5px 0px 10px 0px;text-align:Center; display:block; line-height:3.82em;"><span style="font-family:'Lobster Two','Arial';font-weight:700;font-size:2.643em;color:rgba(62,96,107,1);">Chikery Cake History</span></p><p style="margin:5px 0px 20px 0px;text-align:Center; display:block; line-height:1.8em;"><span style="font-size:1.214em;">“ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur sed turpis feugiat, mollis felis vel, viverra metus. Sed vel nulla non neque dictum imperdiet hendrerit ”</span></p><p style="text-align:Center; display:block; line-height:1.8em;"><span><a href="http://templatetoaster.com" target="_self" class="btn btn-md btn-primary">Learn More</a></span></p></div>
+<div class="margin_collapsetop"></div>
+<div style="clear:both;width:0px;"></div>
+</div>
+</div>
+<div class=" visible-lg-block d-xl-block d-lg-block visible-md-block d-md-block visible-sm-block d-sm-block visible-xs-block d-block" style="clear: both;width:0px;"></div>
+</div>
+<div class="ttr_home_html_row5 row" >
+<div class="post_column col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 col-12">
+<div class="ttr_home_html_column50">
+<div class="margin_collapsetop"></div>
+<div class="html_content"><p style="text-align:Center; display:block; line-height:5.14em;"><span style="font-family:'Lobster Two','Arial';font-weight:700;font-size:3.571em;color:rgba(62,96,107,1);">Indian Best Sweets</span></p></div>
+<div class="margin_collapsetop"></div>
+<div style="clear:both;width:0px;"></div>
+</div>
+</div>
+<div class=" visible-lg-block d-xl-block d-lg-block visible-md-block d-md-block visible-sm-block d-sm-block visible-xs-block d-block" style="clear: both;width:0px;"></div>
+</div>
+<div class="ttr_home_html_row6 row" >
+<div class="post_column col-xl-4 col-lg-4 col-md-4 col-sm-12 col-xs-12 col-12">
+<div class="ttr_home_html_column60">
+<div class="margin_collapsetop"></div>
+<div class="html_content"><p style="text-align:Center; display:block; line-height:2.1em;"><span class="ttr_image" style="float:none;display:block;overflow:hidden;text-align:center;margin:0px 0px 0px 0px;"><span><img class="ttr_uniform" style="max-height:232px;max-width:349px;margin:0px 0px 10px 0px;" src="~base_path~sites/default/files/inline-images/6be390f9f9031aeb550f7085a0b9f03e.jpg" alt="hgf" /></span></span><span style="font-family:'Crimson Text','Arial';font-weight:700;font-size:1.429em;color:rgba(62,96,107,1);">Kaju Katli</span></p></div>
+<div class="margin_collapsetop"></div>
+<div style="clear:both;width:0px;"></div>
+</div>
+</div>
+<div class=" visible-sm-block d-sm-block visible-xs-block d-block" style="clear: both;width:0px;"></div>
+<div class="post_column col-xl-4 col-lg-4 col-md-4 col-sm-12 col-xs-12 col-12">
+<div class="ttr_home_html_column61">
+<div class="margin_collapsetop"></div>
+<div class="html_content"><p style="text-align:Center; display:block; line-height:2.1em;"><span class="ttr_image" style="float:none;display:block;overflow:hidden;text-align:center;margin:0px 0px 0px 0px;"><span><img class="ttr_uniform" style="max-height:232px;max-width:349px;margin:0px 0px 10px 0px;" src="~base_path~sites/default/files/inline-images/ezgif.comwebptopng55.png" alt="s" /></span></span><span style="font-family:'Crimson Text','Arial';font-weight:700;font-size:1.429em;color:rgba(62,96,107,1);">Dodda Barfi</span></p></div>
+<div class="margin_collapsetop"></div>
+<div style="clear:both;width:0px;"></div>
+</div>
+</div>
+<div class=" visible-sm-block d-sm-block visible-xs-block d-block" style="clear: both;width:0px;"></div>
+<div class="post_column col-xl-4 col-lg-4 col-md-4 col-sm-12 col-xs-12 col-12">
+<div class="ttr_home_html_column62">
+<div class="margin_collapsetop"></div>
+<div class="html_content"><p style="text-align:Center; display:block; line-height:2.1em;"><span class="ttr_image" style="float:none;display:block;overflow:hidden;text-align:center;margin:0px 0px 0px 0px;"><span><img class="ttr_uniform" style="max-height:232px;max-width:349px;margin:0px 0px 10px 0px;" src="~base_path~sites/default/files/inline-images/images.jpg" alt="xsz" /></span></span><span style="font-family:'Crimson Text','Arial';font-weight:700;font-size:1.429em;color:rgba(62,96,107,1);">Rassgulla</span></p></div>
+<div class="margin_collapsetop"></div>
+<div style="clear:both;width:0px;"></div>
+</div>
+</div>
+<div class=" visible-lg-block d-xl-block d-lg-block visible-md-block d-md-block visible-sm-block d-sm-block visible-xs-block d-block" style="clear: both;width:0px;"></div>
+</div>
+<div class="ttr_home_html_row7 row" >
+<div class="post_column col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 col-12">
+<div class="ttr_home_html_column70">
+<div class="margin_collapsetop"></div>
+<div class="html_content"><p style="text-align:Center; display:block; line-height:2.51em;"><span style="font-family:'Lobster Two','Courgette','Arial';font-size:1.714em;color:rgba(0,0,0,1);">Sweet for Celebration</span></p><p style="text-align:Center; display:block; line-height:6.66em;"><span style="font-family:'Lobster Two','Courgette','Arial';font-size:4.643em;color:rgba(255,89,154,1);">Welcome to Cakes &amp; Bakes</span></p><p style="text-align:Center; display:block; "><span style="font-family:'Poppins','Courgette','Arial';color:rgba(0,0,0,1);">Lorem ipsum dolor sit amet, consectetur adipis cing elit.</span></p><p style="text-align:Center; display:block; "><span style="font-family:'Poppins','Courgette','Arial';color:rgba(0,0,0,1);">Nullam id arcu tortor. Sed eget sit ame egestas, cursus</span></p><p style="text-align:Center; display:block; "><span style="font-family:'Poppins','Courgette','Arial';color:rgba(0,0,0,1);">felis quis, vestibulum.</span></p><p style="margin:20px 0px 5px 0px;text-align:Center; display:block; "><span><a href="https://templatetoaster.com" target="_self" class="btn btn-md btn-primary">Shop Now</a></span></p></div>
+<div class="margin_collapsetop"></div>
+<div style="clear:both;width:0px;"></div>
+</div>
+</div>
+<div class=" visible-lg-block d-xl-block d-lg-block visible-md-block d-md-block visible-sm-block d-sm-block visible-xs-block d-block" style="clear: both;width:0px;"></div>
+</div>
+<div class="ttr_home_html_row8 row" >
+<div class="post_column col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 col-12">
+<div class="ttr_home_html_column80">
+<div class="margin_collapsetop"></div>
+<div class="html_content"><p style="text-align:Center; display:block; line-height:5.14em;"><span style="font-family:'Lobster Two','Arial';font-weight:700;font-size:3.571em;color:rgba(62,96,107,1);">Cookies &amp; Bread</span></p></div>
+<div class="margin_collapsetop"></div>
+<div style="clear:both;width:0px;"></div>
+</div>
+</div>
+<div class=" visible-lg-block d-xl-block d-lg-block visible-md-block d-md-block visible-sm-block d-sm-block visible-xs-block d-block" style="clear: both;width:0px;"></div>
+</div>
+<div class="ttr_home_html_row9 row" >
+<div class="post_column col-xl-4 col-lg-4 col-md-4 col-sm-12 col-xs-12 col-12">
+<div class="ttr_home_html_column90">
+<div class="margin_collapsetop"></div>
+<div class="html_content"><p style="text-align:Center; display:block; line-height:2.61em;"><span class="ttr_image" style="float:none;display:block;overflow:hidden;text-align:center;margin:0px 0px 0px 0px;"><span><img class="ttr_uniform" style="max-height:254px;max-width:382px;margin:0px 0px 10px 0px;" src="~base_path~sites/default/files/inline-images/joicekellyD5AIQmw5xEunsplash.jpg" alt="vv" /></span></span><span style="font-family:'Lobster Two','Arial';font-size:1.786em;color:rgba(51,51,51,1);">Baker &amp; Coffee</span></p><p style="text-align:Center; display:block; "><span style="font-family:'Lobster Two','Arial';">Delicious coffee</span></p></div>
+<div class="margin_collapsetop"></div>
+<div style="clear:both;width:0px;"></div>
+</div>
+</div>
+<div class=" visible-sm-block d-sm-block visible-xs-block d-block" style="clear: both;width:0px;"></div>
+<div class="post_column col-xl-4 col-lg-4 col-md-4 col-sm-12 col-xs-12 col-12">
+<div class="ttr_home_html_column91">
+<div class="margin_collapsetop"></div>
+<div class="html_content"><p><span class="ttr_image" style="float:none;display:block;overflow:hidden;text-align:center;margin:0px 0px 0px 0px;"><p style="text-align:Center; display:block; line-height:2.61em;"><span style="font-family:'Lobster Two','Arial';font-size:1.786em;">Baker &amp; Coffee</span></p><p style="text-align:Center; display:block; "><span style="font-family:'Lobster Two','Arial';">Delicious coffee</span></p><span><img class="ttr_uniform" style="max-height:232px;max-width:349px;margin:10px 0px 0px 0px;" src="~base_path~sites/default/files/inline-images/placeholder02.jpg" alt="dfg" /></span></span></p></div>
+<div class="margin_collapsetop"></div>
+<div style="clear:both;width:0px;"></div>
+</div>
+</div>
+<div class=" visible-sm-block d-sm-block visible-xs-block d-block" style="clear: both;width:0px;"></div>
+<div class="post_column col-xl-4 col-lg-4 col-md-4 col-sm-12 col-xs-12 col-12">
+<div class="ttr_home_html_column92">
+<div class="margin_collapsetop"></div>
+<div class="html_content"><p style="text-align:Center; display:block; line-height:2.61em;"><span class="ttr_image" style="float:none;display:block;overflow:hidden;text-align:center;margin:0px 0px 0px 0px;"><span><img class="ttr_uniform" style="max-height:232px;max-width:349px;margin:0px 0px 10px 0px;" src="~base_path~sites/default/files/inline-images/alexhuHPk_kxqLzXQunsplash.jpg" alt="d" /></span></span><span style="font-family:'Lobster Two','Arial';font-size:1.786em;">Baker &amp; Coffee</span></p><p style="text-align:Center; display:block; "><span style="font-family:'Lobster Two','Arial';">Tiramisu cheesecake cupcakes</span></p></div>
+<div class="margin_collapsetop"></div>
+<div style="clear:both;width:0px;"></div>
+</div>
+</div>
+<div class=" visible-lg-block d-xl-block d-lg-block visible-md-block d-md-block visible-sm-block d-sm-block visible-xs-block d-block" style="clear: both;width:0px;"></div>
+</div>
+<div class="ttr_home_html_row10 row" >
+<div class="post_column col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 col-12">
+<div class="ttr_home_html_column100">
+<div class="margin_collapsetop"></div>
+<div class="html_content"><p style="text-align:Center; display:block; line-height:5.14em;"><span style="font-family:'Lobster Two','Arial';font-weight:700;font-size:3.571em;color:rgba(62,96,107,1);">Our Best Chef</span></p></div>
+<div class="margin_collapsetop"></div>
+<div style="clear:both;width:0px;"></div>
+</div>
+</div>
+<div class=" visible-lg-block d-xl-block d-lg-block visible-md-block d-md-block visible-sm-block d-sm-block visible-xs-block d-block" style="clear: both;width:0px;"></div>
+</div>
+<div class="ttr_home_html_row11 row" >
+<div class="post_column col-xl-4 col-lg-4 col-md-4 col-sm-12 col-xs-12 col-12">
+<div class="ttr_home_html_column110">
+<div class="margin_collapsetop"></div>
+<div class="html_content"><p style="text-align:Center; display:block; line-height:2.1em;"><span class="ttr_image" style="float:none;display:block;overflow:hidden;text-align:center;margin:0px 0px 0px 0px;"><span><img class="ttr_uniform" style="max-height:560px;max-width:720px;margin:0px 0px 10px 0px;" src="~base_path~sites/default/files/inline-images/team1.jpg" alt="fv" /></span></span><span style="font-family:'Lobster Two','Arial';font-size:1.429em;color:rgba(0,0,0,1);">Christian Gregory</span></p><p style="text-align:Center; display:block; line-height:1.8em;"><span style="font-family:'Playfair Display','Arial';font-weight:1;font-size:1.214em;color:rgba(0,0,0,1);">CEO - Founder</span></p></div>
+<div class="margin_collapsetop"></div>
+<div style="clear:both;width:0px;"></div>
+</div>
+</div>
+<div class=" visible-sm-block d-sm-block visible-xs-block d-block" style="clear: both;width:0px;"></div>
+<div class="post_column col-xl-4 col-lg-4 col-md-4 col-sm-12 col-xs-12 col-12">
+<div class="ttr_home_html_column111">
+<div class="margin_collapsetop"></div>
+<div class="html_content"><p style="text-align:Center; display:block; line-height:2.1em;"><span class="ttr_image" style="float:none;display:block;overflow:hidden;text-align:center;margin:0px 0px 0px 0px;"><span><img class="ttr_uniform" style="max-height:560px;max-width:720px;margin:0px 0px 10px 0px;" src="~base_path~sites/default/files/inline-images/team2.jpg" alt="gvf" /></span></span><span style="font-family:'Lobster Two','Arial';font-size:1.429em;color:rgba(0,0,0,1);">Christian Gregory</span></p><p style="text-align:Center; display:block; line-height:1.8em;"><span style="font-family:'Playfair Display','Arial';font-weight:1;font-size:1.214em;color:rgba(0,0,0,1);">Chef</span></p></div>
+<div class="margin_collapsetop"></div>
+<div style="clear:both;width:0px;"></div>
+</div>
+</div>
+<div class=" visible-sm-block d-sm-block visible-xs-block d-block" style="clear: both;width:0px;"></div>
+<div class="post_column col-xl-4 col-lg-4 col-md-4 col-sm-12 col-xs-12 col-12">
+<div class="ttr_home_html_column112">
+<div class="margin_collapsetop"></div>
+<div class="html_content"><p style="text-align:Center; display:block; line-height:2.1em;"><span class="ttr_image" style="float:none;display:block;overflow:hidden;text-align:center;margin:0px 0px 0px 0px;"><span><img class="ttr_uniform" style="max-height:560px;max-width:720px;margin:0px 0px 10px 0px;" src="~base_path~sites/default/files/inline-images/team11.jpg" alt="dcf" /></span></span><span style="font-family:'Lobster Two','Arial';font-size:1.429em;color:rgba(0,0,0,1);">Christian Gregory</span></p><p style="text-align:Center; display:block; line-height:1.8em;"><span style="font-family:'Playfair Display','Arial';font-weight:1;font-size:1.214em;color:rgba(0,0,0,1);">Chef</span></p></div>
+<div class="margin_collapsetop"></div>
+<div style="clear:both;width:0px;"></div>
+</div>
+</div>
+<div class=" visible-lg-block d-xl-block d-lg-block visible-md-block d-md-block visible-sm-block d-sm-block visible-xs-block d-block" style="clear: both;width:0px;"></div>
+</div>
+<div class="ttr_home_html_row12 row" >
+<div class="post_column col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 col-12">
+<div class="ttr_home_html_column120">
+<div class="margin_collapsetop"></div>
+<div class="html_content"><p style="text-align:Center; display:block; line-height:5.14em;"><span style="font-family:'Lobster Two','Arial';font-weight:700;font-size:3.571em;color:rgba(62,96,107,1);">Our Blogs</span></p></div>
+<div class="margin_collapsetop"></div>
+<div style="clear:both;width:0px;"></div>
+</div>
+</div>
+<div class=" visible-lg-block d-xl-block d-lg-block visible-md-block d-md-block visible-sm-block d-sm-block visible-xs-block d-block" style="clear: both;width:0px;"></div>
+</div>
+<div class="ttr_home_html_row13 row" >
+<div class="post_column col-xl-4 col-lg-4 col-md-4 col-sm-12 col-xs-12 col-12">
+<div class="ttr_home_html_column130">
+<div class="margin_collapsetop"></div>
+<div class="html_content"><p style="text-align:Center; display:block; line-height:2.1em;"><span class="ttr_image" style="float:none;display:block;overflow:hidden;text-align:center;margin:0px 0px 0px 0px;"><span><img class="ttr_uniform" style="max-height:600px;max-width:800px;margin:0px 0px 10px 0px;" src="~base_path~sites/default/files/inline-images/img6800x600.jpg" alt="67i" /></span></span><span style="font-family:'Crimson Text','Arial';font-weight:700;font-size:1.429em;">Standard Post Format</span></p><p style="text-align:Center; display:block; ">Lorem ipsum dolor sit amet, consectetur adipisici elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Idque Caesaris [...]</p></div>
+<div class="margin_collapsetop"></div>
+<div style="clear:both;width:0px;"></div>
+</div>
+</div>
+<div class=" visible-sm-block d-sm-block visible-xs-block d-block" style="clear: both;width:0px;"></div>
+<div class="post_column col-xl-4 col-lg-4 col-md-4 col-sm-12 col-xs-12 col-12">
+<div class="ttr_home_html_column131">
+<div class="margin_collapsetop"></div>
+<div class="html_content"><p style="text-align:Center; display:block; "><span class="ttr_image" style="float:none;display:block;overflow:hidden;text-align:center;margin:0px 0px 0px 0px;"><span><img class="ttr_uniform" style="max-height:600px;max-width:800px;margin:0px 0px 10px 0px;" src="~base_path~sites/default/files/inline-images/img7800x600.jpg" alt="gtyu" /></span></span><span style="font-family:'Crimson Text','Arial';font-weight:700;font-size:1.429em;">Standard Post Format</span></p><p style="margin:5px 0px 5px 0px;text-align:Center; display:block; line-height:1.49em;color:rgba(51,51,51,1);">Lorem ipsum dolor sit amet, consectetur adipisici elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Idque Caesaris [...]</p></div>
+<div class="margin_collapsetop"></div>
+<div style="clear:both;width:0px;"></div>
+</div>
+</div>
+<div class=" visible-sm-block d-sm-block visible-xs-block d-block" style="clear: both;width:0px;"></div>
+<div class="post_column col-xl-4 col-lg-4 col-md-4 col-sm-12 col-xs-12 col-12">
+<div class="ttr_home_html_column132">
+<div class="margin_collapsetop"></div>
+<div class="html_content"><p style="text-align:Center; display:block; "><span class="ttr_image" style="float:none;display:block;overflow:hidden;text-align:center;margin:0px 0px 0px 0px;"><span><img class="ttr_uniform" style="max-height:600px;max-width:800px;margin:0px 0px 10px 0px;" src="~base_path~sites/default/files/inline-images/img9800x600.jpg" alt="b" /></span></span><span style="font-family:'Crimson Text','Arial';font-weight:700;font-size:1.429em;">Standard Post Format</span></p><p style="margin:5px 0px 5px 0px;text-align:Center; display:block; line-height:1.49em;color:rgba(51,51,51,1);">Lorem ipsum dolor sit amet, consectetur adipisici elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Idque Caesaris [...]</p></div>
+<div class="margin_collapsetop"></div>
+<div style="clear:both;width:0px;"></div>
+</div>
+</div>
+<div class=" visible-lg-block d-xl-block d-lg-block visible-md-block d-md-block visible-sm-block d-sm-block visible-xs-block d-block" style="clear: both;width:0px;"></div>
+</div>
+<div class="ttr_home_html_row14 row" >
+<div class="post_column col-xl-3 col-lg-3 col-md-6 col-sm-3 col-xs-3 col-3">
+<div class="ttr_home_html_column140">
+<div class="margin_collapsetop"></div>
+<div class="html_content"><p><span class="ttr_image" style="float:none;display:block;overflow:hidden;text-align:center;margin:0px 0px 0px 0px;"><span><img class="ttr_uniform" style="max-height:96px;max-width:142px;margin:0px 0px 0px 0px;" src="~base_path~sites/default/files/inline-images/client1.png" alt="jhgf" /></span></span></p></div>
+<div class="margin_collapsetop"></div>
+<div style="clear:both;width:0px;"></div>
+</div>
+</div>
+<div class="post_column col-xl-3 col-lg-3 col-md-6 col-sm-3 col-xs-3 col-3">
+<div class="ttr_home_html_column141">
+<div class="margin_collapsetop"></div>
+<div class="html_content"><p><span class="ttr_image" style="float:none;display:block;overflow:hidden;text-align:center;margin:0px 0px 0px 0px;"><span><img class="ttr_uniform" style="max-height:96px;max-width:142px;margin:0px 0px 0px 0px;" src="~base_path~sites/default/files/inline-images/client2.png" alt="ytr" /></span></span></p></div>
+<div class="margin_collapsetop"></div>
+<div style="clear:both;width:0px;"></div>
+</div>
+</div>
+<div class=" visible-md-block d-md-block" style="clear: both;width:0px;"></div>
+<div class="post_column col-xl-3 col-lg-3 col-md-6 col-sm-3 col-xs-3 col-3">
+<div class="ttr_home_html_column142">
+<div class="margin_collapsetop"></div>
+<div class="html_content"><p><span class="ttr_image" style="float:none;display:block;overflow:hidden;text-align:center;margin:0px 0px 0px 0px;"><span><img class="ttr_uniform" style="max-height:96px;max-width:142px;margin:0px 0px 0px 0px;" src="~base_path~sites/default/files/inline-images/client3.png" alt="gfds" /></span></span></p></div>
+<div class="margin_collapsetop"></div>
+<div style="clear:both;width:0px;"></div>
+</div>
+</div>
+<div class="post_column col-xl-3 col-lg-3 col-md-6 col-sm-3 col-xs-3 col-3">
+<div class="ttr_home_html_column143">
+<div class="margin_collapsetop"></div>
+<div class="html_content"><p><span class="ttr_image" style="float:none;display:block;overflow:hidden;text-align:center;margin:0px 0px 0px 0px;"><span><img class="ttr_uniform" style="max-height:96px;max-width:142px;margin:0px 0px 0px 0px;" src="~base_path~sites/default/files/inline-images/client5.png" alt="bvcx" /></span></span></p></div>
+<div class="margin_collapsetop"></div>
+<div style="clear:both;width:0px;"></div>
+</div>
+</div>
+<div class=" visible-lg-block d-xl-block d-lg-block visible-md-block d-md-block visible-sm-block d-sm-block visible-xs-block d-block" style="clear: both;width:0px;"></div>
+</div>
+]]></introtext>
+    </content>
+    <content>
+      <meta_ID>tt_page2</meta_ID>
+      <page_title>About Us</page_title>
+      <alias>about-us</alias>
+      <page_name>About Us</page_name>
+      <page_header_id>about us</page_header_id>
+      <state>1</state>
+      <featured>1</featured>
+      <created>07/08/2021 00:00:00</created>
+      <created_by_alias>SuperUser</created_by_alias>
+      <page_title_visibility>false</page_title_visibility>
+      <introtext><![CDATA[<div class="ttr_about-us_html_row0 row" >
+<div class="post_column col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12 col-12">
+<div class="ttr_about-us_html_column00">
+<div class="margin_collapsetop"></div>
+<div class="html_content"><p style="line-height:2.61em;"><span style="font-family:'Crimson Text','Arial';font-weight:700;font-size:1.786em;color:rgba(127,70,44,1);">Who We Are</span></p><p style="margin:5px 0px 20px 0px;line-height:2.61em;"><span style="font-family:'Crimson Text','Arial';font-weight:700;font-size:1.786em;color:rgba(127,70,44,1);">Fashion democracy</span></p><p style="margin:5px 0px 20px 0px;line-height:1.69em;"><span style="font-size:1.143em;">We believe in a world where you have total freedom to be you, without judgement. To experiment. To express yourself. To be brave and grab life as the extraordinary adventure it is. So we make sure everyone has an equal chance to discover all the amazing things they’re capable of – no matter who they are, where they’re from or what looks they like to boss. We exist to give you the confidence to be whoever you want to be.</span></p><p style="line-height:1.69em;"><span><a href="http://templatetoaster.com" target="_self" class="btn btn-md btn-default">Learn More</a></span></p></div>
+<div class="margin_collapsetop"></div>
+<div style="clear:both;width:0px;"></div>
+</div>
+</div>
+<div class=" visible-sm-block d-sm-block visible-xs-block d-block" style="clear: both;width:0px;"></div>
+<div class="post_column col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12 col-12">
+<div class="ttr_about-us_html_column01">
+<div class="margin_collapsetop"></div>
+<div class="html_content"><br /></div>
+<div class="margin_collapsetop"></div>
+<div style="clear:both;width:0px;"></div>
+</div>
+</div>
+<div class=" visible-lg-block d-xl-block d-lg-block visible-md-block d-md-block visible-sm-block d-sm-block visible-xs-block d-block" style="clear: both;width:0px;"></div>
+</div>
+<div class="ttr_about-us_html_row1 row" >
+<div class="post_column col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12 col-12">
+<div class="ttr_about-us_html_column10">
+<div class="margin_collapsetop"></div>
+<div class="html_content"><br /></div>
+<div class="margin_collapsetop"></div>
+<div style="clear:both;width:0px;"></div>
+</div>
+</div>
+<div class=" visible-sm-block d-sm-block visible-xs-block d-block" style="clear: both;width:0px;"></div>
+<div class="post_column col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12 col-12">
+<div class="ttr_about-us_html_column11">
+<div class="margin_collapsetop"></div>
+<div class="html_content"><p style="line-height:2.61em;"><span style="font-family:'Crimson Text','Arial';font-weight:700;font-size:1.786em;color:rgba(127,70,44,1);">Choice For All</span></p><p style="margin:5px 0px 20px 0px;line-height:2.61em;"><span style="font-family:'Crimson Text','Arial';font-weight:700;font-size:1.786em;color:rgba(127,70,44,1);">Fashion democracy</span></p><p style="margin:5px 0px 20px 0px;line-height:1.69em;"><span style="font-size:1.143em;">Our audience (AKA you) is wonderfully unique. And we do everything we can to help you find your fit, offering our Ciloe Brands in more than 30 sizes – and we're committed to providing all sizes at the same price – so you can be confident we’ve got the perfect thing for you. We’re also proud to partner with GLAAD, one of the biggest voices in LGBTQ activism, on a gender-neutral collection to unite in accelerating acceptance.</span></p><p style="line-height:1.69em;"><span><a href="http://templatetoaster.com" target="_self" class="btn btn-md btn-default">Learn More</a></span></p></div>
+<div class="margin_collapsetop"></div>
+<div style="clear:both;width:0px;"></div>
+</div>
+</div>
+<div class=" visible-lg-block d-xl-block d-lg-block visible-md-block d-md-block visible-sm-block d-sm-block visible-xs-block d-block" style="clear: both;width:0px;"></div>
+</div>
+<div class="ttr_about-us_html_row2 row" >
+<div class="post_column col-xl-4 col-lg-4 col-md-12 col-sm-12 col-xs-12 col-12">
+<div class="ttr_about-us_html_column20">
+<div class="margin_collapsetop"></div>
+<div class="html_content"><br /></div>
+<div class="margin_collapsetop"></div>
+<div style="clear:both;width:0px;"></div>
+</div>
+</div>
+<div class=" visible-md-block d-md-block visible-sm-block d-sm-block visible-xs-block d-block" style="clear: both;width:0px;"></div>
+<div class="post_column col-xl-4 col-lg-4 col-md-12 col-sm-12 col-xs-12 col-12">
+<div class="ttr_about-us_html_column21">
+<div class="margin_collapsetop"></div>
+<div class="html_content"><p style="margin:5px 0px 10px 0px;text-align:Center; display:block; line-height:3.32em;"><span style="font-family:'Crimson Text','Arial';font-weight:700;font-size:2.286em;color:rgba(255,255,255,1);">Best Services</span></p><p style="margin:5px 0px 20px 0px;text-align:Center; display:block; line-height:1.69em;"><span style="font-size:1.143em;color:rgba(255,255,255,1);">Consectetur adipiscing elit. Curabitur sed turpis feugiat, sed vel nulla non neque. Nullamlacinia faucibus risus, a euismod lorem tincidunt id. Vestibulum imperdiet nibh vel magna lacinia ultricesimperdiet.</span></p><p style="text-align:Center; display:block; line-height:1.8em;"><span style="font-size:1.214em;color:rgba(255,255,255,1);">BEST QUALITY</span></p><p style="text-align:Center; display:block; line-height:1.8em;"><span style="font-size:1.214em;color:rgba(255,255,255,1);">FAST DELIVERED</span></p><p style="text-align:Center; display:block; line-height:1.8em;"><span style="font-size:1.214em;color:rgba(255,255,255,1);">EVENT CAKES</span></p><p style="text-align:Center; display:block; line-height:1.8em;"><span style="font-size:1.214em;color:rgba(255,255,255,1);">INGREDIENT SUPPLY</span></p><p style="text-align:Center; display:block; line-height:1.8em;"><span style="font-size:1.214em;color:rgba(255,255,255,1);">ONLINE BOOKING</span></p></div>
+<div class="margin_collapsetop"></div>
+<div style="clear:both;width:0px;"></div>
+</div>
+</div>
+<div class=" visible-md-block d-md-block visible-sm-block d-sm-block visible-xs-block d-block" style="clear: both;width:0px;"></div>
+<div class="post_column col-xl-4 col-lg-4 col-md-12 col-sm-12 col-xs-12 col-12">
+<div class="ttr_about-us_html_column22">
+<div class="margin_collapsetop"></div>
+<div class="html_content"><br /></div>
+<div class="margin_collapsetop"></div>
+<div style="clear:both;width:0px;"></div>
+</div>
+</div>
+<div class=" visible-lg-block d-xl-block d-lg-block visible-md-block d-md-block visible-sm-block d-sm-block visible-xs-block d-block" style="clear: both;width:0px;"></div>
+</div>
+<div class="ttr_about-us_html_row3 row" >
+<div class="post_column col-xl-4 col-lg-4 col-md-4 col-sm-12 col-xs-12 col-12">
+<div class="ttr_about-us_html_column30">
+<div class="margin_collapsetop"></div>
+<div class="html_content"><p style="text-align:Center; display:block; line-height:2.61em;"><span style="font-family:'Crimson Text','Arial';font-weight:700;font-size:1.786em;color:rgba(255,255,255,1);">Free Shipping</span></p><p style="text-align:Center; display:block; line-height:1.59em;"><span style="font-size:1.071em;color:rgba(255,255,255,1);">On in Stock items ordered by 5.00 pm</span></p></div>
+<div class="margin_collapsetop"></div>
+<div style="clear:both;width:0px;"></div>
+</div>
+</div>
+<div class=" visible-sm-block d-sm-block visible-xs-block d-block" style="clear: both;width:0px;"></div>
+<div class="post_column col-xl-4 col-lg-4 col-md-4 col-sm-12 col-xs-12 col-12">
+<div class="ttr_about-us_html_column31">
+<div class="margin_collapsetop"></div>
+<div class="html_content"><p style="text-align:Center; display:block; line-height:2.61em;"><span style="font-family:'Crimson Text','Arial';font-weight:700;font-size:1.786em;color:rgba(255,255,255,1);">Accept Multi Currency</span></p><p style="text-align:Center; display:block; line-height:1.59em;"><span style="font-size:1.071em;color:rgba(255,255,255,1);">Payment on Multi Currency</span></p></div>
+<div class="margin_collapsetop"></div>
+<div style="clear:both;width:0px;"></div>
+</div>
+</div>
+<div class=" visible-sm-block d-sm-block visible-xs-block d-block" style="clear: both;width:0px;"></div>
+<div class="post_column col-xl-4 col-lg-4 col-md-4 col-sm-12 col-xs-12 col-12">
+<div class="ttr_about-us_html_column32">
+<div class="margin_collapsetop"></div>
+<div class="html_content"><p style="text-align:Center; display:block; line-height:2.61em;"><span style="font-family:'Crimson Text','Arial';font-weight:700;font-size:1.786em;color:rgba(255,255,255,1);">Custom % Services</span></p><p style="text-align:Center; display:block; line-height:1.59em;"><span style="font-size:1.071em;color:rgba(255,255,255,1);">Support 24/7</span></p></div>
+<div class="margin_collapsetop"></div>
+<div style="clear:both;width:0px;"></div>
+</div>
+</div>
+<div class=" visible-lg-block d-xl-block d-lg-block visible-md-block d-md-block visible-sm-block d-sm-block visible-xs-block d-block" style="clear: both;width:0px;"></div>
+</div>
+]]></introtext>
+    </content>
+    <content>
+      <meta_ID>tt_page3</meta_ID>
+      <page_title>Contact</page_title>
+      <alias>contact</alias>
+      <page_name>Contact</page_name>
+      <page_header_id>contact</page_header_id>
+      <state>1</state>
+      <featured>1</featured>
+      <created>07/08/2021 00:00:00</created>
+      <created_by_alias>SuperUser</created_by_alias>
+      <page_title_visibility>false</page_title_visibility>
+      <introtext><![CDATA[<div class="ttr_contact_html_row0 row" >
+<div class="post_column col-xl-12 col-lg-12 col-md-6 col-sm-12 col-xs-12 col-12">
+<div class="ttr_contact_html_column00">
+<div class="margin_collapsetop"></div>
+<div class="html_content"><p style="text-align:Center; display:block; line-height:2.61em;"><span style="font-family:'Crimson Text','Arial';font-weight:700;font-size:1.786em;color:rgba(127,70,44,1);">OUR LOCATIONS</span></p><p style="text-align:Center; display:block; line-height:1.69em;"><span style="font-size:1.143em;">As your neighborhood bakery, we're always there</span>.</p></div>
+<div class="margin_collapsetop"></div>
+<div style="clear:both;width:0px;"></div>
+</div>
+</div>
+<div class=" visible-lg-block d-xl-block d-lg-block visible-sm-block d-sm-block visible-xs-block d-block" style="clear: both;width:0px;"></div>
+</div>
+<div class="ttr_contact_html_row1 row" >
+<div class="post_column col-xl-3 col-lg-3 col-md-6 col-sm-12 col-xs-12 col-12">
+<div class="ttr_contact_html_column10">
+<div class="margin_collapsetop"></div>
+<div class="html_content"><p style="text-align:Center; display:block; line-height:2.1em;"><span style="font-family:'Crimson Text','Arial';font-weight:700;font-size:1.429em;">Hoboken</span></p><p style="text-align:Center; display:block; ">95 Washington Street</p><p style="text-align:Center; display:block; ">New Jersey 11968</p><p style="text-align:Center; display:block; ">631 204 1701</p></div>
+<div class="margin_collapsetop"></div>
+<div style="clear:both;width:0px;"></div>
+</div>
+</div>
+<div class=" visible-sm-block d-sm-block visible-xs-block d-block" style="clear: both;width:0px;"></div>
+<div class="post_column col-xl-3 col-lg-3 col-md-6 col-sm-12 col-xs-12 col-12">
+<div class="ttr_contact_html_column11">
+<div class="margin_collapsetop"></div>
+<div class="html_content"><p style="margin:5px 0px 5px 0px;text-align:Center; display:block; line-height:2.1em;color:rgba(51,51,51,1);"><span style="font-family:'Crimson Text','Arial';font-weight:700;font-size:1.429em;">Marlton</span></p><p style="margin:5px 0px 5px 0px;text-align:Center; display:block; line-height:1.49em;color:rgba(51,51,51,1);">300 Route 73 S</p><p style="margin:5px 0px 5px 0px;text-align:Center; display:block; line-height:1.49em;color:rgba(51,51,51,1);">New Jersey 11968</p><p style="margin:5px 0px 5px 0px;text-align:Center; display:block; line-height:1.49em;color:rgba(51,51,51,1);">631 204 1701</p></div>
+<div class="margin_collapsetop"></div>
+<div style="clear:both;width:0px;"></div>
+</div>
+</div>
+<div class=" visible-md-block d-md-block visible-sm-block d-sm-block visible-xs-block d-block" style="clear: both;width:0px;"></div>
+<div class="post_column col-xl-3 col-lg-3 col-md-6 col-sm-12 col-xs-12 col-12">
+<div class="ttr_contact_html_column12">
+<div class="margin_collapsetop"></div>
+<div class="html_content"><p style="margin:5px 0px 5px 0px;text-align:Center; display:block; line-height:2.1em;color:rgba(51,51,51,1);"><span style="font-family:'Crimson Text','Arial';font-weight:700;font-size:1.429em;">Morristown</span></p><p style="margin:5px 0px 5px 0px;text-align:Center; display:block; line-height:1.49em;color:rgba(51,51,51,1);">40 Market Street</p><p style="margin:5px 0px 5px 0px;text-align:Center; display:block; line-height:1.49em;color:rgba(51,51,51,1);">New Jersey 11968</p><p style="margin:5px 0px 5px 0px;text-align:Center; display:block; line-height:1.49em;color:rgba(51,51,51,1);">631 204 1701</p></div>
+<div class="margin_collapsetop"></div>
+<div style="clear:both;width:0px;"></div>
+</div>
+</div>
+<div class=" visible-sm-block d-sm-block visible-xs-block d-block" style="clear: both;width:0px;"></div>
+<div class="post_column col-xl-3 col-lg-3 col-md-6 col-sm-12 col-xs-12 col-12">
+<div class="ttr_contact_html_column13">
+<div class="margin_collapsetop"></div>
+<div class="html_content"><p style="margin:5px 0px 5px 0px;text-align:Center; display:block; line-height:2.1em;color:rgba(51,51,51,1);"><span style="font-family:'Crimson Text','Arial';font-weight:700;font-size:1.429em;">Times Square</span></p><p style="margin:5px 0px 5px 0px;text-align:Center; display:block; line-height:1.49em;color:rgba(51,51,51,1);">Times Square</p><p style="margin:5px 0px 5px 0px;text-align:Center; display:block; line-height:1.49em;color:rgba(51,51,51,1);">New York 11968</p><p style="margin:5px 0px 5px 0px;text-align:Center; display:block; line-height:1.49em;color:rgba(51,51,51,1);">631 204 1701</p></div>
+<div class="margin_collapsetop"></div>
+<div style="clear:both;width:0px;"></div>
+</div>
+</div>
+<div class=" visible-lg-block d-xl-block d-lg-block visible-md-block d-md-block visible-sm-block d-sm-block visible-xs-block d-block" style="clear: both;width:0px;"></div>
+</div>
+<div class="ttr_contact_html_row2 row" >
+<div class="post_column col-xl-12 col-lg-12 col-md-6 col-sm-12 col-xs-12 col-12">
+<div class="ttr_contact_html_column20">
+<div class="margin_collapsetop"></div>
+
+<div class="margin_collapsetop"></div>
+<div style="clear:both;width:0px;"></div>
+</div>
+</div>
+<div class=" visible-lg-block d-xl-block d-lg-block visible-sm-block d-sm-block visible-xs-block d-block" style="clear: both;width:0px;"></div>
+</div>
+]]></introtext>
+    </content>
+    <content>
+      <meta_ID>tt_page4</meta_ID>
+      <page_title>Services</page_title>
+      <alias>services</alias>
+      <page_name>Services</page_name>
+      <page_header_id>Services</page_header_id>
+      <state>1</state>
+      <featured>1</featured>
+      <created>07/08/2021 00:00:00</created>
+      <created_by_alias>SuperUser</created_by_alias>
+      <page_title_visibility>false</page_title_visibility>
+      <introtext><![CDATA[<div class="ttr_services_html_row0 row" >
+<div class="post_column col-xl-4 col-lg-4 col-md-6 col-sm-12 col-xs-12 col-12">
+<div class="ttr_services_html_column00">
+<div class="margin_collapsetop"></div>
+<div class="html_content"><p style="margin:5px 0px 10px 0px;text-align:Center; display:block; line-height:2.1em;"><span class="ttr_image" style="float:none;display:block;overflow:hidden;text-align:center;margin:0px 0px 0px 0px;"><span><img class="ttr_uniform" style="max-height:100px;max-width:101px;margin:0px 0px 20px 0px;" src="~base_path~sites/default/files/inline-images/path847.png" alt="fgh" /></span></span><span style="font-family:'Crimson Text','Arial';font-weight:700;font-size:1.429em;">BAKERY</span></p><p style="margin:5px 0px 20px 0px;text-align:Center; display:block; line-height:1.68em;"><span style="font-size:1.071em;">We have all your favorite traditional bread, 7 days a week! You can choose from a rich variety of cookies, pastries and cakes.</span></p><p style="text-align:Center; display:block; "><span><a href="http://templatetoaster.com" target="_self" class="btn btn-md btn-default">Read More</a></span></p></div>
+<div class="margin_collapsetop"></div>
+<div style="clear:both;width:0px;"></div>
+</div>
+</div>
+<div class=" visible-sm-block d-sm-block visible-xs-block d-block" style="clear: both;width:0px;"></div>
+<div class="post_column col-xl-4 col-lg-4 col-md-6 col-sm-12 col-xs-12 col-12">
+<div class="ttr_services_html_column01">
+<div class="margin_collapsetop"></div>
+<div class="html_content"><p style="margin:5px 0px 10px 0px;text-align:Center; display:block; line-height:2.1em;"><span class="ttr_image" style="float:none;display:block;overflow:hidden;text-align:center;margin:0px 0px 0px 0px;"><span><img class="ttr_uniform" style="max-height:100px;max-width:100px;margin:0px 0px 20px 0px;" src="~base_path~sites/default/files/inline-images/path863.png" alt="wef" /></span></span><span style="font-family:'Crimson Text','Arial';font-weight:700;font-size:1.429em;">CAKES</span></p><p style="margin:5px 0px 20px 0px;text-align:Center; display:block; line-height:1.59em;"><span style="font-size:1.071em;">We specialize in custom cakes for all occasions. You can choose from a variety of designs to create the perfect cake for you</span>.</p><p style="text-align:Center; display:block; "><span><a href="http://templatetoaster.com" target="_self" class="btn btn-md btn-default">Read More</a></span></p></div>
+<div class="margin_collapsetop"></div>
+<div style="clear:both;width:0px;"></div>
+</div>
+</div>
+<div class=" visible-md-block d-md-block visible-sm-block d-sm-block visible-xs-block d-block" style="clear: both;width:0px;"></div>
+<div class="post_column col-xl-4 col-lg-4 col-md-6 col-sm-12 col-xs-12 col-12">
+<div class="ttr_services_html_column02">
+<div class="margin_collapsetop"></div>
+<div class="html_content"><p style="margin:5px 0px 10px 0px;text-align:Center; display:block; line-height:2.1em;"><span class="ttr_image" style="float:none;display:block;overflow:hidden;text-align:center;margin:0px 0px 0px 0px;"><span><img class="ttr_uniform" style="max-height:100px;max-width:90px;margin:0px 0px 20px 0px;" src="~base_path~sites/default/files/inline-images/path879.png" alt="vcx" /></span></span><span style="font-family:'Crimson Text','Arial';font-weight:700;font-size:1.429em;">FRESH JUICES</span></p><p style="margin:5px 0px 20px 0px;text-align:Center; display:block; line-height:1.68em;"><span style="font-size:1.071em;">Choose from a variety of fruits and veggies to make your favorite juice. You can also enjoy a simple fresh squeezed orange juice.</span></p><p style="text-align:Center; display:block; "><span><a href="http://templatetoaster.com" target="_self" class="btn btn-md btn-default">Read More</a></span></p></div>
+<div class="margin_collapsetop"></div>
+<div style="clear:both;width:0px;"></div>
+</div>
+</div>
+<div class=" visible-lg-block d-xl-block d-lg-block visible-sm-block d-sm-block visible-xs-block d-block" style="clear: both;width:0px;"></div>
+<div class="post_column col-xl-4 col-lg-4 col-md-6 col-sm-12 col-xs-12 col-12">
+<div class="ttr_services_html_column03">
+<div class="margin_collapsetop"></div>
+<div class="html_content"><p style="margin:5px 0px 10px 0px;text-align:Center; display:block; line-height:2.1em;"><span class="ttr_image" style="float:none;display:block;overflow:hidden;text-align:center;margin:0px 0px 0px 0px;"><span><img class="ttr_uniform" style="max-height:100px;max-width:114px;margin:0px 0px 20px 0px;" src="~base_path~sites/default/files/inline-images/path895.png" alt="ds" /></span></span><span style="font-family:'Crimson Text','Arial';font-weight:700;font-size:1.429em;">CATERING</span></p><p style="margin:5px 0px 20px 0px;text-align:Center; display:block; line-height:1.68em;"><span style="font-size:1.071em;">We do catering all from weddings to business functions. We offer our authentic food to be simply delivered, or we can serve it for you.</span></p><p style="text-align:Center; display:block; "><span><a href="http://templatetoaster.com" target="_self" class="btn btn-md btn-default">Read More</a></span></p></div>
+<div class="margin_collapsetop"></div>
+<div style="clear:both;width:0px;"></div>
+</div>
+</div>
+<div class=" visible-md-block d-md-block visible-sm-block d-sm-block visible-xs-block d-block" style="clear: both;width:0px;"></div>
+<div class="post_column col-xl-4 col-lg-4 col-md-6 col-sm-12 col-xs-12 col-12">
+<div class="ttr_services_html_column04">
+<div class="margin_collapsetop"></div>
+<div class="html_content"><p style="margin:5px 0px 10px 0px;text-align:Center; display:block; line-height:2.1em;"><span class="ttr_image" style="float:none;display:block;overflow:hidden;text-align:center;margin:0px 0px 0px 0px;"><span><img class="ttr_uniform" style="max-height:100px;max-width:99px;margin:0px 0px 20px 0px;" src="~base_path~sites/default/files/inline-images/path911.png" alt="fd" /></span></span><span style="font-family:'Crimson Text','Arial';font-weight:700;font-size:1.429em;">SMILE TRUCK</span></p><p style="margin:5px 0px 20px 0px;text-align:Center; display:block; line-height:1.68em;"><span style="font-size:1.071em;">Our new awesome team will be hitting the streets with our best picked up goodies for you and much more.</span></p><p style="text-align:Center; display:block; line-height:1.68em;"><span><a href="http://templatetoaster.com" target="_self" class="btn btn-md btn-default">Read More</a></span></p></div>
+<div class="margin_collapsetop"></div>
+<div style="clear:both;width:0px;"></div>
+</div>
+</div>
+<div class=" visible-sm-block d-sm-block visible-xs-block d-block" style="clear: both;width:0px;"></div>
+<div class="post_column col-xl-4 col-lg-4 col-md-6 col-sm-12 col-xs-12 col-12">
+<div class="ttr_services_html_column05">
+<div class="margin_collapsetop"></div>
+<div class="html_content"><p style="margin:5px 0px 10px 0px;text-align:Center; display:block; line-height:2.1em;"><span class="ttr_image" style="float:none;display:block;overflow:hidden;text-align:center;margin:0px 0px 0px 0px;"><span><img class="ttr_uniform" style="max-height:100px;max-width:100px;margin:0px 0px 20px 0px;" src="~base_path~sites/default/files/inline-images/path8631.png" alt="fd" /></span></span><span style="font-family:'Crimson Text','Arial';font-weight:700;font-size:1.429em;">WEDDINGS</span></p><p style="margin:5px 0px 20px 0px;text-align:Center; display:block; line-height:1.68em;"><span style="font-size:1.071em;">From elegant wedding cakes to delicious gift baskets, we can help you create a perfect and unique wedding.</span></p><p style="text-align:Center; display:block; line-height:1.68em;"><span><a href="http://templatetoaster.com" target="_self" class="btn btn-md btn-default">Read More</a></span></p></div>
+<div class="margin_collapsetop"></div>
+<div style="clear:both;width:0px;"></div>
+</div>
+</div>
+<div class=" visible-lg-block d-xl-block d-lg-block visible-md-block d-md-block visible-sm-block d-sm-block visible-xs-block d-block" style="clear: both;width:0px;"></div>
+</div>
+<div class="ttr_services_html_row1 row" >
+<div class="post_column col-xl-12 col-lg-12 col-md-6 col-sm-12 col-xs-12 col-12">
+<div class="ttr_services_html_column10">
+<div class="margin_collapsetop"></div>
+<div class="html_content"><p style="text-align:Center; display:block; line-height:2.61em;"><span style="font-family:'Crimson Text','Arial';font-weight:700;font-size:1.786em;color:rgba(127,70,44,1);">INSTAGRAM</span></p></div>
+<div class="margin_collapsetop"></div>
+<div style="clear:both;width:0px;"></div>
+</div>
+</div>
+<div class=" visible-lg-block d-xl-block d-lg-block visible-sm-block d-sm-block visible-xs-block d-block" style="clear: both;width:0px;"></div>
+</div>
+<div class="ttr_services_html_row2 row" >
+<div class="post_column col-xl-3 col-lg-3 col-md-6 col-sm-12 col-xs-12 col-12">
+<div class="ttr_services_html_column20">
+<div class="margin_collapsetop"></div>
+<div class="html_content"><p><span class="ttr_image" style="float:none;display:block;overflow:hidden;text-align:center;margin:0px 0px 0px 0px;"><span><img class="ttr_uniform" style="max-height:545px;max-width:483px;margin:0px 0px 0px 0px;" src="~base_path~sites/default/files/inline-images/pagesintbannerimg4a.jpg" alt="oop" /></span></span></p></div>
+<div class="margin_collapsetop"></div>
+<div style="clear:both;width:0px;"></div>
+</div>
+</div>
+<div class=" visible-sm-block d-sm-block visible-xs-block d-block" style="clear: both;width:0px;"></div>
+<div class="post_column col-xl-3 col-lg-3 col-md-6 col-sm-12 col-xs-12 col-12">
+<div class="ttr_services_html_column21">
+<div class="margin_collapsetop"></div>
+<div class="html_content"><p><span class="ttr_image" style="float:none;display:block;overflow:hidden;text-align:center;margin:0px 0px 0px 0px;"><span><img class="ttr_uniform" style="max-height:545px;max-width:483px;margin:0px 0px 0px 0px;" src="~base_path~sites/default/files/inline-images/pagesintbannerimg1a.jpg" alt="yt" /></span></span></p></div>
+<div class="margin_collapsetop"></div>
+<div style="clear:both;width:0px;"></div>
+</div>
+</div>
+<div class=" visible-md-block d-md-block visible-sm-block d-sm-block visible-xs-block d-block" style="clear: both;width:0px;"></div>
+<div class="post_column col-xl-3 col-lg-3 col-md-6 col-sm-12 col-xs-12 col-12">
+<div class="ttr_services_html_column22">
+<div class="margin_collapsetop"></div>
+<div class="html_content"><p><span class="ttr_image" style="float:none;display:block;overflow:hidden;text-align:center;margin:0px 0px 0px 0px;"><span><img class="ttr_uniform" style="max-height:545px;max-width:483px;margin:0px 0px 0px 0px;" src="~base_path~sites/default/files/inline-images/pagesintbannerimg2a1.jpg" alt="u" /></span></span></p></div>
+<div class="margin_collapsetop"></div>
+<div style="clear:both;width:0px;"></div>
+</div>
+</div>
+<div class=" visible-sm-block d-sm-block visible-xs-block d-block" style="clear: both;width:0px;"></div>
+<div class="post_column col-xl-3 col-lg-3 col-md-6 col-sm-12 col-xs-12 col-12">
+<div class="ttr_services_html_column23">
+<div class="margin_collapsetop"></div>
+<div class="html_content"><p><span class="ttr_image" style="float:none;display:block;overflow:hidden;text-align:center;margin:0px 0px 0px 0px;"><span><img class="ttr_uniform" style="max-height:545px;max-width:483px;margin:0px 0px 0px 0px;" src="~base_path~sites/default/files/inline-images/pagesintbannerimg3a.jpg" alt="u" /></span></span></p></div>
+<div class="margin_collapsetop"></div>
+<div style="clear:both;width:0px;"></div>
+</div>
+</div>
+<div class=" visible-lg-block d-xl-block d-lg-block visible-md-block d-md-block visible-sm-block d-sm-block visible-xs-block d-block" style="clear: both;width:0px;"></div>
+</div>
+]]></introtext>
+    </content>
+    <content>
+      <meta_ID>tt_page5</meta_ID>
+      <page_title>Shop</page_title>
+      <alias>shop</alias>
+      <page_name>Shop</page_name>
+      <page_header_id>shop</page_header_id>
+      <state>1</state>
+      <featured>1</featured>
+      <created>07/08/2021 00:00:00</created>
+      <created_by_alias>SuperUser</created_by_alias>
+      <page_title_visibility>false</page_title_visibility>
+      <introtext><![CDATA[<div class="ttr_shop_html_row0 row" >
+<div class="post_column col-xl-4 col-lg-4 col-md-6 col-sm-12 col-xs-12 col-12">
+<div class="ttr_shop_html_column00">
+<div class="margin_collapsetop"></div>
+<div class="html_content"><p style="text-align:Center; display:block; line-height:2.1em;"><span class="ttr_image" style="float:none;display:block;overflow:hidden;text-align:center;margin:0px 0px 0px 0px;"><span><img class="ttr_uniform" style="max-height:280px;max-width:259.981429897864px;margin:0px 0px 10px 0px;" src="~base_path~sites/default/files/inline-images/imgcake11.jpg" alt="v" /></span></span><span style="font-family:'Crimson Text','Arial';font-weight:700;font-size:1.429em;">Becky’s Doodle</span></p><p style="text-align:Center; display:block; line-height:1.9em;"><span style="font-size:1.286em;">$45.00 $36.00</span></p></div>
+<div class="margin_collapsetop"></div>
+<div style="clear:both;width:0px;"></div>
+</div>
+</div>
+<div class=" visible-sm-block d-sm-block visible-xs-block d-block" style="clear: both;width:0px;"></div>
+<div class="post_column col-xl-4 col-lg-4 col-md-6 col-sm-12 col-xs-12 col-12">
+<div class="ttr_shop_html_column01">
+<div class="margin_collapsetop"></div>
+<div class="html_content"><p style="text-align:Center; display:block; line-height:2.1em;"><span class="ttr_image" style="float:none;display:block;overflow:hidden;text-align:center;margin:0px 0px 0px 0px;"><span><img class="ttr_uniform" style="max-height:280px;max-width:259.981429897864px;margin:0px 0px 10px 0px;" src="~base_path~sites/default/files/inline-images/imgcake131.jpg" alt="fc" /></span></span><span style="font-family:'Crimson Text','Arial';font-weight:700;font-size:1.429em;">Brown Cakes</span></p><p style="text-align:Center; display:block; line-height:1.9em;"><span style="font-size:1.286em;">$44.00 $22.00</span></p></div>
+<div class="margin_collapsetop"></div>
+<div style="clear:both;width:0px;"></div>
+</div>
+</div>
+<div class=" visible-md-block d-md-block visible-sm-block d-sm-block visible-xs-block d-block" style="clear: both;width:0px;"></div>
+<div class="post_column col-xl-4 col-lg-4 col-md-6 col-sm-12 col-xs-12 col-12">
+<div class="ttr_shop_html_column02">
+<div class="margin_collapsetop"></div>
+<div class="html_content"><p style="text-align:Center; display:block; line-height:2.1em;"><span class="ttr_image" style="float:none;display:block;overflow:hidden;text-align:center;margin:0px 0px 0px 0px;"><span><img class="ttr_uniform" style="max-height:280px;max-width:259.981429897864px;margin:0px 0px 10px 0px;" src="~base_path~sites/default/files/inline-images/imgcake14.jpg" alt="fd" /></span></span><span style="font-family:'Crimson Text','Arial';font-weight:700;font-size:1.429em;">Cupcake Glory</span></p><p style="text-align:Center; display:block; line-height:1.9em;"><span style="font-size:1.286em;">$66.00 $36.00</span></p></div>
+<div class="margin_collapsetop"></div>
+<div style="clear:both;width:0px;"></div>
+</div>
+</div>
+<div class=" visible-lg-block d-xl-block d-lg-block visible-sm-block d-sm-block visible-xs-block d-block" style="clear: both;width:0px;"></div>
+<div class="post_column col-xl-4 col-lg-4 col-md-6 col-sm-12 col-xs-12 col-12">
+<div class="ttr_shop_html_column03">
+<div class="margin_collapsetop"></div>
+<div class="html_content"><p style="text-align:Center; display:block; line-height:2.1em;"><span class="ttr_image" style="float:none;display:block;overflow:hidden;text-align:center;margin:0px 0px 0px 0px;"><span><img class="ttr_uniform" style="max-height:280px;max-width:259.933333333333px;margin:0px 0px 10px 0px;" src="~base_path~sites/default/files/inline-images/ezgif.comwebptopng62.png" alt="njk" /></span></span><span style="font-family:'Crimson Text','Arial';font-weight:700;font-size:1.429em;">Frozen Creamy</span></p><p style="text-align:Center; display:block; line-height:1.9em;"><span style="font-size:1.286em;">$</span><span style="font-size:1.286em;">36.00</span></p></div>
+<div class="margin_collapsetop"></div>
+<div style="clear:both;width:0px;"></div>
+</div>
+</div>
+<div class=" visible-md-block d-md-block visible-sm-block d-sm-block visible-xs-block d-block" style="clear: both;width:0px;"></div>
+<div class="post_column col-xl-4 col-lg-4 col-md-6 col-sm-12 col-xs-12 col-12">
+<div class="ttr_shop_html_column04">
+<div class="margin_collapsetop"></div>
+<div class="html_content"><p style="text-align:Center; display:block; line-height:2.1em;"><span class="ttr_image" style="float:none;display:block;overflow:hidden;text-align:center;margin:0px 0px 0px 0px;"><span><img class="ttr_uniform" style="max-height:280px;max-width:259.933333333333px;margin:0px 0px 10px 0px;" src="~base_path~sites/default/files/inline-images/ezgif.comwebptopng61.png" alt="yujikl" /></span></span><span style="font-family:'Crimson Text','Arial';font-weight:700;font-size:1.429em;">Lemon Cupcakes</span></p><p style="text-align:Center; display:block; line-height:1.9em;"><span style="font-size:1.286em;">$25.00 $15.00</span></p></div>
+<div class="margin_collapsetop"></div>
+<div style="clear:both;width:0px;"></div>
+</div>
+</div>
+<div class=" visible-sm-block d-sm-block visible-xs-block d-block" style="clear: both;width:0px;"></div>
+<div class="post_column col-xl-4 col-lg-4 col-md-6 col-sm-12 col-xs-12 col-12">
+<div class="ttr_shop_html_column05">
+<div class="margin_collapsetop"></div>
+<div class="html_content"><p style="text-align:Center; display:block; line-height:2.1em;"><span class="ttr_image" style="float:none;display:block;overflow:hidden;text-align:center;margin:0px 0px 0px 0px;"><span><img class="ttr_uniform" style="max-height:280px;max-width:260px;margin:0px 0px 10px 0px;" src="~base_path~sites/default/files/inline-images/ezgif.comwebptopng60.png" alt="we" /></span></span><span style="font-family:'Crimson Text','Arial';font-weight:700;font-size:1.429em;">Moist Chocolate</span></p><p style="text-align:Center; display:block; line-height:1.9em;"><span style="font-size:1.286em;">$12.00</span></p></div>
+<div class="margin_collapsetop"></div>
+<div style="clear:both;width:0px;"></div>
+</div>
+</div>
+<div class=" visible-lg-block d-xl-block d-lg-block visible-md-block d-md-block visible-sm-block d-sm-block visible-xs-block d-block" style="clear: both;width:0px;"></div>
+<div class="post_column col-xl-4 col-lg-4 col-md-6 col-sm-12 col-xs-12 col-12">
+<div class="ttr_shop_html_column06">
+<div class="margin_collapsetop"></div>
+<div class="html_content"><p style="text-align:Center; display:block; line-height:2.1em;"><span class="ttr_image" style="float:none;display:block;overflow:hidden;text-align:center;margin:0px 0px 0px 0px;"><span><img class="ttr_uniform" style="max-height:280px;max-width:259.933333333333px;margin:0px 0px 10px 0px;" src="~base_path~sites/default/files/inline-images/ezgif.comwebptopng59.png" alt="cv" /></span></span><span style="font-family:'Crimson Text','Arial';font-weight:700;font-size:1.429em;">Pumpkin Spice</span></p><p style="text-align:Center; display:block; line-height:1.9em;"><span style="font-size:1.286em;">$33.00</span></p></div>
+<div class="margin_collapsetop"></div>
+<div style="clear:both;width:0px;"></div>
+</div>
+</div>
+<div class=" visible-sm-block d-sm-block visible-xs-block d-block" style="clear: both;width:0px;"></div>
+<div class="post_column col-xl-4 col-lg-4 col-md-6 col-sm-12 col-xs-12 col-12">
+<div class="ttr_shop_html_column07">
+<div class="margin_collapsetop"></div>
+<div class="html_content"><p style="text-align:Center; display:block; line-height:2.1em;"><span class="ttr_image" style="float:none;display:block;overflow:hidden;text-align:center;margin:0px 0px 0px 0px;"><span><img class="ttr_uniform" style="max-height:280px;max-width:259.933333333333px;margin:0px 0px 10px 0px;" src="~base_path~sites/default/files/inline-images/ezgif.comwebptopng58.png" alt="sdf" /></span></span><span style="font-family:'Crimson Text','Arial';font-weight:700;font-size:1.429em;">Red Sugar Flowers</span></p><p style="text-align:Center; display:block; line-height:1.9em;"><span style="font-size:1.286em;">$50.00 $16.00</span></p></div>
+<div class="margin_collapsetop"></div>
+<div style="clear:both;width:0px;"></div>
+</div>
+</div>
+<div class=" visible-md-block d-md-block visible-sm-block d-sm-block visible-xs-block d-block" style="clear: both;width:0px;"></div>
+<div class="post_column col-xl-4 col-lg-4 col-md-6 col-sm-12 col-xs-12 col-12">
+<div class="ttr_shop_html_column08">
+<div class="margin_collapsetop"></div>
+<div class="html_content"><p style="text-align:Center; display:block; line-height:2.1em;"><span class="ttr_image" style="float:none;display:block;overflow:hidden;text-align:center;margin:0px 0px 0px 0px;"><span><img class="ttr_uniform" style="max-height:280px;max-width:259.933333333333px;margin:0px 0px 10px 0px;" src="~base_path~sites/default/files/inline-images/ezgif.comwebptopng57.png" alt="fds" /></span></span><span style="font-family:'Crimson Text','Arial';font-weight:700;font-size:1.429em;">Sangria Cupcakes</span></p><p style="text-align:Center; display:block; line-height:1.9em;"><span style="font-size:1.286em;">$36.00</span></p></div>
+<div class="margin_collapsetop"></div>
+<div style="clear:both;width:0px;"></div>
+</div>
+</div>
+<div class=" visible-lg-block d-xl-block d-lg-block visible-sm-block d-sm-block visible-xs-block d-block" style="clear: both;width:0px;"></div>
+</div>
+]]></introtext>
+    </content>
+  </pages>
+  <sidebars />
+  <footers>
+    <footer name="footercellcolumn1">
+      <block name="footercellcolumn0" tt_blockID="footer_cell0" title="footertext1">
+        <content><![CDATA[<div class="html_content"><h4 style="line-height:2.03em;"><span style="font-family:'Crimson Text','Arial';font-weight:700;font-size:1.389em;color:rgba(255,255,255,1);">PAGES</span></h4><p style="line-height:1.69em;"><span style="font-size:1.143em;color:rgba(255,255,255,1);"> ABOUT US</span></p><p style="line-height:1.69em;"><span style="font-size:1.143em;color:rgba(255,255,255,1);"> LOCATIONS</span></p><p style="line-height:1.69em;"><span style="font-size:1.143em;color:rgba(255,255,255,1);"> CAREERS</span></p><p style="line-height:1.69em;"><span style="font-size:1.143em;color:rgba(255,255,255,1);"> CALL US 5555-00-444</span></p></div>]]></content>
+        <widget_pages>
+          <widget_page>home</widget_page>
+          <widget_page>about-us</widget_page>
+          <widget_page>contact</widget_page>
+          <widget_page>services</widget_page>
+          <widget_page>shop</widget_page>
+        </widget_pages>
+      </block>
+    </footer>
+    <footer name="footercellcolumn2">
+      <block name="footercellcolumn1" tt_blockID="footer_cell1" title="footertext2">
+        <content><![CDATA[<div class="html_content"><h4 style="line-height:2.03em;"><span style="font-family:'Crimson Text','Arial';font-weight:700;font-size:1.389em;color:rgba(255,255,255,1);">WORK TIME</span></h4><p style="line-height:1.69em;"><span style="font-size:1.143em;color:rgba(255,255,255,1);">Monday - Friday</span></p><p style="line-height:1.69em;"><span style="font-size:1.143em;color:rgba(255,255,255,1);">8:00 am - 8:30 pm</span></p><p style="line-height:1.69em;"><span style="font-size:1.143em;color:rgba(255,255,255,1);">Satuday - Sunday</span></p><p style="line-height:1.69em;"><span style="font-size:1.143em;color:rgba(255,255,255,1);">10:00 am - 16:30 pm</span></p></div>]]></content>
+        <widget_pages>
+          <widget_page>home</widget_page>
+          <widget_page>about-us</widget_page>
+          <widget_page>contact</widget_page>
+          <widget_page>services</widget_page>
+          <widget_page>shop</widget_page>
+        </widget_pages>
+      </block>
+    </footer>
+    <footer name="footercellcolumn3">
+      <block name="footercellcolumn2" tt_blockID="footer_cell2" title="footertext3">
+        <content><![CDATA[<div class="html_content"><h4 style="line-height:2.03em;"><span style="font-family:'Crimson Text','Arial';font-weight:700;font-size:1.389em;color:rgba(255,255,255,1);">PAYMENTS ACCEPTED</span></h4><p style="line-height: normal;"><span class="ttr_image" style="float:none;display:block;overflow:hidden;text-align:center;margin:0px 0px 0px 0px;"><span><img class="ttr_uniform" style="max-height:77px;max-width:218px;margin:0px 0px 0px 0px;" src="~base_path~sites/default/files/inline-images/thanhtoan.png" alt="cvbn" /></span></span><br style="color:rgba(255,255,255,1);" /></p></div>]]></content>
+        <widget_pages>
+          <widget_page>home</widget_page>
+          <widget_page>about-us</widget_page>
+          <widget_page>contact</widget_page>
+          <widget_page>services</widget_page>
+          <widget_page>shop</widget_page>
+        </widget_pages>
+      </block>
+    </footer>
+  </footers>
+  <Shapes>
+    <headershapes />
+    <slideshowshapes>
+      <slideshow name="slideshowshape000">
+        <block name="slideshowshape000" tt_blockID="slideshow_cell000" title="slideshow_block000">
+          <content><![CDATA[<div class="html_content"><p style="text-align:Center; display:block; line-height:3.07em;"><span style="font-family:'Great Vibes','Arial';font-size:3em;color:rgba(255,255,255,1);">Fresh Cakes </span></p><p style="margin:20px 0px 20px 0px;text-align:Center; display:block; line-height:1.07em;"><span style="font-family:'Lobster Two','Arial';font-size:3.429em;color:rgba(255,150,98,1);">EXCLUSIVE OFFERS </span></p><p style="text-align:Center; display:block; line-height:5.65em;"><span style="font-family:'Poppins','Arial';font-size:6.429em;color:rgba(224,211,0,1);">50% </span><span style="font-family:'Poppins','Arial';font-size:3.929em;color:rgba(224,211,0,1);">Off</span></p><p style="margin:20px 0px 5px 0px;text-align:Center; display:block; line-height:1.07em;"><span><a href="https://templatetoaster.com" target="_self" class="btn btn-md btn-default">Shop Now</a></span></p><p style="line-height:6.66em;"><br style="font-family:'Playfair Display','Arial';font-weight:700;font-size:4.643em;color:rgba(255,255,255,1);" /></p></div>]]></content>
+          <widget_pages>
+            <widget_page>home</widget_page>
+            <widget_page>about-us</widget_page>
+            <widget_page>contact</widget_page>
+            <widget_page>services</widget_page>
+            <widget_page>shop</widget_page>
+            <widget_page>blog-wp</widget_page>
+          </widget_pages>
+        </block>
+      </slideshow>
+      <slideshow name="slideshowshape101">
+        <block name="slideshowshape101" tt_blockID="slideshow_cell101" title="slideshow_block101">
+          <content><![CDATA[<div class="html_content"><p style="line-height:3.11em;"><span style="font-weight:700;font-size:2.143em;color:rgba(127,70,44,1);">About Us</span></p></div>]]></content>
+          <widget_pages>
+            <widget_page>about-us</widget_page>
+          </widget_pages>
+        </block>
+      </slideshow>
+    </slideshowshapes>
+    <menushapes />
+    <footershapes />
+  </Shapes>
+</sitecontent>

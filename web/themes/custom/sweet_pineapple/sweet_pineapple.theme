@@ -1,0 +1,2046 @@
+<?php
+use Drupal\Core\Template\Attribute;
+use Drupal\menu_link_content\Entity\MenuLinkContent;
+use Drupal\node\Entity\Node;
+use Drupal\block\Entity\Block;
+use Drupal\block_content\Entity\BlockContent;
+use Drupal\Core\File\FileSystemInterface;
+use Drupal\system\Entity\Menu;
+use Drupal\Core\Ajax\AjaxResponse;
+use Drupal\Core\Ajax\RedirectCommand;
+use Drupal\Core\Url;
+use Drupal\Core\Database\Database;
+
+function sweet_pineapple_get_theme_path($theme = 'sweet_pineapple') {
+  return \Drupal::service('extension.list.theme')->getPath($theme);
+}
+
+function sweet_pineapple_preprocess_maintenance_page(&$variables) {
+  if (!$variables['db_is_active']) {
+    $variables['site_name'] = '';
+  }
+  // Carga los estilos del tema también en la pantalla de mantenimiento.
+  $variables['#attached']['library'][] = 'sweet_pineapple/global-styling-and-scripts';
+}
+/**
+* Adjunta la librería global del tema.
+*/
+function sweet_pineapple_page_alter(&$page) {
+  $page['#attached']['library'][] = 'sweet_pineapple/global-styling-and-scripts';
+}
+function sweet_pineapple_preprocess_page(&$variables) {
+  sweet_pineapple_apply_content_translation_updates();
+  $variables['theme_path'] = sweet_pineapple_get_theme_path(\Drupal::theme()->getActiveTheme()->getName());
+  $variables['base_path'] = base_path();
+  $variables['front_page'] = Url::fromRoute('<front>')->toString();
+  $variables['sp_account_link_url'] = \Drupal::currentUser()->isAnonymous()
+    ? Url::fromRoute('user.login')->toString()
+    : Url::fromRoute('user.logout')->toString();
+  $variables['sp_account_link_title'] = \Drupal::currentUser()->isAnonymous()
+    ? 'Iniciar sesión'
+    : 'Cerrar sesión';
+  $is_store_catalog = \Drupal::service('path.current')->getPath() === '/tienda';
+  $variables['sp_store_options'] = $is_store_catalog && \Drupal::hasService('sweet_pineapple_management.store_insights')
+    ? \Drupal::service('sweet_pineapple_management.store_insights')->getStoreOptions()
+    : [];
+  $variables['sp_featured_products'] = $is_store_catalog && \Drupal::hasService('sweet_pineapple_ai_recommender.recommender')
+    ? \Drupal::service('sweet_pineapple_ai_recommender.recommender')->getFeaturedProducts()
+    : [];
+}
+
+function sweet_pineapple_preprocess_views_view_fields(&$variables) {
+  if (($variables['view']->id() ?? '') !== 'tienda' || ($variables['view']->current_display ?? '') !== 'page_1') {
+    return;
+  }
+
+  $variables['sp_store_ids'] = '';
+  $entity = $variables['row']->_entity ?? NULL;
+  if (!$entity || !\Drupal::hasService('sweet_pineapple_management.store_insights')) {
+    return;
+  }
+
+  $map = &drupal_static(__FUNCTION__ . ':product_store_map');
+  if ($map === NULL) {
+    $map = \Drupal::service('sweet_pineapple_management.store_insights')->getProductStoreMap();
+  }
+
+  $product_id = (int) $entity->id();
+  if (!empty($map[$product_id])) {
+    $variables['sp_store_ids'] = implode(' ', array_map('strval', $map[$product_id]));
+  }
+}
+
+function sweet_pineapple_preprocess_commerce_product(&$variables) {
+  if (isset($variables['attributes']) && $variables['attributes'] instanceof Attribute) {
+    $variables['attributes']->addClass('sp-product-detail');
+  }
+}
+/**
+ * Migra textos demo del tema base a contenido en español una sola vez.
+ */
+function sweet_pineapple_apply_content_translation_updates() {
+$update_version = 2;
+$state = \Drupal::state();
+if ((int) $state->get('sweet_pineapple_translation_update_version', 0) >= $update_version) {
+return;
+}
+$node_title_map = [
+'Home' => 'Inicio',
+'About Us' => 'Sobre nosotros',
+'Contact' => 'Contacto',
+'Services' => 'Servicios',
+'Shop' => 'Tienda',
+];
+$menu_title_map = [
+'Home' => 'Inicio',
+'About Us' => 'Sobre nosotros',
+'Contact' => 'Contacto',
+'Services' => 'Servicios',
+'Shop' => 'Tienda',
+'Blog' => 'Blog',
+];
+$body_map = [
+'Cakes &amp; Bakes' => 'Pasteles &amp; Repostería',
+'Feel The Taste' => 'Siente el sabor',
+'Dry Fruit Cake' => 'Tarta de frutos secos',
+'Creamy Cup Cake' => 'Cupcake cremoso',
+'Fruit Cake' => 'Tarta de frutas',
+'Shop Now' => 'Comprar ahora',
+'Best selling Products ' => 'Productos más vendidos ',
+'Learn More' => 'Saber más',
+'Trending' => 'Tendencias',
+'Strawberry Muffin' => 'Muffin de fresa',
+'Party Celebration Cake' => 'Tarta de celebracion',
+'Cereal Donut' => 'Donut de cereales',
+'Cupcake Basket' => 'Cesta de cupcakes',
+'Chikery Cake History' => 'Historia de Chikery Cake',
+'Indian Best Sweets' => 'Los mejores dulces indios',
+'Sweet for Celebration' => 'Dulce para celebrar',
+'Welcome to Cakes &amp; Bakes' => 'Bienvenido a Pasteles &amp; Repostería',
+'Baker &amp; Coffee' => 'Panadería y café',
+'Tiramisu cheesecake cupcakes' => 'Cupcakes de tiramisú y tarta de queso',
+'Delicious coffee' => 'Café delicioso',
+'Cookies &amp; Bread' => 'Galletas y pan',
+'Our Best Chef' => 'Nuestro mejor chef',
+'Our Blogs' => 'Nuestro blog',
+'Free Shipping' => 'Envío gratis',
+'On in Stock items ordered by 5.00 pm' => 'En artículos en stock pedidos antes de las 17:00',
+'Accept Multi Currency' => 'Aceptamos varias monedas',
+'Payment on Multi Currency' => 'Pago en varias monedas',
+'Who We Are' => 'Quiénes somos',
+'Fashion democracy' => 'Repostería para todos',
+'Choice For All' => 'Opciones para todos',
+'Best Services' => 'Mejores servicios',
+'BEST QUALITY' => 'MÁXIMA CALIDAD',
+'FAST DELIVERED' => 'ENTREGA RÁPIDA',
+'EVENT CAKES' => 'TARTAS PARA EVENTOS',
+'INGREDIENT SUPPLY' => 'SUMINISTRO DE INGREDIENTES',
+'ONLINE BOOKING' => 'RESERVA EN LÍNEA',
+'Custom % Services' => 'Servicios personalizados',
+'Support 24/7' => 'Atención 24/7',
+'OUR LOCATIONS' => 'NUESTRAS UBICACIONES',
+'As your neighborhood bakery, we\'re always there' => 'Como tu panadería de barrio, siempre estamos ahí',
+'Fresh Juices' => 'Zumos frescos',
+'Choose from a variety of fruits and veggies to make your favorite juice. You can also enjoy a simple fresh squeezed orange juice.' => 'Elige entre una gran variedad de frutas y verduras para preparar tu zumo favorito. También puedes disfrutar de un sencillo zumo de naranja recién exprimido.',
+'BAKERY' => 'PANADERIA',
+'CAKES' => 'TARTAS',
+'CATERING' => 'CATERING',
+'We do catering all from weddings to business functions. We offer our authentic food to be simply delivered, or we can serve it for you.' => 'Ofrecemos catering para todo tipo de eventos, desde bodas hasta celebraciones de empresa. Podemos llevar nuestra comida artesanal o servirla directamente en tu evento.',
+'SMILE TRUCK' => 'FOOD TRUCK',
+'Our new awesome team will be hitting the streets with our best picked up goodies for you and much more.' => 'Nuestro nuevo equipo saldrá a la calle con una selección de nuestras mejores delicias para ti y mucho más.',
+'WEDDINGS' => 'BODAS',
+'Read More' => 'Leer más',
+'Becky\'s Doodle' => 'Donut glaseado',
+'Brown Cakes' => 'Pastel de fresas',
+'Tartas de chocolate' => 'Pastel de fresas',
+'Cupcake Glory' => 'Crepes con frutas',
+'Frozen Creamy' => 'Gofre con helado',
+'Cremoso helado' => 'Gofre con helado',
+'Lemon Cupcakes' => 'Cupcake de vainilla',
+'Cupcakes de limon' => 'Cupcake de vainilla',
+'Moist Chocolate' => 'Cupcake de fresa',
+'Chocolate esponjoso' => 'Cupcake de fresa',
+'Pumpkin Spice' => 'Tortitas con sirope',
+'Calabaza especiada' => 'Tortitas con sirope',
+'Red Sugar Flowers' => 'Cupcake red velvet',
+'Flores rojas de azucar' => 'Cupcake red velvet',
+'Sangria Cupcakes' => 'Cupcake de merengue',
+'Cupcakes de sangria' => 'Cupcake de merengue',
+'PAGES' => 'PÁGINAS',
+'ABOUT US' => 'SOBRE NOSOTROS',
+'LOCATIONS' => 'UBICACIONES',
+'CAREERS' => 'EMPLEO',
+'CALL US' => 'LLÁMANOS AL',
+'WORK TIME' => 'HORARIO',
+'Monday - Friday' => 'Lunes - Viernes',
+'Satuday - Sunday' => 'Sábado - Domingo',
+'PAYMENTS ACCEPTED' => 'PAGOS ACEPTADOS',
+'Fresh Cakes ' => 'Pasteles frescos ',
+'EXCLUSIVE OFFERS ' => 'OFERTAS EXCLUSIVAS ',
+'Off</span>' => 'dto.</span>',
+'About Us</span>' => 'Sobre nosotros</span>',
+'We believe in a world where you have total freedom to be you, without judgement. To experiment. To express yourself. To be brave and grab life as the extraordinary adventure it is. So we make sure everyone has an equal chance to discover all the amazing things they’re capable of – no matter who they are, where they’re from or what looks they like to boss. We exist to give you the confidence to be whoever you want to be.' => 'Creemos en un mundo en el que tengas total libertad para ser tú mismo, sin juicios. Para experimentar. Para expresarte. Para ser valiente y vivir la vida como la extraordinaria aventura que es. Por eso nos aseguramos de que todo el mundo tenga la misma oportunidad de descubrir todo lo increíble de lo que es capaz, sin importar quién sea, de dónde venga o el estilo que prefiera. Estamos aquí para darte la confianza de ser quien quieras ser.',
+'Our audience (AKA you) is wonderfully unique. And we do everything we can to help you find your fit, offering our Ciloe Brands in more than 30 sizes – and we\'re committed to providing all sizes at the same price – so you can be confident we’ve got the perfect thing for you. We’re also proud to partner with GLAAD, one of the biggest voices in LGBTQ activism, on a gender-neutral collection to unite in accelerating acceptance.' => 'Nuestra clientela, es decir, tú, es maravillosamente única. Y hacemos todo lo posible para ayudarte a encontrar lo que mejor encaja contigo, ofreciendo nuestras colecciones en más de 30 tallas y manteniendo el mismo precio en todas ellas, para que tengas la seguridad de que tenemos la opción perfecta para ti. También nos enorgullece colaborar con GLAAD, una de las voces más importantes del activismo LGBTQ, en una colección neutra en cuanto al género para avanzar juntos en la aceptación.',
+'We have all your favorite traditional bread, 7 days a week! You can choose from a rich variety of cookies, pastries and cakes.' => 'Tenemos todo tu pan tradicional favorito, los 7 días de la semana. Puedes elegir entre una gran variedad de galletas, bollería y tartas.',
+'We specialize in custom cakes for all occasions. You can choose from a variety of designs to create the perfect cake for you' => 'Nos especializamos en tartas personalizadas para todo tipo de ocasiones. Puedes elegir entre varios diseños para crear la tarta perfecta para ti.',
+'From elegant wedding cakes to delicious gift baskets, we can help you create a perfect and unique wedding.' => 'Desde elegantes tartas de boda hasta deliciosas cestas de regalo, podemos ayudarte a crear una celebración única y perfecta.',
+'Pasteles &amp; Reposteria' => 'Pasteles &amp; Repostería',
+'Productos mas vendidos ' => 'Productos más vendidos ',
+'Saber mas' => 'Saber más',
+'Panaderia y cafe' => 'Panadería y café',
+'Cafe delicioso' => 'Café delicioso',
+'Envio gratis' => 'Envío gratis',
+'Quienes somos' => 'Quiénes somos',
+'Reposteria para todos' => 'Repostería para todos',
+'MAXIMA CALIDAD' => 'MÁXIMA CALIDAD',
+'ENTREGA RAPIDA' => 'ENTREGA RÁPIDA',
+'RESERVA EN LINEA' => 'RESERVA EN LÍNEA',
+'Atencion 24/7' => 'Atención 24/7',
+'Como tu panaderia de barrio, siempre estamos ahi' => 'Como tu panadería de barrio, siempre estamos ahí',
+'Leer mas' => 'Leer más',
+'PAGINAS' => 'PÁGINAS',
+'LLAMANOS AL' => 'LLÁMANOS AL',
+'Sabado - Domingo' => 'Sábado - Domingo',
+'Creemos en un mundo en el que tengas total libertad para ser tu mismo, sin juicios. Para experimentar. Para expresarte. Para ser valiente y vivir la vida como la extraordinaria aventura que es. Por eso nos aseguramos de que todo el mundo tenga la misma oportunidad de descubrir todo lo increible de lo que es capaz, sin importar quien sea, de donde venga o el estilo que prefiera. Estamos aqui para darte la confianza de ser quien quieras ser.' => 'Creemos en un mundo en el que tengas total libertad para ser tú mismo, sin juicios. Para experimentar. Para expresarte. Para ser valiente y vivir la vida como la extraordinaria aventura que es. Por eso nos aseguramos de que todo el mundo tenga la misma oportunidad de descubrir todo lo increíble de lo que es capaz, sin importar quién sea, de dónde venga o el estilo que prefiera. Estamos aquí para darte la confianza de ser quien quieras ser.',
+'Nuestra clientela, es decir, tu, es maravillosamente unica. Y hacemos todo lo posible para ayudarte a encontrar lo que mejor encaja contigo, ofreciendo nuestras colecciones en mas de 30 tallas y manteniendo el mismo precio en todas ellas, para que tengas la seguridad de que tenemos la opcion perfecta para ti. Tambien nos enorgullece colaborar con GLAAD, una de las voces mas importantes del activismo LGBTQ, en una coleccion neutra en cuanto al genero para avanzar juntos en la aceptacion.' => 'Nuestra clientela, es decir, tú, es maravillosamente única. Y hacemos todo lo posible para ayudarte a encontrar lo que mejor encaja contigo, ofreciendo nuestras colecciones en más de 30 tallas y manteniendo el mismo precio en todas ellas, para que tengas la seguridad de que tenemos la opción perfecta para ti. También nos enorgullece colaborar con GLAAD, una de las voces más importantes del activismo LGBTQ, en una colección neutra en cuanto al género para avanzar juntos en la aceptación.',
+'Tenemos todo tu pan tradicional favorito, los 7 dias de la semana. Puedes elegir entre una gran variedad de galletas, bolleria y tartas.' => 'Tenemos todo tu pan tradicional favorito, los 7 días de la semana. Puedes elegir entre una gran variedad de galletas, bollería y tartas.',
+'Nos especializamos en tartas personalizadas para todo tipo de ocasiones. Puedes elegir entre varios disenos para crear la tarta perfecta para ti.' => 'Nos especializamos en tartas personalizadas para todo tipo de ocasiones. Puedes elegir entre varios diseños para crear la tarta perfecta para ti.',
+'Desde elegantes tartas de boda hasta deliciosas cestas de regalo, podemos ayudarte a crear una celebracion unica y perfecta.' => 'Desde elegantes tartas de boda hasta deliciosas cestas de regalo, podemos ayudarte a crear una celebración única y perfecta.',
+];
+foreach (Node::loadMultiple() as $node) {
+if ($node->bundle() !== 'page') {
+continue;
+}
+foreach (array_keys($node->getTranslationLanguages()) as $langcode) {
+$translation = $node->getTranslation($langcode);
+$title = $translation->label();
+if (isset($node_title_map[$title])) {
+$translation->setTitle($node_title_map[$title]);
+}
+if (!$translation->get('body')->isEmpty()) {
+$body = $translation->get('body')->value;
+$body = strtr($body, $body_map);
+$translation->set('body', [
+'value' => $body,
+'format' => $translation->get('body')->format ?: 'full_html',
+]);
+}
+}
+$node->save();
+}
+$menu_links = \Drupal::entityTypeManager()->getStorage('menu_link_content')->loadByProperties(['menu_name' => 'tt-menu']);
+foreach ($menu_links as $menu_link) {
+foreach (array_keys($menu_link->getTranslationLanguages()) as $langcode) {
+$translation = $menu_link->getTranslation($langcode);
+$title = $translation->label();
+if (isset($menu_title_map[$title])) {
+$translation->set('title', $menu_title_map[$title]);
+}
+}
+$menu_link->save();
+}
+foreach (BlockContent::loadMultiple() as $block) {
+if (!$block->hasField('body')) {
+continue;
+}
+foreach (array_keys($block->getTranslationLanguages()) as $langcode) {
+$translation = $block->getTranslation($langcode);
+if ($translation->get('body')->isEmpty()) {
+continue;
+}
+$body = $translation->get('body')->value;
+$body = strtr($body, $body_map);
+$translation->set('body', [
+'value' => $body,
+'format' => $translation->get('body')->format ?: 'full_html',
+]);
+}
+$block->save();
+}
+$state->set('sweet_pineapple_translation_update_version', $update_version);
+}
+function sweet_pineapple_preprocess_page_title(&$variables) {
+$node = Drupal::request()->attributes->get('node');
+if (isset($node) && method_exists($node, 'getType') && $node->getType() == 'article') {
+$variables['title_prefix'] = array('#markup' => '<div class="tt_article_title_hidden">');
+$variables['title_suffix'] = array('#markup' => '</div>');
+}
+if ( $node !== null && $node->id() ){
+$variables['node_id'] = $node->id();
+}
+}
+function sweet_pineapple_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) { 
+if (str_starts_with($form_id, 'commerce_checkout_flow_')) {
+  $gateway = \Drupal::entityTypeManager()->getStorage('commerce_payment_gateway')->load('pago_de_ejemplo_tarjeta');
+  if ($gateway && $gateway->status() && $gateway->getPluginId() === 'example_onsite') {
+    $form['sp_demo_payment_notice'] = [
+      '#type' => 'container',
+      '#weight' => -100,
+      '#attributes' => ['class' => ['messages', 'messages--warning', 'sp-demo-payment-notice'], 'role' => 'note'],
+      'message' => ['#markup' => t('Compra de demostración: el pago de ejemplo es simulado y no realiza cargos. No introduzcas datos de una tarjeta real.')],
+    ];
+  }
+}
+$form['actions']['submit']['#attributes']['class'][] = 'btn btn-default'; 
+$form['actions']['preview']['#attributes']['class'][] = 'btn btn-default'; 
+if (in_array($form_id, ['search_form']) || in_array($form_id, ['search_block_form']) ) 
+ {  
+	$key = ($form_id == 'search_block_form') ? 'actions' : 'basic';	 
+  $form[$key]['submit']['#attributes']['class'][] = 'btn btn-default'; 
+	} 
+ } 
+function sweet_pineapple_preprocess_menu(&$variables, $hook) {
+$current_path = \Drupal::request()->getRequestUri();
+global $current_region ;
+if ($hook == 'menu' || $hook == 'menu__sidebar_first'){ 
+$items = $variables['items']; 
+foreach ($items as $key => $item)
+	{ 
+ if ($current_region == 'primary_menu' || ($current_region == 'leftfooterarea' && theme_get_setting('menu_leftfooterarea') == 0) || ($current_region == 'centerfooterarea' && theme_get_setting('menu_centerfooterarea') == 0) || ( $current_region == 'rightfooterarea' && theme_get_setting('menu_rightfooterarea') == 0) 
+|| ($current_region == 'slideshowshape000' && theme_get_setting('menu_slideshowshape000') == 0) 
+|| ($current_region == 'slideshowshape101' && theme_get_setting('menu_slideshowshape101') == 0) 
+|| ($current_region == 'slideshowabovecolumn1' && theme_get_setting('menu_slideshowabovecolumn1') == 0) 
+|| ($current_region == 'slideshowabovecolumn2' && theme_get_setting('menu_slideshowabovecolumn2') == 0) 
+|| ($current_region == 'slideshowabovecolumn3' && theme_get_setting('menu_slideshowabovecolumn3') == 0) 
+|| ($current_region == 'slideshowabovecolumn4' && theme_get_setting('menu_slideshowabovecolumn4') == 0) 
+|| ($current_region == 'slideshowbelowcolumn1' && theme_get_setting('menu_slideshowbelowcolumn1') == 0) 
+|| ($current_region == 'slideshowbelowcolumn2' && theme_get_setting('menu_slideshowbelowcolumn2') == 0) 
+|| ($current_region == 'slideshowbelowcolumn3' && theme_get_setting('menu_slideshowbelowcolumn3') == 0) 
+|| ($current_region == 'slideshowbelowcolumn4' && theme_get_setting('menu_slideshowbelowcolumn4') == 0) 
+|| ($current_region == 'menuabovecolumn1' && theme_get_setting('menu_menuabovecolumn1') == 0) 
+|| ($current_region == 'menuabovecolumn2' && theme_get_setting('menu_menuabovecolumn2') == 0) 
+|| ($current_region == 'menuabovecolumn3' && theme_get_setting('menu_menuabovecolumn3') == 0) 
+|| ($current_region == 'menuabovecolumn4' && theme_get_setting('menu_menuabovecolumn4') == 0) 
+|| ($current_region == 'menubelowcolumn1' && theme_get_setting('menu_menubelowcolumn1') == 0) 
+|| ($current_region == 'menubelowcolumn2' && theme_get_setting('menu_menubelowcolumn2') == 0) 
+|| ($current_region == 'menubelowcolumn3' && theme_get_setting('menu_menubelowcolumn3') == 0) 
+|| ($current_region == 'menubelowcolumn4' && theme_get_setting('menu_menubelowcolumn4') == 0) 
+|| ($current_region == 'contenttopcolumn1' && theme_get_setting('menu_contenttopcolumn1') == 0) 
+|| ($current_region == 'contenttopcolumn2' && theme_get_setting('menu_contenttopcolumn2') == 0) 
+|| ($current_region == 'contenttopcolumn3' && theme_get_setting('menu_contenttopcolumn3') == 0) 
+|| ($current_region == 'contenttopcolumn4' && theme_get_setting('menu_contenttopcolumn4') == 0) 
+|| ($current_region == 'contentbottomcolumn1' && theme_get_setting('menu_contentbottomcolumn1') == 0) 
+|| ($current_region == 'contentbottomcolumn2' && theme_get_setting('menu_contentbottomcolumn2') == 0) 
+|| ($current_region == 'contentbottomcolumn3' && theme_get_setting('menu_contentbottomcolumn3') == 0) 
+|| ($current_region == 'contentbottomcolumn4' && theme_get_setting('menu_contentbottomcolumn4') == 0) 
+|| ($current_region == 'footerabovecolumn1' && theme_get_setting('menu_footerabovecolumn1') == 0) 
+|| ($current_region == 'footerabovecolumn2' && theme_get_setting('menu_footerabovecolumn2') == 0) 
+|| ($current_region == 'footerabovecolumn3' && theme_get_setting('menu_footerabovecolumn3') == 0) 
+|| ($current_region == 'footerabovecolumn4' && theme_get_setting('menu_footerabovecolumn4') == 0) 
+|| ($current_region == 'footercellcolumn1' && theme_get_setting('menu_footercellcolumn1') == 0) 
+|| ($current_region == 'footercellcolumn2' && theme_get_setting('menu_footercellcolumn2') == 0) 
+|| ($current_region == 'footercellcolumn3' && theme_get_setting('menu_footercellcolumn3') == 0) 
+|| ($current_region == 'footerbelowcolumn1' && theme_get_setting('menu_footerbelowcolumn1') == 0) 
+|| ($current_region == 'footerbelowcolumn2' && theme_get_setting('menu_footerbelowcolumn2') == 0) 
+|| ($current_region == 'footerbelowcolumn3' && theme_get_setting('menu_footerbelowcolumn3') == 0) 
+|| ($current_region == 'footerbelowcolumn4' && theme_get_setting('menu_footerbelowcolumn4') == 0) 
+ ) 
+ { 
+	if($items[$key]['below'])  {
+		if ($item['url']->toString() == $current_path) 
+		{	
+		$variables['items'][$key]['attributes']['class'] = 'ttr_menu_items_parent_link_active_arrow dropdown-toggle';	
+		} 
+		else
+		{ 
+		$variables['items'][$key]['attributes']['class'] = 'ttr_menu_items_parent_link_arrow dropdown-toggle';
+		} 
+	} 
+	else
+	{ 
+		if ($item['url']->toString() == $current_path) 
+		{	
+		$variables['items'][$key]['attributes']['class'] = 'ttr_menu_items_parent_link_active'; 
+		}
+		else
+		{	
+		$variables['items'][$key]['attributes']['class'] = 'ttr_menu_items_parent_link';
+		}
+	}
+}
+else	{
+	if($items[$key]['below'])  {
+		if ($item['url']->toString() == $current_path) 
+		{	
+		$variables['items'][$key]['attributes']['class'] = 'ttr_vmenu_items_parent_link_active_arrow dropdown-toggle';	
+		} 
+		else
+		{ 
+		$variables['items'][$key]['attributes']['class'] = 'ttr_vmenu_items_parent_link_arrow dropdown-toggle';
+		} 
+	} 
+	else
+	{ 
+		if ($item['url']->toString() == $current_path) 
+		{	
+		$variables['items'][$key]['attributes']['class'] = 'ttr_vmenu_items_parent_link_active'; 
+		}
+		else
+		{	
+		$variables['items'][$key]['attributes']['class'] = 'ttr_vmenu_items_parent_link';
+		}
+	}
+}
+}
+}
+} 
+function sweet_pineapple_form_system_theme_settings_alter(&$form, Drupal\Core\Form\FormStateInterface $form_state) { 
+$form['sweet_pineapple_content'] = array(
+'#type' => 'details',
+'#title' => t('Import Content'),
+'#open' => TRUE,
+'#markup' => '<br>',
+'#description' => t('Click to add content page and menu'),
+'#weight' => 0,
+);
+$form['sweet_pineapple_content']['content_import_options'] = array(
+'#type' => 'submit',
+'#value' => t('Import Content'),
+ '#submit' => array('sweet_pineapple_add_content'),
+'#ajax' => array(
+  'callback' => 'sweet_pineapple_callback',
+  'event' => 'click',
+  'progress' => array(
+    'type' => 'throbber',
+    ),
+  ),
+);
+$form['sweet_pineapple_content']['is_content_imported'] = array('#type' => 'hidden');
+$is_content_imported = \Drupal::config('sweet_pineapple.settings')->get('is_content_imported');
+if ($is_content_imported == '1')
+{
+	unset($form['sweet_pineapple_content']);
+}
+$form['sweet_pineapple_settings']['menu_style_options'] = array( 
+	'#type' => 'details', 
+	'#title' => t('Menu style options'), 
+	'#open' => TRUE, 
+	'#description' => t('Select menu style'), 
+ ); 
+$form['sweet_pineapple_settings']['menu_style_options']['Menu']['menu_slideshowshape000'] = array(
+	'#type' => 'select',
+	'#title' => t('slideshowshape000'),
+	'#options' => array(
+	0 => t('Horizontal'),
+	1 => t('Vertical'),
+	),
+	 '#default_value' => theme_get_setting('menu_slideshowshape000'),
+ );
+$form['sweet_pineapple_settings']['menu_style_options']['Menu']['menu_slideshowshape101'] = array(
+	'#type' => 'select',
+	'#title' => t('slideshowshape101'),
+	'#options' => array(
+	0 => t('Horizontal'),
+	1 => t('Vertical'),
+	),
+	 '#default_value' => theme_get_setting('menu_slideshowshape101'),
+ );
+$form['sweet_pineapple_settings']['menu_style_options']['Menu']['menu_slideshowabovecolumn1'] = array(
+	'#type' => 'select',
+	'#title' => t('SARegion00'),
+	'#options' => array(
+	 0 => t('Horizontal'),
+	 1 => t('Vertical'),
+	),
+	 '#default_value' => theme_get_setting('menu_slideshowabovecolumn1'),
+ );
+$form['sweet_pineapple_settings']['menu_style_options']['Menu']['menu_slideshowabovecolumn2'] = array(
+	'#type' => 'select',
+	'#title' => t('SARegion01'),
+	'#options' => array(
+	 0 => t('Horizontal'),
+	 1 => t('Vertical'),
+	),
+	 '#default_value' => theme_get_setting('menu_slideshowabovecolumn2'),
+ );
+$form['sweet_pineapple_settings']['menu_style_options']['Menu']['menu_slideshowabovecolumn3'] = array(
+	'#type' => 'select',
+	'#title' => t('SARegion02'),
+	'#options' => array(
+	 0 => t('Horizontal'),
+	 1 => t('Vertical'),
+	),
+	 '#default_value' => theme_get_setting('menu_slideshowabovecolumn3'),
+ );
+$form['sweet_pineapple_settings']['menu_style_options']['Menu']['menu_slideshowabovecolumn4'] = array(
+	'#type' => 'select',
+	'#title' => t('SARegion03'),
+	'#options' => array(
+	 0 => t('Horizontal'),
+	 1 => t('Vertical'),
+	),
+	 '#default_value' => theme_get_setting('menu_slideshowabovecolumn4'),
+ );
+$form['sweet_pineapple_settings']['menu_style_options']['Menu']['menu_slideshowbelowcolumn1'] = array(
+	'#type' => 'select',
+	'#title' => t('SBRegion00'),
+	'#options' => array(
+	0 => t('Horizontal'),
+	1 => t('Vertical'),
+	),
+	 '#default_value' => theme_get_setting('menu_slideshowbelowcolumn1'),
+ );
+$form['sweet_pineapple_settings']['menu_style_options']['Menu']['menu_slideshowbelowcolumn2'] = array(
+	'#type' => 'select',
+	'#title' => t('SBRegion01'),
+	'#options' => array(
+	0 => t('Horizontal'),
+	1 => t('Vertical'),
+	),
+	 '#default_value' => theme_get_setting('menu_slideshowbelowcolumn2'),
+ );
+$form['sweet_pineapple_settings']['menu_style_options']['Menu']['menu_slideshowbelowcolumn3'] = array(
+	'#type' => 'select',
+	'#title' => t('SBRegion02'),
+	'#options' => array(
+	0 => t('Horizontal'),
+	1 => t('Vertical'),
+	),
+	 '#default_value' => theme_get_setting('menu_slideshowbelowcolumn3'),
+ );
+$form['sweet_pineapple_settings']['menu_style_options']['Menu']['menu_slideshowbelowcolumn4'] = array(
+	'#type' => 'select',
+	'#title' => t('SBRegion03'),
+	'#options' => array(
+	0 => t('Horizontal'),
+	1 => t('Vertical'),
+	),
+	 '#default_value' => theme_get_setting('menu_slideshowbelowcolumn4'),
+ );
+$form['sweet_pineapple_settings']['menu_style_options']['Menu']['menu_menuabovecolumn1'] = array(
+	'#type' => 'select',
+	'#title' => t('MARegion00'),
+	'#options' => array(
+	0 => t('Horizontal'),
+	1 => t('Vertical'),
+	),
+	 '#default_value' => theme_get_setting('menu_menuabovecolumn1'),
+ );
+$form['sweet_pineapple_settings']['menu_style_options']['Menu']['menu_menuabovecolumn2'] = array(
+	'#type' => 'select',
+	'#title' => t('MARegion01'),
+	'#options' => array(
+	0 => t('Horizontal'),
+	1 => t('Vertical'),
+	),
+	 '#default_value' => theme_get_setting('menu_menuabovecolumn2'),
+ );
+$form['sweet_pineapple_settings']['menu_style_options']['Menu']['menu_menuabovecolumn3'] = array(
+	'#type' => 'select',
+	'#title' => t('MARegion02'),
+	'#options' => array(
+	0 => t('Horizontal'),
+	1 => t('Vertical'),
+	),
+	 '#default_value' => theme_get_setting('menu_menuabovecolumn3'),
+ );
+$form['sweet_pineapple_settings']['menu_style_options']['Menu']['menu_menuabovecolumn4'] = array(
+	'#type' => 'select',
+	'#title' => t('MARegion03'),
+	'#options' => array(
+	0 => t('Horizontal'),
+	1 => t('Vertical'),
+	),
+	 '#default_value' => theme_get_setting('menu_menuabovecolumn4'),
+ );
+$form['sweet_pineapple_settings']['menu_style_options']['Menu']['menu_menubelowcolumn1'] = array(
+	'#type' => 'select',
+	'#title' => t('MBRegion00'),
+	'#options' => array(
+	0 => t('Horizontal'),
+	1 => t('Vertical'),
+	),
+	 '#default_value' => theme_get_setting('menu_menubelowcolumn1'),
+ );
+$form['sweet_pineapple_settings']['menu_style_options']['Menu']['menu_menubelowcolumn2'] = array(
+	'#type' => 'select',
+	'#title' => t('MBRegion01'),
+	'#options' => array(
+	0 => t('Horizontal'),
+	1 => t('Vertical'),
+	),
+	 '#default_value' => theme_get_setting('menu_menubelowcolumn2'),
+ );
+$form['sweet_pineapple_settings']['menu_style_options']['Menu']['menu_menubelowcolumn3'] = array(
+	'#type' => 'select',
+	'#title' => t('MBRegion02'),
+	'#options' => array(
+	0 => t('Horizontal'),
+	1 => t('Vertical'),
+	),
+	 '#default_value' => theme_get_setting('menu_menubelowcolumn3'),
+ );
+$form['sweet_pineapple_settings']['menu_style_options']['Menu']['menu_menubelowcolumn4'] = array(
+	'#type' => 'select',
+	'#title' => t('MBRegion03'),
+	'#options' => array(
+	0 => t('Horizontal'),
+	1 => t('Vertical'),
+	),
+	 '#default_value' => theme_get_setting('menu_menubelowcolumn4'),
+ );
+$form['sweet_pineapple_settings']['menu_style_options']['Menu']['menu_contenttopcolumn1'] = array(
+	'#type' => 'select',
+	'#title' => t('CARegion00'),
+	'#options' => array(
+	0 => t('Horizontal'),
+	1 => t('Vertical'),
+	),
+	 '#default_value' => theme_get_setting('menu_contenttopcolumn1'),
+ );
+$form['sweet_pineapple_settings']['menu_style_options']['Menu']['menu_contenttopcolumn2'] = array(
+	'#type' => 'select',
+	'#title' => t('CARegion01'),
+	'#options' => array(
+	0 => t('Horizontal'),
+	1 => t('Vertical'),
+	),
+	 '#default_value' => theme_get_setting('menu_contenttopcolumn2'),
+ );
+$form['sweet_pineapple_settings']['menu_style_options']['Menu']['menu_contenttopcolumn3'] = array(
+	'#type' => 'select',
+	'#title' => t('CARegion02'),
+	'#options' => array(
+	0 => t('Horizontal'),
+	1 => t('Vertical'),
+	),
+	 '#default_value' => theme_get_setting('menu_contenttopcolumn3'),
+ );
+$form['sweet_pineapple_settings']['menu_style_options']['Menu']['menu_contenttopcolumn4'] = array(
+	'#type' => 'select',
+	'#title' => t('CARegion03'),
+	'#options' => array(
+	0 => t('Horizontal'),
+	1 => t('Vertical'),
+	),
+	 '#default_value' => theme_get_setting('menu_contenttopcolumn4'),
+ );
+$form['sweet_pineapple_settings']['menu_style_options']['Menu']['menu_contentbottomcolumn1'] = array(
+	'#type' => 'select',
+	'#title' => t('CBRegion00'),
+	'#options' => array(
+	0 => t('Horizontal'),
+	1 => t('Vertical'),
+	),
+	 '#default_value' => theme_get_setting('menu_contentbottomcolumn1'),
+ );
+$form['sweet_pineapple_settings']['menu_style_options']['Menu']['menu_contentbottomcolumn2'] = array(
+	'#type' => 'select',
+	'#title' => t('CBRegion01'),
+	'#options' => array(
+	0 => t('Horizontal'),
+	1 => t('Vertical'),
+	),
+	 '#default_value' => theme_get_setting('menu_contentbottomcolumn2'),
+ );
+$form['sweet_pineapple_settings']['menu_style_options']['Menu']['menu_contentbottomcolumn3'] = array(
+	'#type' => 'select',
+	'#title' => t('CBRegion02'),
+	'#options' => array(
+	0 => t('Horizontal'),
+	1 => t('Vertical'),
+	),
+	 '#default_value' => theme_get_setting('menu_contentbottomcolumn3'),
+ );
+$form['sweet_pineapple_settings']['menu_style_options']['Menu']['menu_contentbottomcolumn4'] = array(
+	'#type' => 'select',
+	'#title' => t('CBRegion03'),
+	'#options' => array(
+	0 => t('Horizontal'),
+	1 => t('Vertical'),
+	),
+	 '#default_value' => theme_get_setting('menu_contentbottomcolumn4'),
+ );
+$form['sweet_pineapple_settings']['menu_style_options']['Menu']['menu_footerabovecolumn1'] = array(
+	'#type' => 'select',
+	'#title' => t('FARegion00'),
+	'#options' => array(
+	0 => t('Horizontal'),
+	1 => t('Vertical'),
+	),
+	 '#default_value' => theme_get_setting('menu_footerabovecolumn1'),
+ );
+$form['sweet_pineapple_settings']['menu_style_options']['Menu']['menu_footerabovecolumn2'] = array(
+	'#type' => 'select',
+	'#title' => t('FARegion01'),
+	'#options' => array(
+	0 => t('Horizontal'),
+	1 => t('Vertical'),
+	),
+	 '#default_value' => theme_get_setting('menu_footerabovecolumn2'),
+ );
+$form['sweet_pineapple_settings']['menu_style_options']['Menu']['menu_footerabovecolumn3'] = array(
+	'#type' => 'select',
+	'#title' => t('FARegion02'),
+	'#options' => array(
+	0 => t('Horizontal'),
+	1 => t('Vertical'),
+	),
+	 '#default_value' => theme_get_setting('menu_footerabovecolumn3'),
+ );
+$form['sweet_pineapple_settings']['menu_style_options']['Menu']['menu_footerabovecolumn4'] = array(
+	'#type' => 'select',
+	'#title' => t('FARegion03'),
+	'#options' => array(
+	0 => t('Horizontal'),
+	1 => t('Vertical'),
+	),
+	 '#default_value' => theme_get_setting('menu_footerabovecolumn4'),
+ );
+$form['sweet_pineapple_settings']['menu_style_options']['Menu']['menu_footercellcolumn1'] = array(
+	'#type' => 'select',
+	'#title' => t('FooterColumn11'),
+	'#options' => array(
+	0 => t('Horizontal'),
+	1 => t('Vertical'),
+	),
+	 '#default_value' => theme_get_setting('menu_footercellcolumn1'),
+ );
+$form['sweet_pineapple_settings']['menu_style_options']['Menu']['menu_footercellcolumn2'] = array(
+	'#type' => 'select',
+	'#title' => t('FooterColumn22'),
+	'#options' => array(
+	0 => t('Horizontal'),
+	1 => t('Vertical'),
+	),
+	 '#default_value' => theme_get_setting('menu_footercellcolumn2'),
+ );
+$form['sweet_pineapple_settings']['menu_style_options']['Menu']['menu_footercellcolumn3'] = array(
+	'#type' => 'select',
+	'#title' => t('FooterColumn33'),
+	'#options' => array(
+	0 => t('Horizontal'),
+	1 => t('Vertical'),
+	),
+	 '#default_value' => theme_get_setting('menu_footercellcolumn3'),
+ );
+$form['sweet_pineapple_settings']['menu_style_options']['Menu']['menu_footerbelowcolumn1'] = array(
+	'#type' => 'select',
+	'#title' => t('FBRegion00'),
+	'#options' => array(
+	0 => t('Horizontal'),
+	1 => t('Vertical'),
+	),
+	 '#default_value' => theme_get_setting('menu_footerbelowcolumn1'),
+ );
+$form['sweet_pineapple_settings']['menu_style_options']['Menu']['menu_footerbelowcolumn2'] = array(
+	'#type' => 'select',
+	'#title' => t('FBRegion01'),
+	'#options' => array(
+	0 => t('Horizontal'),
+	1 => t('Vertical'),
+	),
+	 '#default_value' => theme_get_setting('menu_footerbelowcolumn2'),
+ );
+$form['sweet_pineapple_settings']['menu_style_options']['Menu']['menu_footerbelowcolumn3'] = array(
+	'#type' => 'select',
+	'#title' => t('FBRegion02'),
+	'#options' => array(
+	0 => t('Horizontal'),
+	1 => t('Vertical'),
+	),
+	 '#default_value' => theme_get_setting('menu_footerbelowcolumn3'),
+ );
+$form['sweet_pineapple_settings']['menu_style_options']['Menu']['menu_footerbelowcolumn4'] = array(
+	'#type' => 'select',
+	'#title' => t('FBRegion03'),
+	'#options' => array(
+	0 => t('Horizontal'),
+	1 => t('Vertical'),
+	),
+	 '#default_value' => theme_get_setting('menu_footerbelowcolumn4'),
+ );
+$form['sweet_pineapple_settings']['menu_style_options']['Menu']['menu_leftfooterarea'] = array( 
+	'#type' => 'select', 
+	'#title' => t('Leftfooterarea'),
+	'#options' => array( 
+	0 => t('Horizontal'), 
+	1 => t('Vertical'), 
+	), 
+	'#default_value' => theme_get_setting('menu_leftfooterarea','sweet_pineapple'), 
+ ); 
+$form['sweet_pineapple_settings']['menu_style_options']['Menu']['menu_centerfooterarea'] = array( 
+'#type' => 'select', 
+	'#title' => t('Centerfooterarea'), 
+'#options' => array( 
+0 => t('Horizontal'), 
+1 => t('Vertical'), 
+ ), 
+ '#default_value' => theme_get_setting('menu_centerfooterarea','sweet_pineapple'), 
+ ); 
+$form['sweet_pineapple_settings']['menu_style_options']['Menu']['menu_rightfooterarea'] = array( 
+'#type' => 'select', 
+'#title' => t('Rightfooterarea'), 
+'#options' => array( 
+0 => t('Horizontal'), 
+1 => t('Vertical'), 
+), 
+ '#default_value' => theme_get_setting('menu_rightfooterarea','sweet_pineapple'), 
+ ); 
+$form['sweet_pineapple_settings']['style_options'] = array( 
+'#type' => 'details', 
+'#title' => t('Region Style options'), 
+'#open' => TRUE, 
+'#description' => t('Select Position Style '),
+ ); 
+
+
+$form['sweet_pineapple_settings']['style_options']['style']['style_slideshowshape000'] = array(
+	'#type' => 'select',
+	'#title' => t('slideshowshape000'),
+	'#options' => array(
+	0 => t('TTDefault'),
+	1 => t('None'),
+	),
+	 '#default_value' => theme_get_setting('style_slideshowshape000'),
+ );
+$form['sweet_pineapple_settings']['style_options']['style']['style_slideshowshape101'] = array(
+	'#type' => 'select',
+	'#title' => t('slideshowshape101'),
+	'#options' => array(
+	0 => t('TTDefault'),
+	1 => t('None'),
+	),
+	 '#default_value' => theme_get_setting('style_slideshowshape101'),
+ );
+$form['sweet_pineapple_settings']['style_options']['style']['style_slideshowabovecolumn1'] = array(
+	'#type' => 'select',
+	'#title' => t('SARegion00'),
+	'#options' => array(
+	 0 => t('TTDefault'),
+	 1 => t('None'),
+	),
+	 '#default_value' => theme_get_setting('style_slideshowabovecolumn1'),
+ );
+$form['sweet_pineapple_settings']['style_options']['style']['style_slideshowabovecolumn2'] = array(
+	'#type' => 'select',
+	'#title' => t('SARegion01'),
+	'#options' => array(
+	 0 => t('TTDefault'),
+	 1 => t('None'),
+	),
+	 '#default_value' => theme_get_setting('style_slideshowabovecolumn2'),
+ );
+$form['sweet_pineapple_settings']['style_options']['style']['style_slideshowabovecolumn3'] = array(
+	'#type' => 'select',
+	'#title' => t('SARegion02'),
+	'#options' => array(
+	 0 => t('TTDefault'),
+	 1 => t('None'),
+	),
+	 '#default_value' => theme_get_setting('style_slideshowabovecolumn3'),
+ );
+$form['sweet_pineapple_settings']['style_options']['style']['style_slideshowabovecolumn4'] = array(
+	'#type' => 'select',
+	'#title' => t('SARegion03'),
+	'#options' => array(
+	 0 => t('TTDefault'),
+	 1 => t('None'),
+	),
+	 '#default_value' => theme_get_setting('style_slideshowabovecolumn4'),
+ );
+$form['sweet_pineapple_settings']['style_options']['style']['style_slideshowbelowcolumn1'] = array(
+	'#type' => 'select',
+	'#title' => t('SBRegion00'),
+	'#options' => array(
+	0 => t('TTDefault'),
+	1 => t('None'),
+	),
+	 '#default_value' => theme_get_setting('style_slideshowbelowcolumn1'),
+ );
+$form['sweet_pineapple_settings']['style_options']['style']['style_slideshowbelowcolumn2'] = array(
+	'#type' => 'select',
+	'#title' => t('SBRegion01'),
+	'#options' => array(
+	0 => t('TTDefault'),
+	1 => t('None'),
+	),
+	 '#default_value' => theme_get_setting('style_slideshowbelowcolumn2'),
+ );
+$form['sweet_pineapple_settings']['style_options']['style']['style_slideshowbelowcolumn3'] = array(
+	'#type' => 'select',
+	'#title' => t('SBRegion02'),
+	'#options' => array(
+	0 => t('TTDefault'),
+	1 => t('None'),
+	),
+	 '#default_value' => theme_get_setting('style_slideshowbelowcolumn3'),
+ );
+$form['sweet_pineapple_settings']['style_options']['style']['style_slideshowbelowcolumn4'] = array(
+	'#type' => 'select',
+	'#title' => t('SBRegion03'),
+	'#options' => array(
+	0 => t('TTDefault'),
+	1 => t('None'),
+	),
+	 '#default_value' => theme_get_setting('style_slideshowbelowcolumn4'),
+ );
+$form['sweet_pineapple_settings']['style_options']['style']['style_menuabovecolumn1'] = array(
+	'#type' => 'select',
+	'#title' => t('MARegion00'),
+	'#options' => array(
+	0 => t('TTDefault'),
+	1 => t('None'),
+	),
+	 '#default_value' => theme_get_setting('style_menuabovecolumn1'),
+ );
+$form['sweet_pineapple_settings']['style_options']['style']['style_menuabovecolumn2'] = array(
+	'#type' => 'select',
+	'#title' => t('MARegion01'),
+	'#options' => array(
+	0 => t('TTDefault'),
+	1 => t('None'),
+	),
+	 '#default_value' => theme_get_setting('style_menuabovecolumn2'),
+ );
+$form['sweet_pineapple_settings']['style_options']['style']['style_menuabovecolumn3'] = array(
+	'#type' => 'select',
+	'#title' => t('MARegion02'),
+	'#options' => array(
+	0 => t('TTDefault'),
+	1 => t('None'),
+	),
+	 '#default_value' => theme_get_setting('style_menuabovecolumn3'),
+ );
+$form['sweet_pineapple_settings']['style_options']['style']['style_menuabovecolumn4'] = array(
+	'#type' => 'select',
+	'#title' => t('MARegion03'),
+	'#options' => array(
+	0 => t('TTDefault'),
+	1 => t('None'),
+	),
+	 '#default_value' => theme_get_setting('style_menuabovecolumn4'),
+ );
+$form['sweet_pineapple_settings']['style_options']['style']['style_menubelowcolumn1'] = array(
+	'#type' => 'select',
+	'#title' => t('MBRegion00'),
+	'#options' => array(
+	0 => t('TTDefault'),
+	1 => t('None'),
+	),
+	 '#default_value' => theme_get_setting('style_menubelowcolumn1'),
+ );
+$form['sweet_pineapple_settings']['style_options']['style']['style_menubelowcolumn2'] = array(
+	'#type' => 'select',
+	'#title' => t('MBRegion01'),
+	'#options' => array(
+	0 => t('TTDefault'),
+	1 => t('None'),
+	),
+	 '#default_value' => theme_get_setting('style_menubelowcolumn2'),
+ );
+$form['sweet_pineapple_settings']['style_options']['style']['style_menubelowcolumn3'] = array(
+	'#type' => 'select',
+	'#title' => t('MBRegion02'),
+	'#options' => array(
+	0 => t('TTDefault'),
+	1 => t('None'),
+	),
+	 '#default_value' => theme_get_setting('style_menubelowcolumn3'),
+ );
+$form['sweet_pineapple_settings']['style_options']['style']['style_menubelowcolumn4'] = array(
+	'#type' => 'select',
+	'#title' => t('MBRegion03'),
+	'#options' => array(
+	0 => t('TTDefault'),
+	1 => t('None'),
+	),
+	 '#default_value' => theme_get_setting('style_menubelowcolumn4'),
+ );
+$form['sweet_pineapple_settings']['style_options']['style']['style_contenttopcolumn1'] = array(
+	'#type' => 'select',
+	'#title' => t('CARegion00'),
+	'#options' => array(
+	0 => t('TTDefault'),
+	1 => t('None'),
+	),
+	 '#default_value' => theme_get_setting('style_contenttopcolumn1'),
+ );
+$form['sweet_pineapple_settings']['style_options']['style']['style_contenttopcolumn2'] = array(
+	'#type' => 'select',
+	'#title' => t('CARegion01'),
+	'#options' => array(
+	0 => t('TTDefault'),
+	1 => t('None'),
+	),
+	 '#default_value' => theme_get_setting('style_contenttopcolumn2'),
+ );
+$form['sweet_pineapple_settings']['style_options']['style']['style_contenttopcolumn3'] = array(
+	'#type' => 'select',
+	'#title' => t('CARegion02'),
+	'#options' => array(
+	0 => t('TTDefault'),
+	1 => t('None'),
+	),
+	 '#default_value' => theme_get_setting('style_contenttopcolumn3'),
+ );
+$form['sweet_pineapple_settings']['style_options']['style']['style_contenttopcolumn4'] = array(
+	'#type' => 'select',
+	'#title' => t('CARegion03'),
+	'#options' => array(
+	0 => t('TTDefault'),
+	1 => t('None'),
+	),
+	 '#default_value' => theme_get_setting('style_contenttopcolumn4'),
+ );
+$form['sweet_pineapple_settings']['style_options']['style']['style_contentbottomcolumn1'] = array(
+	'#type' => 'select',
+	'#title' => t('CBRegion00'),
+	'#options' => array(
+	0 => t('TTDefault'),
+	1 => t('None'),
+	),
+	 '#default_value' => theme_get_setting('style_contentbottomcolumn1'),
+ );
+$form['sweet_pineapple_settings']['style_options']['style']['style_contentbottomcolumn2'] = array(
+	'#type' => 'select',
+	'#title' => t('CBRegion01'),
+	'#options' => array(
+	0 => t('TTDefault'),
+	1 => t('None'),
+	),
+	 '#default_value' => theme_get_setting('style_contentbottomcolumn2'),
+ );
+$form['sweet_pineapple_settings']['style_options']['style']['style_contentbottomcolumn3'] = array(
+	'#type' => 'select',
+	'#title' => t('CBRegion02'),
+	'#options' => array(
+	0 => t('TTDefault'),
+	1 => t('None'),
+	),
+	 '#default_value' => theme_get_setting('style_contentbottomcolumn3'),
+ );
+$form['sweet_pineapple_settings']['style_options']['style']['style_contentbottomcolumn4'] = array(
+	'#type' => 'select',
+	'#title' => t('CBRegion03'),
+	'#options' => array(
+	0 => t('TTDefault'),
+	1 => t('None'),
+	),
+	 '#default_value' => theme_get_setting('style_contentbottomcolumn4'),
+ );
+$form['sweet_pineapple_settings']['style_options']['style']['style_footerabovecolumn1'] = array(
+	'#type' => 'select',
+	'#title' => t('FARegion00'),
+	'#options' => array(
+	0 => t('TTDefault'),
+	1 => t('None'),
+	),
+	 '#default_value' => theme_get_setting('style_footerabovecolumn1'),
+ );
+$form['sweet_pineapple_settings']['style_options']['style']['style_footerabovecolumn2'] = array(
+	'#type' => 'select',
+	'#title' => t('FARegion01'),
+	'#options' => array(
+	0 => t('TTDefault'),
+	1 => t('None'),
+	),
+	 '#default_value' => theme_get_setting('style_footerabovecolumn2'),
+ );
+$form['sweet_pineapple_settings']['style_options']['style']['style_footerabovecolumn3'] = array(
+	'#type' => 'select',
+	'#title' => t('FARegion02'),
+	'#options' => array(
+	0 => t('TTDefault'),
+	1 => t('None'),
+	),
+	 '#default_value' => theme_get_setting('style_footerabovecolumn3'),
+ );
+$form['sweet_pineapple_settings']['style_options']['style']['style_footerabovecolumn4'] = array(
+	'#type' => 'select',
+	'#title' => t('FARegion03'),
+	'#options' => array(
+	0 => t('TTDefault'),
+	1 => t('None'),
+	),
+	 '#default_value' => theme_get_setting('style_footerabovecolumn4'),
+ );
+$form['sweet_pineapple_settings']['style_options']['style']['style_footercellcolumn1'] = array(
+	'#type' => 'select',
+	'#title' => t('FooterColumn11'),
+	'#options' => array(
+	0 => t('TTDefault'),
+	1 => t('None'),
+	),
+	 '#default_value' => theme_get_setting('style_footercellcolumn1'),
+ );
+$form['sweet_pineapple_settings']['style_options']['style']['style_footercellcolumn2'] = array(
+	'#type' => 'select',
+	'#title' => t('FooterColumn22'),
+	'#options' => array(
+	0 => t('TTDefault'),
+	1 => t('None'),
+	),
+	 '#default_value' => theme_get_setting('style_footercellcolumn2'),
+ );
+$form['sweet_pineapple_settings']['style_options']['style']['style_footercellcolumn3'] = array(
+	'#type' => 'select',
+	'#title' => t('FooterColumn33'),
+	'#options' => array(
+	0 => t('TTDefault'),
+	1 => t('None'),
+	),
+	 '#default_value' => theme_get_setting('style_footercellcolumn3'),
+ );
+$form['sweet_pineapple_settings']['style_options']['style']['style_footerbelowcolumn1'] = array(
+	'#type' => 'select',
+	'#title' => t('FBRegion00'),
+	'#options' => array(
+	0 => t('TTDefault'),
+	1 => t('None'),
+	),
+	 '#default_value' => theme_get_setting('style_footerbelowcolumn1'),
+ );
+$form['sweet_pineapple_settings']['style_options']['style']['style_footerbelowcolumn2'] = array(
+	'#type' => 'select',
+	'#title' => t('FBRegion01'),
+	'#options' => array(
+	0 => t('TTDefault'),
+	1 => t('None'),
+	),
+	 '#default_value' => theme_get_setting('style_footerbelowcolumn2'),
+ );
+$form['sweet_pineapple_settings']['style_options']['style']['style_footerbelowcolumn3'] = array(
+	'#type' => 'select',
+	'#title' => t('FBRegion02'),
+	'#options' => array(
+	0 => t('TTDefault'),
+	1 => t('None'),
+	),
+	 '#default_value' => theme_get_setting('style_footerbelowcolumn3'),
+ );
+$form['sweet_pineapple_settings']['style_options']['style']['style_footerbelowcolumn4'] = array(
+	'#type' => 'select',
+	'#title' => t('FBRegion03'),
+	'#options' => array(
+	0 => t('TTDefault'),
+	1 => t('None'),
+	),
+	 '#default_value' => theme_get_setting('style_footerbelowcolumn4'),
+ );
+$form['sweet_pineapple_settings']['style_options']['style']['style_leftfooterarea'] = array( 
+	'#type' => 'select', 
+	'#title' => t('Leftfooterarea'), 
+	'#options' => array( 
+	0 => t('TTDefault'), 
+	1 => t('None'), 
+	), 
+	 '#default_value' => theme_get_setting('style_leftfooterarea','sweet_pineapple'), 
+ ); 
+$form['sweet_pineapple_settings']['style_options']['style']['style_centerfooterarea'] = array( 
+	'#type' => 'select', 
+	'#title' => t('Centerfooterarea'), 
+	'#options' => array( 
+	0 => t('TTDefault'), 
+	1 => t('None'), 
+	), 
+	 '#default_value' => theme_get_setting('style_centerfooterarea','sweet_pineapple'), 
+ ); 
+$form['sweet_pineapple_settings']['style_options']['style']['style_rightfooterarea'] = array( 
+	'#type' => 'select', 
+	'#title' => t('Rightfooterarea'), 
+	'#options' => array( 
+	0 => t('TTDefault'), 
+	1 => t('None'), 
+	), 
+	 '#default_value' => theme_get_setting('style_rightfooterarea','sweet_pineapple'), 
+ ); 
+ unset($form['logo']); 
+ } 
+function sweet_pineapple_callback() { 
+$response = new AjaxResponse();
+$currentURL = Url::fromRoute('<current>');
+$response->addCommand(new RedirectCommand($currentURL->toString()));
+return $response;
+ }
+function sweet_pineapple_preprocess_block(&$variables) { 
+switch ($variables['base_plugin_id']) {
+case 'system_branding_block':
+$variables['site_logo'] = '';
+if ($variables['content']['site_logo']['#access'] && $variables['content']['site_logo']['#uri']) {
+ $variables['site_logo'] = str_replace('.svg', '.png', $variables['content']['site_logo']['#uri']);
+ }
+ break;
+ }
+global $current_region ;
+$block_id = $variables['elements']['#id'];  
+ $block = \Drupal\block\Entity\Block::load($block_id); 
+if ($block) 
+{
+$current_region = $variables['region'] = $block->getRegion();
+}
+$variables['menu_slideshowshape000'] = theme_get_setting('menu_slideshowshape000');
+$variables['style_slideshowshape000'] = theme_get_setting('style_slideshowshape000');
+$variables['menu_slideshowshape101'] = theme_get_setting('menu_slideshowshape101');
+$variables['style_slideshowshape101'] = theme_get_setting('style_slideshowshape101');
+$variables['menu_slideshowabovecolumn1'] = theme_get_setting('menu_slideshowabovecolumn1');
+$variables['style_slideshowabovecolumn1'] = theme_get_setting('style_slideshowabovecolumn1');
+$variables['menu_slideshowabovecolumn2'] = theme_get_setting('menu_slideshowabovecolumn2');
+$variables['style_slideshowabovecolumn2'] = theme_get_setting('style_slideshowabovecolumn2');
+$variables['menu_slideshowabovecolumn3'] = theme_get_setting('menu_slideshowabovecolumn3');
+$variables['style_slideshowabovecolumn3'] = theme_get_setting('style_slideshowabovecolumn3');
+$variables['menu_slideshowabovecolumn4'] = theme_get_setting('menu_slideshowabovecolumn4');
+$variables['style_slideshowabovecolumn4'] = theme_get_setting('style_slideshowabovecolumn4');
+$variables['menu_slideshowbelowcolumn1'] =  theme_get_setting('menu_slideshowbelowcolumn1');
+$variables['style_slideshowbelowcolumn1'] =  theme_get_setting('style_slideshowbelowcolumn1');
+$variables['menu_slideshowbelowcolumn2'] =  theme_get_setting('menu_slideshowbelowcolumn2');
+$variables['style_slideshowbelowcolumn2'] =  theme_get_setting('style_slideshowbelowcolumn2');
+$variables['menu_slideshowbelowcolumn3'] =  theme_get_setting('menu_slideshowbelowcolumn3');
+$variables['style_slideshowbelowcolumn3'] =  theme_get_setting('style_slideshowbelowcolumn3');
+$variables['menu_slideshowbelowcolumn4'] =  theme_get_setting('menu_slideshowbelowcolumn4');
+$variables['style_slideshowbelowcolumn4'] =  theme_get_setting('style_slideshowbelowcolumn4');
+$variables['menu_menuabovecolumn1'] = theme_get_setting('menu_menuabovecolumn1');
+$variables['style_menuabovecolumn1'] = theme_get_setting('style_menuabovecolumn1');
+$variables['menu_menuabovecolumn2'] = theme_get_setting('menu_menuabovecolumn2');
+$variables['style_menuabovecolumn2'] = theme_get_setting('style_menuabovecolumn2');
+$variables['menu_menuabovecolumn3'] = theme_get_setting('menu_menuabovecolumn3');
+$variables['style_menuabovecolumn3'] = theme_get_setting('style_menuabovecolumn3');
+$variables['menu_menuabovecolumn4'] = theme_get_setting('menu_menuabovecolumn4');
+$variables['style_menuabovecolumn4'] = theme_get_setting('style_menuabovecolumn4');
+$variables['menu_menubelowcolumn1'] = theme_get_setting('menu_menubelowcolumn1');
+$variables['style_menubelowcolumn1'] = theme_get_setting('style_menubelowcolumn1');
+$variables['menu_menubelowcolumn2'] = theme_get_setting('menu_menubelowcolumn2');
+$variables['style_menubelowcolumn2'] = theme_get_setting('style_menubelowcolumn2');
+$variables['menu_menubelowcolumn3'] = theme_get_setting('menu_menubelowcolumn3');
+$variables['style_menubelowcolumn3'] = theme_get_setting('style_menubelowcolumn3');
+$variables['menu_menubelowcolumn4'] = theme_get_setting('menu_menubelowcolumn4');
+$variables['style_menubelowcolumn4'] = theme_get_setting('style_menubelowcolumn4');
+$variables['menu_contenttopcolumn1'] = theme_get_setting('menu_contenttopcolumn1');
+$variables['style_contenttopcolumn1'] = theme_get_setting('style_contenttopcolumn1');
+$variables['menu_contenttopcolumn2'] = theme_get_setting('menu_contenttopcolumn2');
+$variables['style_contenttopcolumn2'] = theme_get_setting('style_contenttopcolumn2');
+$variables['menu_contenttopcolumn3'] = theme_get_setting('menu_contenttopcolumn3');
+$variables['style_contenttopcolumn3'] = theme_get_setting('style_contenttopcolumn3');
+$variables['menu_contenttopcolumn4'] = theme_get_setting('menu_contenttopcolumn4');
+$variables['style_contenttopcolumn4'] = theme_get_setting('style_contenttopcolumn4');
+$variables['menu_contentbottomcolumn1'] = theme_get_setting('menu_contentbottomcolumn1');
+$variables['style_contentbottomcolumn1'] = theme_get_setting('style_contentbottomcolumn1');
+$variables['menu_contentbottomcolumn2'] = theme_get_setting('menu_contentbottomcolumn2');
+$variables['style_contentbottomcolumn2'] = theme_get_setting('style_contentbottomcolumn2');
+$variables['menu_contentbottomcolumn3'] = theme_get_setting('menu_contentbottomcolumn3');
+$variables['style_contentbottomcolumn3'] = theme_get_setting('style_contentbottomcolumn3');
+$variables['menu_contentbottomcolumn4'] = theme_get_setting('menu_contentbottomcolumn4');
+$variables['style_contentbottomcolumn4'] = theme_get_setting('style_contentbottomcolumn4');
+$variables['menu_footerabovecolumn1'] = theme_get_setting('menu_footerabovecolumn1');
+$variables['style_footerabovecolumn1'] = theme_get_setting('style_footerabovecolumn1');
+$variables['menu_footerabovecolumn2'] = theme_get_setting('menu_footerabovecolumn2');
+$variables['style_footerabovecolumn2'] = theme_get_setting('style_footerabovecolumn2');
+$variables['menu_footerabovecolumn3'] = theme_get_setting('menu_footerabovecolumn3');
+$variables['style_footerabovecolumn3'] = theme_get_setting('style_footerabovecolumn3');
+$variables['menu_footerabovecolumn4'] = theme_get_setting('menu_footerabovecolumn4');
+$variables['style_footerabovecolumn4'] = theme_get_setting('style_footerabovecolumn4');
+$variables['menu_footercellcolumn1'] = theme_get_setting('menu_footercellcolumn1');
+$variables['style_footercellcolumn1'] = theme_get_setting('style_footercellcolumn1');
+$variables['menu_footercellcolumn2'] = theme_get_setting('menu_footercellcolumn2');
+$variables['style_footercellcolumn2'] = theme_get_setting('style_footercellcolumn2');
+$variables['menu_footercellcolumn3'] = theme_get_setting('menu_footercellcolumn3');
+$variables['style_footercellcolumn3'] = theme_get_setting('style_footercellcolumn3');
+$variables['menu_footerbelowcolumn1'] = theme_get_setting('menu_footerbelowcolumn1');
+$variables['style_footerbelowcolumn1'] = theme_get_setting('style_footerbelowcolumn1');
+$variables['menu_footerbelowcolumn2'] = theme_get_setting('menu_footerbelowcolumn2');
+$variables['style_footerbelowcolumn2'] = theme_get_setting('style_footerbelowcolumn2');
+$variables['menu_footerbelowcolumn3'] = theme_get_setting('menu_footerbelowcolumn3');
+$variables['style_footerbelowcolumn3'] = theme_get_setting('style_footerbelowcolumn3');
+$variables['menu_footerbelowcolumn4'] = theme_get_setting('menu_footerbelowcolumn4');
+$variables['style_footerbelowcolumn4'] = theme_get_setting('style_footerbelowcolumn4');
+$variables['menu_leftfooterarea'] = theme_get_setting('menu_leftfooterarea'); 
+$variables['style_leftfooterarea'] = theme_get_setting('style_leftfooterarea'); 
+$variables['menu_centerfooterarea'] = theme_get_setting('menu_centerfooterarea'); 
+$variables['style_centerfooterarea'] = theme_get_setting('style_centerfooterarea'); 
+$variables['menu_rightfooterarea'] = theme_get_setting('menu_rightfooterarea'); 
+$variables['style_rightfooterarea'] = theme_get_setting('style_rightfooterarea'); 
+} 
+/* Inicio de la importacion de contenido demo. */
+function sweet_pineapple_add_content()
+{
+	$themeLink = sweet_pineapple_get_theme_path();
+	$xml = simplexml_load_file($themeLink.'/content/content.xml');
+		$menu_arr = array();
+		foreach($xml->menu->menu_item as $menu_name){
+			if ((string) $menu_name->menu_item_slug == 'blog-wp') {
+				continue;
+			}
+			array_push(
+				$menu_arr,
+				array(
+					'title'  => (string) $menu_name->menu_item_title,
+					'status' => (int) $menu_name->menu_item_status,
+					'slug'   => (string) $menu_name->menu_item_slug,
+				)
+			);
+		}
+	if(isset($xml->pages->content))	
+	{
+  /* Copia imagenes del contenido a sites/default/files/inline-images. */
+		$fid = 10;
+		$file = \Drupal\file\Entity\File::load($fid);
+      $path = 'public://inline-images/'; 
+		if (\Drupal::service('file_system')->prepareDirectory($path, FileSystemInterface::CREATE_DIRECTORY)) 
+		{
+	  		if ($file) {
+	  			\Drupal::service('file_system')->copy($file->getFileUri(), $path . basename($file->getFileUri()), FileSystemInterface::EXISTS_REPLACE);
+	  		}
+		}
+		$images_dir = $themeLink.'/content/images';
+		if (is_dir($images_dir)) {
+			$images = \Drupal::service('file_system')->scanDirectory($images_dir,'/.*\.jpg|jpeg|gif|png|pdf|doc|zip|rar|docx|7zip|txt|rtf|odt|7z|ods$/');
+		}
+		$videos_dir = $themeLink.'/video';
+		if (is_dir($videos_dir)) {
+			$videos = \Drupal::service('file_system')->scanDirectory($videos_dir,'/.*\.mp4$/');
+		}
+		if (!isset($images)) {
+      $images = [];
+    }
+		if (!isset($videos)) {
+      $videos = [];
+    }
+		foreach($images as $value)
+		{
+			\Drupal::service('file_system')->copy($value->uri, 'public://inline-images/' . $value->filename, FileSystemInterface::EXISTS_REPLACE);
+		}
+		foreach($videos as $value)
+		{
+			\Drupal::service('file_system')->copy($value->uri, 'public://inline-images/' . $value->filename, FileSystemInterface::EXISTS_REPLACE);
+		}
+  /* Copia imagenes del contenido a sites/default/files/inline-images. */
+		sweet_pineapple_tt_menu();
+  /* Lee paginas del XML y crea sus nodos/enlaces. */
+		foreach($xml->pages->content as $page_node)
+		{
+			if(isset($page_node->introtext))
+			{
+				$properties = (string)$page_node->introtext;
+				$base_path = base_path();
+				$properties = str_replace('~base_path~', $base_path, $properties);
+			}
+			$query = \Drupal::entityQuery('node')->accessCheck(FALSE);
+			$query->condition('title', $page_node->page_title);
+			$query->condition('type', 'page');	
+			$pageTitle = $query->execute();
+			$parent = NULL;
+			$nodeExist = false;
+  /* Comprueba si el nodo ya existe. */
+			$aliasnode = \Drupal::entityTypeManager()->getStorage('node')->loadByProperties(['title' => $page_node->page_title]);
+			if($aliasnode)
+			{
+          	foreach($aliasnode as $nidKey => $nidValue)
+          	{
+          		if (((int) \Drupal::VERSION) < 9)
+          		{
+              	$alias = \Drupal::service('path.alias_manager')->getAliasByPath('/node/'.$nidKey);
+          		}
+          		else
+          		{
+              		$alias = \Drupal::service('path_alias.manager')->getAliasByPath('/node/'.$nidKey);
+          		}
+					if($alias == '/' . $page_node->alias)
+            		{
+                		$nodeExist = True; 
+           		}
+       		}
+    		}
+  /* Obtiene el padre del enlace si existe. */
+			foreach($xml->menu->menu_item as $menu_name)
+			{
+			if ((string) $menu_name->menu_item_slug == 'blog-wp') {
+				continue;
+			}
+			if($menu_name->menu_item_title == (string)$page_node->page_name && isset($menu_name->menu_item_parent))
+			    {
+			    	$page_node_title = $menu_name->menu_item_parent;
+			    	$menu_nid = \Drupal::entityTypeManager()->getStorage('menu_link_content')->loadByProperties(['title' => $page_node_title]);
+			        foreach($menu_nid as $menu_nidKey => $menu_nidValue)
+			        {
+			            $menu_link = MenuLinkContent::load($menu_nidKey);
+						$parent = 'menu_link_content:' . $menu_link->uuid();
+						break;
+			        } 
+			    }
+			}
+  /* Si el nodo existe, actualiza sus datos. */
+	$schema = Database::getConnection()->schema();
+	$tt_node_field_data = $schema->fieldExists('node_field_data', 'TT_ID');
+			if($tt_node_field_data && reset($pageTitle) && $nodeExist)
+			{
+				$nid = \Drupal::entityTypeManager()
+		  				->getStorage('node')
+		  				->loadByProperties(['title' => $page_node->page_title]);
+				foreach($nid as $nidKey => $nidValue)
+				{
+					$node = Node::load($nidKey);
+				}
+				$node->body->value = $properties;
+				$node->path = array('alias' => '/' . $page_node->alias, 'pathauto' => 0);
+				$resetNode = $node->save();	
+				if($resetNode)
+				{
+					$state = true;
+					Database::getConnection()->update('node_field_data')
+            ->fields(['TT_ID' => 1])
+            ->condition('title', (string) $page_node->page_title)
+            ->execute();
+				}
+				else
+				{
+					$state = false;
+				}
+			}
+      else /* Si la pagina no existe, la crea. */
+			{
+				$node = \Drupal\node\Entity\Node::create(
+					array(
+					'type' => 'page',
+					'title' =>  (string)$page_node->page_title,
+					'base' => 'node_content',
+					'body' => [	
+						'value' => $properties,
+						'format' => 'full_html',
+		  			],
+					'custom' => 1,
+					'modified' => 1,
+					'locked' => 0,
+					'path' =>  ['alias' => '/' . $page_node->alias]
+					));
+				if($node->save())
+				{
+						$state = true;
+				}
+				else
+				{
+					$state = false;
+				}
+			}
+ $singlepage = false;
+ if ($singlepage){
+  /* Genera enlaces para secciones de pagina. */
+			$i = 0;
+ 		foreach($xml->menu->menu_item as $menu_name){
+			if ((string) $menu_name->menu_item_slug == 'blog-wp') {
+				continue;
+			}
+			$weight = -100 + $i;
+			$links = \Drupal::entityTypeManager()->getStorage('menu_link_content')->loadByProperties(['title' => (string)$menu_name->menu_item_title]);
+			if(!$links)
+			{
+				if ((string)$menu_name->menu_item_url == null){
+					$link = '/<front>';
+					$config = \Drupal::configFactory()->getEditable('system.site');
+					$config->set('page.front', '/node/'.$node->id().$menu_name->menu_item_url)->save();
+					}
+					else{
+					$link = '/'.$menu_name->menu_item_url;
+					 }
+				$create_menu = MenuLinkContent::create([
+					'title' => (string)$menu_name->menu_item_title,
+					'expanded' => TRUE,
+					'link' => ['uri' => 'internal:'.$link],
+					'menu_name' => 'tt-menu',
+					'weight' => $weight,
+					'parent' => $parent,
+					'enabled' => 1,
+					]);
+				if($create_menu->save())
+				{
+						$fieldSpec = array(
+					    	'type' => 'int',
+					    	'size' => 'small',
+					    	'not null' => TRUE,
+					    	'default' => 0,
+					    	'description' => 'TT id for TemplateToaster themes.',
+					  		);
+					$schema = Database::getConnection()->schema();
+					if (!$schema->fieldExists('node_field_data', 'TT_ID')) {
+						$schema->addField('node_field_data', 'TT_ID', $fieldSpec);
+					} else {
+						Database::getConnection()->update('node_field_data')
+              ->fields(['TT_ID' => 1])
+              ->condition('nid', $node->id())
+              ->execute();
+					}
+					$state = true;
+				}
+				else
+				{
+					$state = false;
+				}
+			}
+			else{
+				if ((string)$menu_name->menu_item_url == null){
+					$link = '/<front>';
+					$config = \Drupal::configFactory()->getEditable('system.site');
+					$config->set('page.front', '/node/'.$node->id().$menu_name->menu_item_url)->save();
+					}
+					else{
+					$link = '/'.$menu_name->menu_item_url;
+					 }
+				$linkobj = reset($links);
+				$oldweight = $linkobj->getWeight();
+				$linkobj->set('weight', $weight);
+				$linkobj->set('enabled', 1);
+				$linkobj->set('link', 'internal:'.$link);
+				$linkobj->set('parent', $parent);
+				$linkobj->save();
+			}
+			$i++;
+  	}
+ }
+	else{
+			$weight = -100;
+          $item = (string)$page_node->alias;
+          $order = array_search($item, array_column($menu_arr, 'slug'));
+          if($order === FALSE){
+          	$enabled = 0;
+          }else{
+          $enabled = $menu_arr[ $order ]['status'];
+          $weight += $order ;
+				}
+  /* Genera enlaces para nodos de pagina. */
+			$links = \Drupal::entityTypeManager()->getStorage('menu_link_content')->loadByProperties(['link__uri' => 'internal:/node/'.$node->id()]);
+			if(!$links)
+			{
+				if ((string)$page_node->page_header_id == 'home'){
+					$link = '/<front>';
+					$config = \Drupal::configFactory()->getEditable('system.site');
+					$config->set('page.front', '/node/'.$node->id())->save();
+					}
+					else{
+					$link = '/node/'.$node->id();
+					 }
+				$create_menu = MenuLinkContent::create([
+					'title' => (string)$page_node->page_name,
+					'expanded' => TRUE,
+					'link' => ['uri' => 'internal:'.$link],
+					'menu_name' => 'tt-menu',
+					'weight' => $weight,
+					'parent' => $parent,
+					'enabled' => $enabled,
+					]);
+				if($create_menu->save())
+				{
+						$fieldSpec = array(
+					    	'type' => 'int',
+					    	'size' => 'small',
+					    	'not null' => TRUE,
+					    	'default' => 0,
+					    	'description' => 'TT id for TemplateToaster themes.',
+					  		);
+				$schema = Database::getConnection()->schema();
+				if (!$schema->fieldExists('node_field_data', 'TT_ID'))
+				{
+					$schema->addField('node_field_data', 'TT_ID', $fieldSpec);
+				}
+				else
+				{
+					Database::getConnection()->update('node_field_data')
+            ->fields(['TT_ID' => 1])
+            ->condition('nid', $node->id())
+            ->execute();
+				}
+					$state = true;
+				}
+				else
+				{
+					$state = false;
+				}
+			}
+			else{
+				if ((string)$page_node->page_header_id == 'home'){
+					$link = '/<front>';
+					$config = \Drupal::configFactory()->getEditable('system.site');
+					$config->set('page.front', '/node/'.$node->id())->save();
+					}
+					else{
+					$link = '/node/'.$node->id();
+					 }
+				$linkobj = reset($links);
+				$oldweight = $linkobj->getWeight();
+				$linkobj->set('weight', $weight);
+				$linkobj->set('enabled', $enabled);
+				$linkobj->set('link', 'internal:'.$link);
+				$linkobj->set('parent', $parent);
+				$linkobj->save();
+			}
+	}
+		if (((int) \Drupal::VERSION) < 9)
+		{
+			$alias = \Drupal::service('path.alias_manager')->getAliasByPath('/node/'.$node->id());
+		}
+		else
+		{
+			$alias = \Drupal::service('path_alias.manager')->getAliasByPath('/node/'.$node->id());
+		}
+			$alias = ltrim($alias, '/');
+		$tt_nodes = array(
+		'home', 
+		);
+		if (!in_array($alias,$tt_nodes) && $alias != 'home')
+  	{
+		$droot = \Drupal::root();
+		$theme_root = $droot . '/' . sweet_pineapple_get_theme_path();
+		$location =  $theme_root . '/templates/';
+		if (\Drupal::service('file_system')->prepareDirectory($location, FileSystemInterface::CREATE_DIRECTORY)) { 
+			\Drupal::service('file_system')->copy($theme_root . '/content/' . $alias . '.html.twig', $location . 'page--' . $alias . '.html.twig', FileSystemInterface::EXISTS_REPLACE);
+		}
+		}
+		}
+		if ($state)
+		{
+			sweet_pineapple_delete_nodes();
+ 			 \Drupal::configFactory()->getEditable('sweet_pineapple.settings')->set('is_content_imported', '1')->save();
+   		\Drupal::messenger()->addStatus('Content imported successfully');
+		}
+		else
+		{
+			\Drupal::messenger()->addError('Content import is failed. Please, try again.');
+	}
+	}
+	else
+	{
+		\Drupal::messenger()->addError('No content is available for upload.');
+		}
+  $theme = \Drupal::config('system.theme')->get('default');
+            $system_regions = system_region_list($theme, $show = REGIONS_ALL);
+                $blocks = \Drupal::entityTypeManager()->getStorage('block')->loadByProperties(array('provider' => 'block_content'));
+                uasort($blocks, 'Drupal\block\Entity\Block::sort');
+                $build = array();
+                foreach ($blocks as $key => $block) {
+                    $trr = substr($key, -4);
+                    if ($trr == '_ttr') {
+						$bid = $block->getPluginId();
+			            $block->delete();
+						$bid = str_replace('block_content:','', $bid);
+						$blockcontent  = \Drupal::service('entity.repository')->loadEntityByUuid('block_content', $bid);
+                      if ($blockcontent){
+							$blockcontent->delete();
+							}
+                   	 }
+                    }
+  /* Lee paginas del XML y crea sus nodos/enlaces. */
+  /* Crea bloques laterales. */
+	if(isset($xml->sidebars->sidebar->block))
+	{
+		foreach($xml->sidebars->sidebar as $sidebars)
+		{
+			foreach($sidebars->block as $sidebar_block)
+			{
+				$w_page = null;
+				foreach($sidebar_block->widget_pages->widget_page as $page)
+				{
+				if ((string)$page == 'blog-wp')
+				{
+					$w_page .=  '
+<front>';
+				}else{
+					$w_page .=  '
+/'.$page;
+				}
+				}
+				$sidebarRegion = $sidebars[0];
+				$region = $sidebarRegion->attributes()->name;
+				$title = (string)$sidebar_block[0]->attributes()->title;
+				$tt_blockID = str_replace(' ', '_', $title);
+				$tt_blockID = preg_replace('/[^a-zA-Z0-9_.]/', '', $tt_blockID);
+				$tt_blockID = strtolower($tt_blockID.'_ttr');
+				$blockExists = \Drupal\block\Entity\Block::load($tt_blockID);
+				if (!$blockExists)
+				{
+					$createBlock = true;
+				}
+                else if ($blockExists && $tt_blockID == 'sidebar_menu_ttr')
+				{
+                    $visibility = $blockExists->getVisibility();
+                    $visibility['request_path']['pages'] = $w_page;
+                    if ( empty( $w_page) )
+                    	{
+                    		$visibility['request_path']['negate'] = 1;
+                    	}
+                    	else 
+                    	{
+                    		$visibility['request_path']['negate'] = 0;
+                    	}
+                    $blockExists->setVisibilityConfig('request_path', $visibility['request_path']);
+                    $blockExists->setRegion((string)$region);
+                    $blockExists->set('theme', 'sweet_pineapple');
+				}else{
+				continue;}
+				if((string)$title == 'Sidebar Menu' && $createBlock)
+				{
+				   	$block = Block::create([
+					         	'id' => $tt_blockID,
+					            'plugin' => 'system_menu_block:tt-menu',
+					            'region' => (string)$region,
+					            'weight' => 0,
+					            'theme' => 'sweet_pineapple',
+					            'visibility' => [],
+					            'settings' => [
+					              	'label' => (string)$title,
+					              	'label_display' => TRUE,
+					               ]
+					            ]);
+					 $block->save();
+                    if (empty($w_page))
+                    	{
+                    		$visibility['request_path']['negate'] = 1;
+                    	}
+                    	else 
+                    	{
+                    		$visibility['request_path']['negate'] = 0;
+                    	}
+                        $block->setVisibilityConfig('request_path', $visibility['request_path']);
+                        $block->save();
+				}
+				elseif (isset($sidebar_block->content) && $createBlock)
+				{
+					$body = (string)$sidebar_block->content;
+					$base_path = base_path();
+					$body = str_replace('~base_path~', $base_path, $body); 
+					$block_content = BlockContent::create([
+							'info' => $title,
+							'type' => 'basic',
+							'langcode' => 'en',
+							'body' => [
+						 		'value' => (string)$body,
+						 		'format' => 'full_html',
+							],
+					]);
+					$basic_block = $block_content->save();
+					if($basic_block)
+					{
+						$block = Block::create([
+								'id' => $tt_blockID,
+								'plugin' => 'block_content:' . $block_content->uuid(),
+								'region' => (string)$region,
+								'provider' => 'block_content',
+								'weight' => 1,
+								'theme' => 'sweet_pineapple',
+								'visibility' => [],
+								'settings' => [
+									'label' => $title,
+									'label_display' => TRUE,
+								]
+							]);
+						$block->save();
+						  $visibility['request_path']['pages'] = $w_page;
+                        $visibility['request_path']['negate'] = 0;
+                        $block->setVisibilityConfig('request_path', $visibility['request_path']);
+                        $block->save();
+					}
+				}
+			}
+		}
+	}
+  /* Crea bloques del pie. */
+	if(isset($xml->footers->footer->block))
+	{
+		foreach($xml->footers->footer as $cells)
+		{
+sweet_pineapple_add_blocks($cells);
+		}
+	}
+  /* Crea bloques de texto de cabecera. */
+	if(isset($xml->Shapes->headershapes->header->block))
+	{
+		foreach($xml->Shapes->headershapes->header as $cells)
+		{
+sweet_pineapple_add_blocks($cells);
+		}
+	}
+  /* Crea bloques de texto del menu. */
+	if(isset($xml->Shapes->menushapes->menu->block))
+	{
+		foreach($xml->Shapes->menushapes->menu as $cells)
+		{
+sweet_pineapple_add_blocks($cells);
+		}
+	}
+  /* Crea bloques de texto del menu. */
+	if(isset($xml->Shapes->slideshowshapes->slideshow->block))
+	{
+		foreach($xml->Shapes->slideshowshapes->slideshow as $cells)
+		{
+sweet_pineapple_add_blocks($cells);
+		}
+	}
+  /* Crea bloques de texto del pie. */
+	if(isset($xml->Shapes->footershapes->footer->block))
+	{
+		foreach($xml->Shapes->footershapes->footer as $cells)
+		{
+sweet_pineapple_add_blocks($cells);
+		}
+	}
+}
+/* Borra enlaces de nodos que ya no existen en el XML. */
+function sweet_pineapple_add_blocks($cells)
+{
+			foreach($cells->block as $cell_block)
+			{
+				$w_page = null;
+				foreach($cell_block->widget_pages->widget_page as $page)
+				{
+				if ((string)$page == 'blog-wp')
+				{
+					$w_page .=  '
+/blog';
+					$w_page .=  '
+/node/*';
+				}else{
+					$w_page .=  '
+/'.$page;
+				}
+				}
+				$sidebarRegion = $cells[0];
+				$region = $sidebarRegion->attributes()->name;
+				$title = (string)$cell_block[0]->attributes()->title;
+				$tt_blockID = str_replace(' ', '_', $title);
+				$tt_blockID = preg_replace('/[^a-zA-Z0-9_.]/', '', $tt_blockID);
+				$tt_blockID = strtolower($tt_blockID.'_ttr');
+				$blockExists = \Drupal\block\Entity\Block::load($tt_blockID);
+				if (!$blockExists)
+				{
+					$createBlock = true;
+				}else{
+				continue;}
+				if (isset($cell_block->content) && $createBlock)
+				{
+					$body = (string)$cell_block->content;
+					$base_path = base_path();
+					$body = str_replace('~base_path~', $base_path, $body); 
+					$block_content = BlockContent::create([
+							'info' => $title,
+							'type' => 'basic',
+							'langcode' => 'en',
+							'body' => [
+						 		'value' => (string)$body,
+						 		'format' => 'full_html',
+							],
+					]);
+					$basic_block = $block_content->save();
+					if($basic_block)
+					{
+						$block = Block::create([
+								'id' => $tt_blockID,
+								'plugin' => 'block_content:' . $block_content->uuid(),
+								'region' => (string)$region,
+								'provider' => 'block_content',
+								'weight' => 0,
+								'theme' => 'sweet_pineapple',
+								'visibility' => [],
+								'settings' => [
+									'label' => $title,
+									'label_display' => FALSE,
+								]
+							]);
+						$block->save();
+						  $visibility['request_path']['pages'] = $w_page;
+                        $visibility['request_path']['negate'] = 0;
+                        $block->setVisibilityConfig('request_path', $visibility['request_path']);
+                        $block->save();
+					}
+				}
+			}
+		}
+/* Borra enlaces de nodos que ya no existen en el XML. */
+function sweet_pineapple_delete_nodes()
+{
+	$themeLink = sweet_pineapple_get_theme_path();
+	$xml = simplexml_load_file($themeLink.'/content/content.xml');
+	$pageNodes = array();
+	foreach($xml->pages->content as $page_node)
+	{
+		array_push($pageNodes, $page_node->page_name); 
+	}
+	$storage = \Drupal::entityTypeManager()->getStorage('menu_link_content');
+	$menu_links = $storage->loadByProperties(['menu_name' => 'tt-menu']);
+	foreach ($menu_links as $menu_link)
+	{
+		$title = $menu_link->getTitle();
+		$nid = \Drupal::entityTypeManager()
+ 			->getStorage('node')
+ 			->loadByProperties(['title' => $title]);
+		foreach($nid as $nidKey => $nidValue)
+		{
+			$node_link = Node::load($nidKey);
+			if (!in_array($title, $pageNodes))
+			{
+				$node_link->delete();
+			}
+		}
+	}
+/* Crea la pagina de blog si no existe. */
+	$count = count($xml->menu->menu_item);
+	$last_item = $xml->menu->menu_item[$count-1];
+	$blog_page = \Drupal::entityTypeManager()->getStorage('menu_link_content')->loadByProperties(['title' => 'Blog']);
+	if( !$blog_page)
+	{
+		$item = \Drupal\menu_link_content\Entity\MenuLinkContent::create([
+				  'link' => ['uri' => 'internal:/node'],
+				  'title' => 'Blog',
+				  'menu_name' => 'tt-menu',
+				  'expanded' => TRUE,
+				  'enabled' => (int) $last_item->menu_item_status,
+				]);
+		$item->save();
+	}
+	else{
+		$linkobj = reset($blog_page);
+		$linkobj->set('link', 'internal:/node');
+		$linkobj->save();
+		}
+	//	 \Drupal::service('pathauto.generator')->updateEntityAlias($entity, 'update');
+	if (((int) \Drupal::VERSION) < 9) {
+		 $blog_alias = \Drupal::service('path.alias_storage')->save('/node', '/blog', 'en');
+  } else { 
+		$blog_alias =\Drupal::entityTypeManager()->getStorage('path_alias')->create([
+			'path' => '/node',
+			'alias' => '/blog',
+			'langcode' => 'en',
+			]);
+	$blog_alias->save();
+ }
+}
+/* Asigna alias a todos los enlaces de menu. */
+function sweet_pineapple_preprocess_html(&$variables) {
+  if (\Drupal::moduleHandler()->moduleExists('commerce_cart')) {
+    $variables['attributes']['class'][] = 'sp-has-cart';
+    // Commerce's placeholder keeps the cart specific to the current session.
+    $variables['sp_cart_summary'] = \Drupal::service('plugin.manager.block')
+      ->createInstance('commerce_cart', ['dropdown' => FALSE, 'show_if_empty' => TRUE])
+      ->build();
+  }
+	$current_path = \Drupal::service('path.current')->getPath();
+	$normalized_current_path = ltrim($current_path, '/');
+	if (((int) \Drupal::VERSION) < 9)
+  {
+	$path_alias = \Drupal::service('path.alias_manager')->getAliasByPath($current_path);
+	}
+	else
+	{
+		$path_alias = \Drupal::service('path_alias.manager')->getAliasByPath($current_path);
+	}
+	if ($path_alias == $current_path)
+	{
+		$path_alias = 'blog';
+	}
+	else
+	{
+		$path_alias = ltrim($path_alias, '/');
+	}
+/* Quita el menu principal duplicado de la region primary_menu. */
+	$variables['attributes']['class'][] = \Drupal\Component\Utility\Html::cleanCssIdentifier($path_alias);
+	if ($normalized_current_path === 'tienda') {
+		$variables['attributes']['class'][] = 'shop';
+	}
+	if (isset($variables['page']['primary_menu']['sweet_pineapple_main_menu'])) 
+	{
+		unset($variables['page']['primary_menu']['sweet_pineapple_main_menu']);
+	}
+}
+/* Crea el menu propio heredado de TemplateToaster. */
+function sweet_pineapple_tt_menu() {
+	$menu = \Drupal\system\Entity\Menu::load('tt-menu');
+	if($menu)
+	{
+		$menu->delete();
+		$menu = Menu::create([
+			'id' => 'tt-menu',
+			'label' => 'sweet_pineapple Menu',
+			'description' => 'TemplateToaster custom menu module.',
+			'theme' => 'sweet_pineapple',
+			'status' => TRUE
+			]);
+		$menu->save();
+	}
+ else{
+		$menu = Menu::create([
+			'id' => 'tt-menu',
+			'label' => 'sweet_pineapple Menu',
+			'description' => 'TemplateToaster custom menu module.',
+			'theme' => 'sweet_pineapple',
+			'status' => TRUE
+			]);
+		$menu->save();
+}
+	$menuBlock = \Drupal\block\Entity\Block::load('tt-menu_block');
+	if(!$menuBlock)
+	{
+  	$menuBlock = Block::create([
+					'plugin' => 'system_menu_block:tt-menu',
+					'region' => 'primary_menu',
+					'weight' => 1,
+					'theme' => 'sweet_pineapple',
+					'id' => 'tt-menu_block',
+					'settings' => [
+						'label' => 'sweet_pineapple Menu',
+						'label_display' => FALSE,
+						]
+					]);
+		$menuBlock->save();
+	} 
+}
+/* Sugiere la plantilla de pagina segun el alias del nodo. */
+function sweet_pineapple_theme_suggestions_page_alter(array &$suggestions, array $vars)
+{
+$alias = '';
+	$current_path = \Drupal::service('path.current')->getPath();
+	$frontPage = \Drupal::service('path.matcher')->isFrontPage();
+	if (!$frontPage)
+	{
+		$node = \Drupal::request()->attributes->get('node');
+		if ($current_path === '/tienda') {
+		$alias = 'tienda';
+		}
+		elseif ($node == null){
+		$alias = 'blog';
+		}
+		else{
+			if (((int) \Drupal::VERSION) < 9)
+			{
+		$alias = \Drupal::service('path.alias_manager')->getAliasByPath('/node/'.$node->id());
+		}
+			else
+			{
+				$alias = \Drupal::service('path_alias.manager')->getAliasByPath('/node/'.$node->id());
+			}
+		}
+		}
+		$tt_nodes = array(
+		'home', 
+		);
+ 		if (in_array($alias,$tt_nodes) || $alias == 'blog')
+  	{
+			$suggestions[] = 'page--node';
+		}
+		elseif (!empty($alias))
+		{
+			$suggestions[] = 'page__' . str_replace('-', '_', $alias);
+		}
+	}
+/* Fin de la importacion de contenido demo. */
+function sweet_pineapple_theme_suggestions_block_alter(array &$suggestions, array $variables) {
+		$base_plugin_id = $variables['elements']['#base_plugin_id'];
+		$system_menu_block = $base_plugin_id == 'system_menu_block';
+		if ($system_menu_block) {
+		 $id = $variables['elements']['#id'];
+		 $block = Block::load($id);
+		 $region = $block->get('region');
+		 $suggestions[] = 'block__' . $region . '__menu';
+		 }
+		} 
+function sweet_pineapple_preprocess_block__sidebar_first__menu(&$variables) {
+		 $variables['content']['#theme'] = 'menu__sidebar_first';
+		}
+function sweet_pineapple_preprocess_breadcrumb(&$variables) {
+if ($variables['breadcrumb']) {
+$request = \Drupal::request();
+$route_match = \Drupal::routeMatch();
+$page_title = \Drupal::service('title_resolver')->getTitle($request, $route_match->getRouteObject());
+if (!empty($page_title)) {
+$variables['breadcrumb'][] = [
+'text' => $page_title,
+'attributes' => new Attribute(['class' => ['active']])
+];
+}
+}
+}

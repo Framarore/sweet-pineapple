@@ -1,0 +1,23 @@
+uuid: e003e474-633e-428e-9f21-b5f3ce6639cf
+langcode: es
+status: true
+dependencies:
+  config:
+    - commerce_product.commerce_product_variation_type.tarta
+    - field.storage.commerce_product_variation.field_precio
+  module:
+    - commerce_price
+id: commerce_product_variation.tarta.field_precio
+field_name: field_precio
+entity_type: commerce_product_variation
+bundle: tarta
+label: Precio
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  available_currencies: {  }
+  allow_negative: false
+field_type: commerce_price

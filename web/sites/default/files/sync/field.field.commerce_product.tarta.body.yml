@@ -1,0 +1,24 @@
+uuid: 4601c5cf-0a3b-4aa4-a549-54a2f676abb5
+langcode: es
+status: true
+dependencies:
+  config:
+    - commerce_product.commerce_product_type.tarta
+    - field.storage.commerce_product.body
+  module:
+    - text
+id: commerce_product.tarta.body
+field_name: body
+entity_type: commerce_product
+bundle: tarta
+label: Body
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: null
+settings:
+  display_summary: false
+  required_summary: false
+  allowed_formats: {  }
+field_type: text_with_summary

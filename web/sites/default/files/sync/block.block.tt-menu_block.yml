@@ -1,0 +1,25 @@
+uuid: b21665c4-e0c7-4cb0-95a3-74847c6c3f46
+langcode: es
+status: true
+dependencies:
+  config:
+    - system.menu.tt-menu
+  module:
+    - system
+  theme:
+    - theme__100260
+id: tt-menu_block
+theme: theme__100260
+region: primary_menu
+weight: 1
+provider: null
+plugin: 'system_menu_block:tt-menu'
+settings:
+  id: 'system_menu_block:tt-menu'
+  label: 'theme__100260 Menu'
+  label_display: ''
+  provider: system
+  level: 1
+  depth: 0
+  expand_all_items: false
+visibility: {  }

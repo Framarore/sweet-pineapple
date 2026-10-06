@@ -1,0 +1,21 @@
+uuid: 873e5c9a-da1d-498e-aa0f-7514acb501a0
+langcode: es
+status: true
+dependencies:
+  config:
+    - field.storage.user.field_sp_position
+  module:
+    - options
+    - user
+id: user.user.field_sp_position
+field_name: field_sp_position
+entity_type: user
+bundle: user
+label: Puesto
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

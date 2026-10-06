@@ -1,0 +1,26 @@
+<article{{ attributes.addClass('ttr_post') }}>
+<mark class="hidden"data-comment-timestamp="{{ new_indicator_timestamp }}"></mark>
+{{ user_picture }}
+<div class="ttr_article">
+<div  class="postedon node_meta">
+<span  class="meta" {{ author_attributes }}>{{ 'Submitted on'|t }} </span>
+<img src="{{ base_path ~ active_theme_path() ~ '/images/datebutton.png' }}" alt="{{ 'Date'|t }}" />
+ {{ created }} 
+<span  class="meta"{{ author_attributes }}> {{ 'by'|t }} </span>
+<img src="{{ base_path ~ active_theme_path() ~ '/images/authorbutton.png' }}" alt="{{ 'Author'|t }}" />
+{{ author }}
+</div>
+</div>
+{% if parent %}
+<p class="visually-hidden">{{ parent }}</p>
+{% endif %}
+{{ permalink }}
+<div{{ content_attributes }}>
+{% if title %}
+{{ title_prefix }}
+<h3{{ title_attributes }}>{{ title }}</h3>
+{{ title_suffix }}
+{% endif %}
+{{ content }}
+</div>
+</article>

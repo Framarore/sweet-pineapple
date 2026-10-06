@@ -1,0 +1,16 @@
+uuid: 5a798b73-8067-4975-923e-c77ee915a826
+langcode: es
+status: true
+dependencies:
+  module:
+    - profile
+  enforced:
+    module:
+      - commerce_order
+_core:
+  default_config_hash: rNBHCP7hJFMjP_iDe9-0AsSfkGC98V6Lh_oeOwmLos8
+id: profile.admin
+label: Administrar
+description: ''
+targetEntityType: profile
+cache: true

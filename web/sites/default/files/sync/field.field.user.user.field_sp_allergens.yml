@@ -1,0 +1,21 @@
+uuid: eda7d73f-80b2-4035-b51b-a64435309c12
+langcode: es
+status: true
+dependencies:
+  config:
+    - field.storage.user.field_sp_allergens
+  module:
+    - options
+    - user
+id: user.user.field_sp_allergens
+field_name: field_sp_allergens
+entity_type: user
+bundle: user
+label: 'Alergias o restricciones'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

@@ -1,0 +1,20 @@
+uuid: 4ac30d45-5cd8-4810-b303-20283811a7b6
+langcode: es
+status: true
+dependencies:
+  config:
+    - commerce_product.commerce_product_variation_type.default
+id: commerce_product_variation.default.uid
+field_name: uid
+entity_type: commerce_product_variation
+bundle: default
+label: Autor
+description: 'Autor de la variación.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: 'Drupal\commerce_product\Entity\ProductVariation::getDefaultEntityOwner'
+settings:
+  handler: default
+  handler_settings: {  }
+field_type: entity_reference

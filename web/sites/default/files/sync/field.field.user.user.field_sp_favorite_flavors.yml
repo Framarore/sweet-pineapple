@@ -1,0 +1,21 @@
+uuid: 3ad83e94-478b-473e-8128-76884753182a
+langcode: es
+status: true
+dependencies:
+  config:
+    - field.storage.user.field_sp_favorite_flavors
+  module:
+    - options
+    - user
+id: user.user.field_sp_favorite_flavors
+field_name: field_sp_favorite_flavors
+entity_type: user
+bundle: user
+label: 'Sabores favoritos'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

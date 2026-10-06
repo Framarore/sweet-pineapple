@@ -1,0 +1,65 @@
+<?php
+
+declare(strict_types=1);
+
+use Drupal\Core\Link;
+use Drupal\Core\Url;
+
+/**
+ * Implements hook_toolbar().
+ */
+function sweet_pineapple_management_toolbar(): array {
+  $account = \Drupal::currentUser();
+  if (!$account->hasPermission('access sweet pineapple store admin toolbar')) {
+    return [];
+  }
+
+  $links = [
+    Link::fromTextAndUrl(t('Panel de tiendas'), Url::fromRoute('sweet_pineapple_management.dashboard'))->toRenderable(),
+    Link::fromTextAndUrl(t('Equipo y turnos'), Url::fromRoute('sweet_pineapple_management.team'))->toRenderable(),
+    Link::fromTextAndUrl(t('Añadir turno'), Url::fromRoute('node.add', ['node_type' => 'sp_shift']))->toRenderable(),
+  ];
+
+  return [
+    'sweet_pineapple_store_admin' => [
+      '#type' => 'toolbar_item',
+      '#weight' => 20,
+      '#cache' => [
+        'contexts' => ['user.permissions'],
+      ],
+      'tab' => [
+        '#type' => 'link',
+        '#title' => t('Sweet Pineapple'),
+        '#url' => Url::fromRoute('sweet_pineapple_management.dashboard'),
+        '#attributes' => [
+          'class' => ['toolbar-icon', 'toolbar-icon-sweet-pineapple-store'],
+        ],
+      ],
+      'tray' => [
+        '#heading' => t('Administración de tienda'),
+        'links' => [
+          '#theme' => 'links',
+          '#links' => array_map(static fn(array $link): array => [
+            'title' => $link['#title'],
+            'url' => $link['#url'],
+          ], $links),
+          '#attributes' => [
+            'class' => ['toolbar-menu'],
+          ],
+        ],
+      ],
+    ],
+  ];
+}
+
+/**
+ * Implements hook_toolbar_alter().
+ */
+function sweet_pineapple_management_toolbar_alter(array &$items): void {
+  $account = \Drupal::currentUser();
+  if (!in_array('sweet_pineapple_store_admin', $account->getRoles(), TRUE)) {
+    return;
+  }
+
+  unset($items['administration'], $items['shortcuts']);
+}

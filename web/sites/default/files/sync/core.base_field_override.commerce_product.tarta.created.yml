@@ -1,0 +1,18 @@
+uuid: e1234963-2453-4543-8dc0-4a82e0c64fc8
+langcode: es
+status: true
+dependencies:
+  config:
+    - commerce_product.commerce_product_type.tarta
+id: commerce_product.tarta.created
+field_name: created
+entity_type: commerce_product
+bundle: tarta
+label: Creado
+description: 'La fecha en la que el producto fue creado'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: created

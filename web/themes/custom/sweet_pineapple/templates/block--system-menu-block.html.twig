@@ -1,0 +1,73 @@
+{% set heading_id = attributes.id ~ '-menu'|clean_id %}
+{% set theme_path = base_path ~ active_theme_path() %}
+ {% if region == 'primary_menu' or (region == 'leftfooterarea' and menu_leftfooterarea == 0) or (region == 'centerfooterarea' and menu_centerfooterarea == 0) or ( region == 'rightfooterarea' and menu_rightfooterarea == 0) 
+or (region == 'slideshowshape000' and menu_slideshowshape000 == 0 ) 
+or (region == 'slideshowshape101' and menu_slideshowshape101 == 0 ) 
+or (region == 'slideshowabovecolumn1' and  menu_slideshowabovecolumn1 == 0) 
+or (region == 'slideshowabovecolumn2' and  menu_slideshowabovecolumn2 == 0) 
+or (region == 'slideshowabovecolumn3' and  menu_slideshowabovecolumn3 == 0) 
+or (region == 'slideshowabovecolumn4' and  menu_slideshowabovecolumn4 == 0) 
+or (region == 'slideshowbelowcolumn1' and  menu_slideshowbelowcolumn1 == 0) 
+or (region == 'slideshowbelowcolumn2' and  menu_slideshowbelowcolumn2 == 0) 
+or (region == 'slideshowbelowcolumn3' and  menu_slideshowbelowcolumn3 == 0) 
+or (region == 'slideshowbelowcolumn4' and  menu_slideshowbelowcolumn4 == 0) 
+or (region == 'menuabovecolumn1' and menu_menuabovecolumn1 == 0) 
+or (region == 'menuabovecolumn2' and menu_menuabovecolumn2 == 0) 
+or (region == 'menuabovecolumn3' and menu_menuabovecolumn3 == 0) 
+or (region == 'menuabovecolumn4' and menu_menuabovecolumn4 == 0) 
+or (region == 'menubelowcolumn1' and menu_menubelowcolumn1 == 0) 
+or (region == 'menubelowcolumn2' and menu_menubelowcolumn2 == 0) 
+or (region == 'menubelowcolumn3' and menu_menubelowcolumn3 == 0) 
+or (region == 'menubelowcolumn4' and menu_menubelowcolumn4 == 0) 
+or (region == 'contenttopcolumn1' and menu_contenttopcolumn1 == 0) 
+or (region == 'contenttopcolumn2' and menu_contenttopcolumn2 == 0) 
+or (region == 'contenttopcolumn3' and menu_contenttopcolumn3 == 0) 
+or (region == 'contenttopcolumn4' and menu_contenttopcolumn4 == 0) 
+or (region == 'contentbottomcolumn1' and menu_contentbottomcolumn1 == 0) 
+or (region == 'contentbottomcolumn2' and menu_contentbottomcolumn2 == 0) 
+or (region == 'contentbottomcolumn3' and menu_contentbottomcolumn3 == 0) 
+or (region == 'contentbottomcolumn4' and menu_contentbottomcolumn4 == 0) 
+or (region == 'footerabovecolumn1' and menu_footerabovecolumn1 == 0 ) 
+or (region == 'footerabovecolumn2' and menu_footerabovecolumn2 == 0 ) 
+or (region == 'footerabovecolumn3' and menu_footerabovecolumn3 == 0 ) 
+or (region == 'footerabovecolumn4' and menu_footerabovecolumn4 == 0 ) 
+or (region == 'footercellcolumn1' and menu_footercellcolumn1 == 0 ) 
+or (region == 'footercellcolumn2' and menu_footercellcolumn2 == 0 ) 
+or (region == 'footercellcolumn3' and menu_footercellcolumn3 == 0 ) 
+or (region == 'footerbelowcolumn1' and menu_footerbelowcolumn1 == 0 ) 
+or (region == 'footerbelowcolumn2' and menu_footerbelowcolumn2 == 0 ) 
+or (region == 'footerbelowcolumn3' and menu_footerbelowcolumn3 == 0 ) 
+or (region == 'footerbelowcolumn4' and menu_footerbelowcolumn4 == 0 ) 
+  %}
+<ul class="ttr_menu_items nav navbar-nav navbar-right">
+{{ content }}	
+</ul>
+{% else %}
+<nav role="navigation" aria-labelledby="{{ heading_id }}"{{ attributes.addClass('ttr_verticalmenu')|without('role', 'aria-labelledby') }}> 
+{% if not configuration.label_display %}
+<div class="ttr_verticalmenu_content">
+<nav class="navbar">
+<ul class= "ttr_vmenu_items nav nav-pills nav-stacked">
+{{ title_prefix }}
+{{ content }}	 
+</ul>
+</nav>
+</div> 
+{% else %}
+<div class="margin_collapsetop"></div>
+<div class="ttr_verticalmenu_header"> 
+<h3 {{ title_attributes.addClass('ttr_verticalmenu_heading') }}>
+{{ configuration.label }}</h3>
+{{ title_suffix }}
+</div>
+<div class="ttr_verticalmenu_content">
+{{ title_prefix }}
+<nav class="navbar">
+<ul class="ttr_vmenu_items nav nav-pills nav-stacked">
+{{ content }}
+</ul>
+</nav>
+</div>
+</nav>
+{% endif %}
+{% endif %}

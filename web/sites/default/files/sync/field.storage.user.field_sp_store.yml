@@ -1,0 +1,20 @@
+uuid: 3e1df070-4c61-421d-88f9-cb915c6a830c
+langcode: es
+status: true
+dependencies:
+  module:
+    - commerce_store
+    - user
+id: user.field_sp_store
+field_name: field_sp_store
+entity_type: user
+type: entity_reference
+settings:
+  target_type: commerce_store
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

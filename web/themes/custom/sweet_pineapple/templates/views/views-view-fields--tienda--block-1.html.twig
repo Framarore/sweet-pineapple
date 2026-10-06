@@ -1,0 +1,37 @@
+{#
+/**
+ * @file
+ * Theme override for the "tienda" block display field output.
+ *
+ * This view renders Commerce products as individual fields rather than full
+ * product entities, so we provide a card wrapper to preserve the storefront
+ * layout without affecting other views.
+ */
+#}
+{% set handled_fields = ['title', 'field_imagen', 'variations_target_id'] %}
+
+<article class="ttr-store-card">
+  {% if fields.field_imagen is defined %}
+    <div class="ttr-store-card__image">
+      {{ fields.field_imagen.content }}
+    </div>
+  {% endif %}
+
+  {% if fields.title is defined %}
+    <h3 class="ttr-store-card__title">{{ fields.title.content }}</h3>
+  {% endif %}
+
+  {% if fields.variations_target_id is defined %}
+    <div class="ttr-store-card__purchase">
+      {{ fields.variations_target_id.content }}
+    </div>
+  {% endif %}
+
+  {% for key, field in fields %}
+    {% if key not in handled_fields %}
+      <div class="ttr-store-card__extra ttr-store-card__extra--{{ key|clean_class }}">
+        {{ field.content }}
+      </div>
+    {% endif %}
+  {% endfor %}
+</article>

@@ -1,0 +1,38 @@
+{% set classes = [node.isSticky() ? 'ttnode--sticky']%} 
+<article id="node-{{  node.id  }}"{{ attributes.addClass("ttr_post",classes) }}>
+<header>
+<div class="ttr_post_content_inner">
+<div class="ttr_post_inner_box">
+{{ title_prefix }}
+{% if not page %}
+<h2{{ title_attributes.addClass('ttr_post_title') }}>
+{% set theme_path = base_path ~ active_theme_path() %}
+<a href="{{ url }}">
+{{ label }}
+</a>
+</h2>
+{% endif %}
+{{ title_suffix }}
+</div>
+<div class="ttr_article">
+{% if display_submitted %}
+<div  class="postedon node_meta">
+<span  class="meta" {{ author_attributes }}>
+{% trans %}Posted on {% endtrans %} 
+<img src="{{ base_path ~ active_theme_path() ~ '/images/datebutton.png' }}" alt="date" />
+{{ date }} {% trans %}by {% endtrans %} 
+<img src="{{ base_path ~ active_theme_path() ~ '/images/authorbutton.png' }}" alt="author" />
+{{ author_name }}
+</span>{{ metadata }}
+</div>
+{% endif %}
+<div  id="main-content" class="postcontent" {{ content_attributes }}>
+{{ content.comments }}
+{% set columncounter = columncounter + 1 %}
+{{ content }}
+<div style="clear:both;"></div>
+</div>
+</div>
+</div>
+</header>
+</article>

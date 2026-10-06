@@ -1,0 +1,14 @@
+uuid: cbaf5992-0241-4c99-b04c-578767c42163
+langcode: es
+status: true
+dependencies:
+  config:
+    - user.role.sweet_pineapple_store_manager
+  module:
+    - user
+id: user_remove_role_action.sweet_pineapple_store_manager
+label: 'Elimina el rol Responsable de tienda al(los) usuario(s) seleccionado(s)'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: sweet_pineapple_store_manager

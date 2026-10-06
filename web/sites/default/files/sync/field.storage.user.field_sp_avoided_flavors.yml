@@ -1,0 +1,45 @@
+uuid: a9dd2662-1018-4186-bb1f-10e7e73b1459
+langcode: es
+status: true
+dependencies:
+  module:
+    - options
+    - user
+id: user.field_sp_avoided_flavors
+field_name: field_sp_avoided_flavors
+entity_type: user
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: chocolate
+      label: Chocolate
+    -
+      value: pistacho
+      label: Pistacho
+    -
+      value: caramelo
+      label: Caramelo/Lotus
+    -
+      value: fruta
+      label: Fruta
+    -
+      value: citricos
+      label: Citricos
+    -
+      value: cafe
+      label: Cafe
+    -
+      value: galleta
+      label: Galleta
+    -
+      value: clasico
+      label: Clasico
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

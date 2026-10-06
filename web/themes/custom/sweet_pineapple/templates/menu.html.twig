@@ -1,0 +1,96 @@
+{% import _self as menus %}
+{{ menus.menu_links(items, attributes, 0) }}
+{% macro menu_links(items, attributes, menu_level) %}
+{% set justify = false %}
+{% import _self as menus %}
+{% if items %}
+{% for item in items %}  
+{% if item.attributes.class == 'ttr_menu_items_parent_link_active' or item.attributes.class == 'ttr_menu_items_parent_link_active_arrow dropdown-toggle' %} 
+{% set list_class = ' ttr_menu_items_parent active' %} 
+{% elseif item.attributes.class == 'ttr_menu_items_parent_link' or item.attributes.class == 'ttr_menu_items_parent_link_arrow dropdown-toggle' %} 
+{% set list_class = ' ttr_menu_items_parent' %} 
+{% elseif item.attributes.class == 'ttr_vmenu_items_parent_link_active' or item.attributes.class == 'ttr_vmenu_items_parent_link_active_arrow dropdown-toggle' %} 
+{% set list_class = ' ttr_vmenu_items_parent active' %} 
+{% elseif item.attributes.class == 'ttr_vmenu_items_parent_link' or item.attributes.class == 'ttr_vmenu_items_parent_link_arrow dropdown-toggle' %} 
+{% set list_class = ' ttr_vmenu_items_parent' %} 
+{% endif %} 
+{% if item.below %}
+<li class=" {{ list_class ~ ' dropdown' }}">
+<a  href="{{ item.url }}" data-toggle="dropdown"{{ item.attributes }}>
+<span class="menuchildicon"></span>{{ item.title }}<span class="menuarrowicon  "></span></a>
+<hr class=" horiz_separator"/>
+{{ menus.level1_menu_links(item.below, attributes, menu_level+1) }}
+{% else %}
+<li class=" {{ list_class }} ">
+<a  href="{{ item.url }}"{{ item.attributes }}>
+<span class="menuchildicon"></span>{{ item.title }}</a>
+<hr class=" horiz_separator"/>
+{% endif %}
+</li>
+{% endfor %}
+{% endif %}
+{% endmacro %}
+{% macro level1_menu_links(items, attributes, menu_level) %}
+{% set magmenu = false %}
+{% import _self as menus %}
+{% if items %}
+<ul class="child dropdown-menu menu-dropdown-styles"role="menu">
+{% for item in items %} 
+{% if item.below %} 
+{% if magmenu %}
+<li class="span1 unstyled dropdown dropdown-submenu">
+<a class="subchild dropdown-toggle" data-toggle="dropdown" href="{{ item.url }}" tabindex="0">
+<span class="menuchildicon"></span>{{ item.title }}<span class="menuarrowicon"></span></a>
+<hr class="horiz_separator"/>
+{% else %}
+<li class="dropdown dropdown-submenu">
+<a class="subchild dropdown-toggle" data-toggle="dropdown" href="{{ item.url }}" tabindex="0">
+<span class="menuchildicon"></span>{{ item.title }}<span class="menuarrowicon"></span></a>
+<hr class="horiz_separator"/>
+{% endif %}
+{{ menus.level2_menu_links(item.below, attributes, menu_level+1) }}
+</li>
+{% else %}
+{% if magmenu %}
+<li class="span1 unstyled">
+{% else %}
+<li>
+{% endif %}
+<a href="{{ item.url }}" ><span class="menuchildicon"></span>{{ item.title }}<span class="menuarrowicon  "></span></a>
+<hr class="separator"/>
+</li>
+{% endif %}
+{% endfor %}
+</ul>
+{% endif %}
+{% endmacro %}
+{% macro level2_menu_links(items, attributes, menu_level) %}
+{% set magmenu = false %}
+{% set menuh = false %}
+{% import _self as menus %}
+{% if items %}
+{% if magmenu %}
+<ul role="menu" >
+{% elseif menuh %}
+<ul class="sub-menu" role="menu">
+{% else %}
+<ul class="dropdown-menu sub-menu menu-dropdown-styles " role="menu">
+{% endif %}
+{% for item in items %} 
+{% if item.below %}
+<li class="dropdown dropdown-submenu">
+<a class="subchild dropdown-toggle" data-toggle="dropdown" href="{{ item.url }}"tabindex="0">
+<span class="menuchildicon"></span>{{ item.title }}<span class="menuarrowicon"></span></a>
+<hr class="horiz_separator"/>
+{{ menus.level2_menu_links(item.below, attributes, menu_level+1) }}
+</li>
+{% else %}
+<li>
+<a href="{{ item.url }}" ><span class="menuchildicon"></span>{{ item.title }}<span class="menuarrowicon  "></span></a>
+<hr class="horiz_separator"/>
+</li>
+{% endif %}
+{% endfor %}
+</ul>
+{% endif %}
+{% endmacro %}

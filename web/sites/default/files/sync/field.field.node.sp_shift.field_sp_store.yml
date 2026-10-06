@@ -1,0 +1,21 @@
+uuid: 70417cf8-385b-4891-8a11-be5ce41cfcbd
+langcode: es
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_sp_store
+    - node.type.sp_shift
+id: node.sp_shift.field_sp_store
+field_name: field_sp_store
+entity_type: node
+bundle: sp_shift
+label: Tienda
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:commerce_store'
+  handler_settings: {  }
+field_type: entity_reference

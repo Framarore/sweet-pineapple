@@ -1,0 +1,4 @@
+customer_area:
+  css:
+    theme:
+      css/customer-area.css: {}

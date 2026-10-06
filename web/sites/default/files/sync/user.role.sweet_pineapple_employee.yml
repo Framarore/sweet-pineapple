@@ -1,0 +1,9 @@
+uuid: 0c05c1c7-7437-46e5-8d0e-8466a5bdccbd
+langcode: es
+status: true
+dependencies: {  }
+id: sweet_pineapple_employee
+label: Empleado
+weight: 6
+is_admin: null
+permissions: {  }

@@ -1,0 +1,8 @@
+uuid: 67c27168-c0d4-4223-ac18-329e6d3e9d3f
+langcode: es
+status: true
+dependencies: {  }
+id: tt-menu
+label: 'Menu principal Sweet Pineapple'
+description: 'TemplateToaster custom menu module.'
+locked: false

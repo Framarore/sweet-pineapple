@@ -1,0 +1,11 @@
+name: Sweet Pineapple Customer Area
+type: module
+description: Area de cliente con preferencias, recordatorios y resumen de pedidos.
+package: Sweet Pineapple
+core_version_requirement: ^10
+dependencies:
+  - drupal:datetime
+  - drupal:field
+  - drupal:commerce_order
+  - drupal:options
+  - drupal:user

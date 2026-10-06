@@ -1,0 +1,14 @@
+name: Sweet Pineapple Management
+type: module
+description: Adds multi-store management, employee scheduling and owner dashboard tools for Sweet Pineapple.
+package: Sweet Pineapple
+core_version_requirement: ^10 || ^11
+dependencies:
+  - drupal:commerce_order
+  - drupal:commerce_store
+  - drupal:datetime
+  - drupal:field
+  - drupal:node
+  - drupal:options
+  - drupal:toolbar
+  - drupal:user

@@ -1,0 +1,13 @@
+uuid: bcf938cf-e2ed-46a4-b8a9-d7e16a0b92c5
+langcode: es
+status: true
+dependencies: {  }
+id: tarta
+label: Tarta
+traits: {  }
+locked: false
+description: ''
+variationTypes:
+  - tarta
+multipleVariations: true
+injectVariationFields: true

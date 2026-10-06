@@ -1,0 +1,21 @@
+uuid: 5b9688e7-cdb7-463b-9759-611bcb133bdb
+langcode: es
+status: true
+dependencies:
+  config:
+    - field.storage.user.field_sp_avoided_flavors
+  module:
+    - options
+    - user
+id: user.user.field_sp_avoided_flavors
+field_name: field_sp_avoided_flavors
+entity_type: user
+bundle: user
+label: 'Sabores a evitar'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

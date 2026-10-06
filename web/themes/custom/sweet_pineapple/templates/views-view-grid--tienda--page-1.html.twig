@@ -1,0 +1,22 @@
+{% set classes = ['views-view-grid', options.alignment, 'cols-3', 'clearfix', 'row', 'ttr_shop_html_row0'] %}
+{% if title %}
+<h3>{{ title }}</h3>
+{% endif %}
+<div{{ attributes.addClass(classes) }}>
+{% set item_counter = 0 %}
+{% for column in items %}
+{% for row in column.content %}
+<div class="post_column col-xl-4 col-lg-4 col-md-6 col-sm-12 col-xs-12 col-12">
+ {{ row.content }}
+</div>
+{% set item_counter = item_counter + 1 %}
+{% if (item_counter % 3) == 0 %}
+<div class=" visible-lg-block d-xl-block d-lg-block visible-sm-block d-sm-block visible-xs-block d-block" style="clear: both;width:0px;"></div>
+{% elseif (item_counter % 2) == 0 %}
+<div class=" visible-md-block d-md-block visible-sm-block d-sm-block visible-xs-block d-block" style="clear: both;width:0px;"></div>
+{% else %}
+<div class=" visible-sm-block d-sm-block visible-xs-block d-block" style="clear: both;width:0px;"></div>
+{% endif %}
+{% endfor %}
+{% endfor %}
+</div>

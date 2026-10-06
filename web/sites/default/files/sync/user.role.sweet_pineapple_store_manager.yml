@@ -1,0 +1,9 @@
+uuid: bd669bff-4306-4c9f-846c-256c1a9d1c37
+langcode: es
+status: true
+dependencies: {  }
+id: sweet_pineapple_store_manager
+label: 'Responsable de tienda'
+weight: 5
+is_admin: null
+permissions: {  }

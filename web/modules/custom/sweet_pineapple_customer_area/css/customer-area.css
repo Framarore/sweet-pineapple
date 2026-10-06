@@ -1,0 +1,129 @@
+.sp-customer-area {
+  display: grid;
+  gap: 28px;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 28px 18px 56px;
+}
+
+.sp-customer-hero {
+  display: grid;
+  gap: 10px;
+  padding: 36px;
+  color: #fff;
+  background: linear-gradient(135deg, #7a2e16, #d96b2b);
+  border-radius: 8px;
+}
+
+.sp-customer-hero p,
+.sp-customer-hero h1 {
+  margin: 0;
+}
+
+.sp-customer-hero p {
+  text-transform: uppercase;
+  font-weight: 800;
+  letter-spacing: .08em;
+}
+
+.sp-customer-hero h1 {
+  font-size: clamp(2rem, 4vw, 3.25rem);
+}
+
+.sp-customer-hero a,
+.sp-customer-link {
+  width: fit-content;
+  padding: 12px 18px;
+  color: #7a2e16;
+  background: #fff7ee;
+  border-radius: 999px;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.sp-customer-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.sp-customer-card {
+  padding: 24px;
+  background: #fff;
+  border: 1px solid #ead7c7;
+  border-radius: 8px;
+  box-shadow: 0 18px 42px rgba(122, 46, 22, .08);
+}
+
+.sp-customer-card--wide {
+  grid-column: 1 / -1;
+}
+
+.sp-customer-card h2 {
+  margin: 0 0 18px;
+  color: #2e2b28;
+  font-size: 1.25rem;
+}
+
+.sp-customer-list,
+.sp-customer-orders {
+  display: grid;
+  gap: 12px;
+  margin: 0 0 20px;
+}
+
+.sp-customer-list {
+  grid-template-columns: max-content 1fr;
+}
+
+.sp-customer-list dt {
+  color: #6f4b37;
+  font-weight: 800;
+}
+
+.sp-customer-list dd {
+  margin: 0;
+  color: #554943;
+}
+
+.sp-customer-orders {
+  padding: 0;
+  list-style: none;
+}
+
+.sp-customer-orders li {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: 14px;
+  align-items: center;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #f0dfd3;
+}
+
+.sp-customer-empty {
+  margin: 0;
+  color: #6f625b;
+}
+
+.sp-customer-preferences {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px 28px;
+}
+
+.sp-customer-preferences .form-actions {
+  grid-column: 1 / -1;
+}
+
+@media (max-width: 760px) {
+  .sp-customer-grid,
+  .sp-customer-preferences,
+  .sp-customer-orders li {
+    grid-template-columns: 1fr;
+  }
+
+  .sp-customer-hero,
+  .sp-customer-card {
+    padding: 22px;
+  }
+}

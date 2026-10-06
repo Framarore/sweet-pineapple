@@ -1,0 +1,21 @@
+uuid: ebbff726-104a-40f3-a671-8a0cf488a0ab
+langcode: es
+status: true
+dependencies:
+  config:
+    - field.storage.user.field_sp_next_event
+  module:
+    - datetime
+    - user
+id: user.user.field_sp_next_event
+field_name: field_sp_next_event
+entity_type: user
+bundle: user
+label: 'Proxima fecha importante'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

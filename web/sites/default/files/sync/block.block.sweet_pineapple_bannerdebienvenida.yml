@@ -1,0 +1,30 @@
+uuid: 74724710-458d-4e60-a092-1d6e764c6a33
+langcode: es
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:8c06e876-c3fd-4f50-bf90-8e5e73a0af4a'
+  module:
+    - block_content
+    - system
+  theme:
+    - sweet_pineapple
+id: sweet_pineapple_bannerdebienvenida
+theme: sweet_pineapple
+region: content
+weight: 0
+provider: null
+plugin: 'block_content:8c06e876-c3fd-4f50-bf90-8e5e73a0af4a'
+settings:
+  id: 'block_content:8c06e876-c3fd-4f50-bf90-8e5e73a0af4a'
+  label: 'Banner de Bienvenida'
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: /node/1

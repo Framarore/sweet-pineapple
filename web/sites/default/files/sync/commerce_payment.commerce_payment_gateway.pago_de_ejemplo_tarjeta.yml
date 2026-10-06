@@ -1,0 +1,19 @@
+uuid: 92a4fe16-bc6c-4447-91ca-ae843a95f020
+langcode: es
+status: true
+dependencies:
+  module:
+    - commerce_payment_example
+id: pago_de_ejemplo_tarjeta
+label: 'Pago de Ejemplo (Tarjeta)'
+weight: null
+plugin: example_onsite
+configuration:
+  display_label: Ejemplo
+  mode: test
+  payment_method_types:
+    - credit_card
+  collect_billing_information: true
+  api_key: test
+conditions: {  }
+conditionOperator: AND

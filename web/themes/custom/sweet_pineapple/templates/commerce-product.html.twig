@@ -1,0 +1,73 @@
+{#
+/**
+ * @file
+ * Theme override for a Commerce product detail page.
+ */
+#}
+<article{{ attributes.addClass('sp-product-detail') }}>
+  {{ title_prefix }}
+  {{ title_suffix }}
+
+  {% set image = product.field_imagen is defined ? product.field_imagen : null %}
+  {% set product_name = product_entity.label %}
+  {% set description = product.body is defined ? product.body : null %}
+  {% set price = product.variation_price is defined ? product.variation_price : null %}
+  {% set legacy_price = product.variation_field_precio is defined ? product.variation_field_precio : null %}
+  {% set sku = product.variation_field_sku is defined ? product.variation_field_sku : null %}
+  {% set variations = product.variations is defined ? product.variations : null %}
+  {% set extras = product|without('field_imagen', 'body', 'variation_price', 'variation_field_precio', 'variation_field_sku', 'variations', 'variation_attributes') %}
+
+  <div class="sp-product-detail__content">
+    {% if image %}
+      <div class="sp-product-detail__media">
+        <p class="sp-product-detail__kicker">{{ 'Imagen'|t }}</p>
+        <div class="sp-product-detail__image">{{ image }}</div>
+      </div>
+    {% endif %}
+
+    <div class="sp-product-detail__main">
+      <header class="sp-product-detail__header">
+        <p class="sp-product-detail__eyebrow">{{ 'Sweet Pineapple'|t }}</p>
+        <h2 class="sp-product-detail__title">{{ product_name }}</h2>
+      </header>
+
+      {% if price %}
+        <div class="sp-product-detail__price-card">
+          <p class="sp-product-detail__kicker">{{ 'Precio'|t }}</p>
+          <div class="sp-product-detail__price">{{ price }}</div>
+        </div>
+      {% elseif legacy_price %}
+        <div class="sp-product-detail__price-card">
+          <p class="sp-product-detail__kicker">{{ 'Precio'|t }}</p>
+          <div class="sp-product-detail__price">{{ legacy_price }}</div>
+        </div>
+      {% endif %}
+
+      {% if variations %}
+        <div class="sp-product-detail__purchase-card">
+          <p class="sp-product-detail__kicker">{{ 'Selecciona tu pedido'|t }}</p>
+          {{ variations }}
+        </div>
+      {% endif %}
+
+      {% if description %}
+        <div class="sp-product-detail__description">
+          {{ description }}
+        </div>
+      {% endif %}
+
+      {% if sku %}
+        <div class="sp-product-detail__meta-card">
+          <p class="sp-product-detail__kicker">{{ 'Referencia'|t }}</p>
+          <div class="sp-product-detail__meta">{{ sku }}</div>
+        </div>
+      {% endif %}
+
+      {% if extras %}
+        <div class="sp-product-detail__extras">
+          {{ extras }}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</article>

@@ -1,0 +1,22 @@
+uuid: 1ba2cac6-7e17-4abd-9aea-d6c06b8975b0
+langcode: es
+status: true
+dependencies:
+  config:
+    - commerce_product.commerce_product_variation_type.tarta
+id: commerce_product_variation.tarta.status
+field_name: status
+entity_type: commerce_product_variation
+bundle: tarta
+label: Publicado
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: Activado
+  off_label: Desactivado
+field_type: boolean

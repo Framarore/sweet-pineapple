@@ -1,0 +1,14 @@
+uuid: bb9041a6-8a26-4751-be0e-57bf59463828
+langcode: es
+status: true
+dependencies:
+  config:
+    - user.role.sweet_pineapple_store_manager
+  module:
+    - user
+id: user_add_role_action.sweet_pineapple_store_manager
+label: 'Add the Responsable de tienda role to the selected user(s)'
+type: user
+plugin: user_add_role_action
+configuration:
+  rid: sweet_pineapple_store_manager

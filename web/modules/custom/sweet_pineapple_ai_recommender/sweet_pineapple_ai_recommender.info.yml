@@ -1,0 +1,8 @@
+name: Sweet Pineapple AI Recommender
+type: module
+description: Provides an AI-inspired product recommender for the Sweet Pineapple shop.
+package: Sweet Pineapple
+core_version_requirement: ^10 || ^11
+dependencies:
+  - drupal:commerce_product
+  - sweet_pineapple_management:sweet_pineapple_management

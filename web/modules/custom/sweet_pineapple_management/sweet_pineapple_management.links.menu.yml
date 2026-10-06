@@ -1,0 +1,13 @@
+sweet_pineapple_management.dashboard:
+  title: 'Panel de tiendas'
+  description: 'Indicadores de ventas, productos, tiendas y empleados.'
+  route_name: sweet_pineapple_management.dashboard
+  parent: system.admin
+  weight: -8
+
+sweet_pineapple_management.team:
+  title: 'Gestión de equipo'
+  description: 'Administrar empleados, usuarios y turnos.'
+  route_name: sweet_pineapple_management.team
+  parent: system.admin
+  weight: -7

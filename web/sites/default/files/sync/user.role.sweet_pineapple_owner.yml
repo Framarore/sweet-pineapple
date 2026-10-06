@@ -1,0 +1,17 @@
+uuid: 0c055320-a394-4928-8234-49b6f2fc181c
+langcode: es
+status: true
+dependencies:
+  module:
+    - commerce_order
+    - commerce_store
+    - sweet_pineapple_management
+id: sweet_pineapple_owner
+label: 'Dueño de tienda'
+weight: 4
+is_admin: null
+permissions:
+  - 'access sweet pineapple dashboard'
+  - 'administer commerce_order'
+  - 'administer commerce_store'
+  - 'administer users'

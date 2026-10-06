@@ -1,0 +1,21 @@
+uuid: 1433b414-302a-4428-914d-a2c616f97957
+langcode: es
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_sp_employee
+    - node.type.sp_shift
+id: node.sp_shift.field_sp_employee
+field_name: field_sp_employee
+entity_type: node
+bundle: sp_shift
+label: Empleado
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:user'
+  handler_settings: {  }
+field_type: entity_reference

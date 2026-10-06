@@ -1,0 +1,14 @@
+uuid: 0de48374-fed2-4500-b3d0-c923ffc0320d
+langcode: es
+status: true
+dependencies:
+  config:
+    - user.role.sweet_pineapple_employee
+  module:
+    - user
+id: user_remove_role_action.sweet_pineapple_employee
+label: 'Elimina el rol Empleado al(los) usuario(s) seleccionado(s)'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: sweet_pineapple_employee

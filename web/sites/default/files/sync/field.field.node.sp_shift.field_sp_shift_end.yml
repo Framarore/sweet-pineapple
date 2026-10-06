@@ -1,0 +1,21 @@
+uuid: b229d7d4-3431-4fb3-9149-9c5a13d249e5
+langcode: es
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_sp_shift_end
+    - node.type.sp_shift
+  module:
+    - datetime
+id: node.sp_shift.field_sp_shift_end
+field_name: field_sp_shift_end
+entity_type: node
+bundle: sp_shift
+label: Fin
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

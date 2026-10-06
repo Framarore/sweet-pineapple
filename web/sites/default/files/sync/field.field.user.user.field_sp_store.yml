@@ -1,0 +1,22 @@
+uuid: 06e16946-d689-4bc9-b0a7-4a308e10293c
+langcode: es
+status: true
+dependencies:
+  config:
+    - field.storage.user.field_sp_store
+  module:
+    - user
+id: user.user.field_sp_store
+field_name: field_sp_store
+entity_type: user
+bundle: user
+label: 'Tienda asignada'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:commerce_store'
+  handler_settings: {  }
+field_type: entity_reference

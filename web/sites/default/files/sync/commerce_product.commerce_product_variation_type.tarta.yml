@@ -1,0 +1,10 @@
+uuid: b934fd45-efd0-49d6-a558-4c66ad6ec770
+langcode: es
+status: true
+dependencies: {  }
+id: tarta
+label: Tarta
+traits: {  }
+locked: false
+orderItemType: default
+generateTitle: null

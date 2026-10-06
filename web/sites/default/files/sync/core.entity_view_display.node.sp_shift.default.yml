@@ -1,0 +1,68 @@
+uuid: 6233ce87-af99-4908-b665-d2bb68800563
+langcode: es
+status: true
+dependencies:
+  config:
+    - field.field.node.sp_shift.field_sp_employee
+    - field.field.node.sp_shift.field_sp_shift_end
+    - field.field.node.sp_shift.field_sp_shift_start
+    - field.field.node.sp_shift.field_sp_shift_status
+    - field.field.node.sp_shift.field_sp_store
+    - node.type.sp_shift
+  module:
+    - datetime
+    - options
+    - user
+id: node.sp_shift.default
+targetEntityType: node
+bundle: sp_shift
+mode: default
+content:
+  field_sp_employee:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_sp_shift_end:
+    type: datetime_default
+    label: above
+    settings:
+      timezone_override: ''
+      format_type: medium
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  field_sp_shift_start:
+    type: datetime_default
+    label: above
+    settings:
+      timezone_override: ''
+      format_type: medium
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_sp_shift_status:
+    type: list_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 5
+    region: content
+  field_sp_store:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  langcode: true

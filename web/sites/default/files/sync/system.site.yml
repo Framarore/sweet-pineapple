@@ -1,0 +1,15 @@
+_core:
+  default_config_hash: ijfbzDTN4CbE7Sr-6ubWzy_t1vH4OtU1doNCLssVz-4
+langcode: es
+uuid: d39403b4-a802-4c8d-ba2c-6b0c1ffabff1
+name: 'Pastelería Francisco'
+mail: admin@pasteleria.com
+slogan: ''
+page:
+  403: ''
+  404: ''
+  front: /node/2
+admin_compact_mode: false
+weight_select_max: 100
+default_langcode: es
+mail_notification: null

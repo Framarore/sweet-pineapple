@@ -1,0 +1,14 @@
+uuid: 319dbe38-7522-4af0-8f54-690171944e3d
+langcode: es
+status: true
+dependencies:
+  config:
+    - user.role.sweet_pineapple_employee
+  module:
+    - user
+id: user_add_role_action.sweet_pineapple_employee
+label: 'Add the Empleado role to the selected user(s)'
+type: user
+plugin: user_add_role_action
+configuration:
+  rid: sweet_pineapple_employee

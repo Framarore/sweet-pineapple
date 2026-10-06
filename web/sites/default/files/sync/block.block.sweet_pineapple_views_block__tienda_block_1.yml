@@ -1,0 +1,29 @@
+uuid: 6fb91818-805a-4a8b-a5fe-8e79b43f2160
+langcode: es
+status: true
+dependencies:
+  config:
+    - views.view.tienda
+  module:
+    - system
+    - views
+  theme:
+    - sweet_pineapple
+id: sweet_pineapple_views_block__tienda_block_1
+theme: sweet_pineapple
+region: content
+weight: 0
+provider: null
+plugin: 'views_block:tienda-block_1'
+settings:
+  id: 'views_block:tienda-block_1'
+  label: ''
+  label_display: '0'
+  provider: views
+  views_label: ''
+  items_per_page: none
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: /node/1

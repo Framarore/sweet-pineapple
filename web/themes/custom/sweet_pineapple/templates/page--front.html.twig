@@ -1,0 +1,213 @@
+{% set theme_path = base_path ~ active_theme_path() %}
+<div class="ttr_banner_menu"></div>
+<div id="ttr_menu">
+<div class="margin_collapsetop"></div>
+<nav class="navbar-default navbar-expand-md navbar">
+<div id="ttr_menu_inner_in">
+<div class="ttr_menu_element_alignment container">
+<div class="ttr_images_container">
+<div class="ttr_menu_logo">
+<a href="{{ front_page }}">
+<img src="{{ theme_path ~ '/images/sweet-pineapple-profile.jpg' }}" alt="{{ 'Sweet Pineapple'|t }}" class="" />
+</a>
+</div>
+</div>
+<div id="navigationmenu">
+<div class="navbar-header">
+<button id="nav-expander" data-target=".navbar-collapse" data-toggle="collapse" class="navbar-toggle" type="button">
+<span class="ttr_menu_toggle_button">
+<span class="sr-only"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</span>
+<span class="ttr_menu_button_text">{{ 'Menu'|t }}</span>
+</button>
+</div>
+<div class="menu-center collapse navbar-collapse">
+{{ page.primary_menu }}
+</div>
+<div class="ttr_images_container"></div>
+</div>
+</div>
+</div>
+</nav>
+</div>
+
+<main class="sp-homepage">
+  <section class="sp-hero">
+    <div class="sp-hero__media">
+      <img src="{{ theme_path ~ '/images/sweet-pineapple-graffiti-hero.jpg' }}" alt="{{ 'Graffiti de Sweet Pineapple'|t }}" />
+    </div>
+    <div class="sp-hero__overlay"></div>
+    <div class="sp-hero__content container">
+      <p class="sp-hero__eyebrow">Sweet Pineapple</p>
+      <h1 class="sp-hero__title">Tu pasteleria americana en Montequinto</h1>
+      <p class="sp-hero__copy">Estamos en Calle Bolonia 14, en Montequinto, con una propuesta de pasteleria americana artesanal hecha para disfrutar cada visita.</p>
+      <div class="sp-hero__actions">
+        <a class="sp-button sp-button--primary" href="/tienda">{{ 'Ver la tienda'|t }}</a>
+        <a class="sp-button sp-button--ghost" href="https://www.instagram.com/sweettpineapple/" target="_blank" rel="noopener noreferrer">Instagram</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="sp-section sp-hours container">
+    <div class="sp-hours__media">
+      <img src="{{ theme_path ~ '/images/sweet-pineapple-hours-post.jpg' }}" alt="{{ 'Horario de Sweet Pineapple'|t }}" />
+    </div>
+    <div class="sp-hours__content">
+      <p class="sp-section__kicker">Horario</p>
+      <h2>Consulta nuestro horario</h2>
+      <p>Revisa nuestros horarios de apertura y ven a visitarnos cuando mejor te venga.</p>
+      <div class="sp-hero__actions">
+        <a class="sp-button sp-button--primary" href="/tienda">{{ 'Ir a la tienda'|t }}</a>
+        <a class="sp-button sp-button--secondary" href="https://www.instagram.com/p/DUlXdNyCo9p/" target="_blank" rel="noopener noreferrer">Ver horario en Instagram</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="sp-section sp-social container">
+    <div class="sp-section__header">
+      <p class="sp-section__kicker">Sweet Pineapple</p>
+      <h2>Descubre nuestro universo</h2>
+    </div>
+    <div class="sp-story-list">
+      <article class="sp-story">
+        <div class="sp-story__media">
+          <iframe src="https://www.instagram.com/reel/DFx61hngoVv/embed" allowtransparency="true" allowfullscreen="true" frameborder="0" scrolling="no" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+        </div>
+        <div class="sp-story__content">
+          <p class="sp-story__eyebrow">Publicacion 01</p>
+          <h3>Graffiti de Sweet Pineapple</h3>
+          <p>La historia del mural del local en Calle Bolonia 14, creado junto a <strong>@febo_one</strong> para convertir la fachada en una pieza totalmente reconocible de la marca.</p>
+          <a class="sp-button sp-button--secondary" href="https://www.instagram.com/p/DFx61hngoVv/" target="_blank" rel="noopener noreferrer">Ver publicacion</a>
+        </div>
+      </article>
+
+      <article class="sp-story sp-story--reverse">
+        <div class="sp-story__media">
+          <iframe src="https://www.instagram.com/reel/DKjoJTEi2xm/embed" allowtransparency="true" allowfullscreen="true" frameborder="0" scrolling="no" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+        </div>
+        <div class="sp-story__content">
+          <p class="sp-story__eyebrow">Publicacion 02</p>
+          <h3>Pasteleria americana en Montequinto</h3>
+          <p>Presentacion del espacio Sweet Pineapple como pasteleria americana artesanal en Montequinto, con foco en la experiencia del local y su identidad visual.</p>
+          <a class="sp-button sp-button--secondary" href="https://www.instagram.com/p/DKjoJTEi2xm/" target="_blank" rel="noopener noreferrer">Ver publicacion</a>
+        </div>
+      </article>
+
+      <article class="sp-story">
+        <div class="sp-story__media">
+          <iframe src="https://www.instagram.com/reel/DWWjHw5CtXt/embed" allowtransparency="true" allowfullscreen="true" frameborder="0" scrolling="no" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+        </div>
+        <div class="sp-story__content">
+          <p class="sp-story__eyebrow">Publicacion 03</p>
+          <h3>Visita y productos recomendados</h3>
+          <p>Una visita real al local mostrando el ambiente de Sweet Pineapple y varios de los productos que más llaman la atención al entrar en la tienda.</p>
+          <a class="sp-button sp-button--secondary" href="https://www.instagram.com/p/DWWjHw5CtXt/" target="_blank" rel="noopener noreferrer">Ver publicacion</a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="sp-admin container">
+    {% if tabs %}
+    <div class="tabs">{{ tabs }}</div>
+    {% endif %}
+    {{ page.help }}
+    {{ page.messages }}
+    {% if action_links %}
+    <ul class="action-links">{{ action_links }}</ul>
+    {% endif %}
+  </section>
+</main>
+
+<div class="footer-widget-area">
+<div class="footer-widget-area_left_border_image">
+<div class="footer-widget-area_right_border_image">
+<div class="footer-widget-area_inner"></div>
+</div>
+</div>
+</div>
+<div class="margin_collapsetop"></div>
+<footer id="ttr_footer">
+<div class="margin_collapsetop"></div>
+ <div id="ttr_footer_inner">
+{% if page.footercellcolumn1 or page.footercellcolumn2 or page.footercellcolumn3 %}
+<div class="ttr_footer-widget-cell_inner_widget_container">
+<div class="ttr_footer-widget-cell_inner0 container row">
+{% set showcolumn = page.footercellcolumn1 %}
+{% if showcolumn %}
+<div class="cell1 col-xl-4 col-lg-4 col-md-4 col-sm-4  col-xs-4  col-4">
+<div class="footercellcolumn1">{{ page.footercellcolumn1 }}</div>
+</div>
+{% else %}
+<div class="cell1 col-xl-4 col-lg-4 col-md-4 col-sm-4  col-xs-4  col-4" style="background-color:transparent;"></div>
+{% endif %}
+{% set showcolumn = page.footercellcolumn2 %}
+{% if showcolumn %}
+<div class="cell2 col-xl-4 col-lg-4 col-md-4 col-sm-4  col-xs-4  col-4">
+<div class="footercellcolumn2">{{ page.footercellcolumn2 }}</div>
+</div>
+{% else %}
+<div class="cell2 col-xl-4 col-lg-4 col-md-4 col-sm-4  col-xs-4  col-4" style="background-color:transparent;"></div>
+{% endif %}
+{% set showcolumn = page.footercellcolumn3 %}
+{% if showcolumn %}
+<div class="cell3 col-xl-4 col-lg-4 col-md-4 col-sm-4  col-xs-4  col-4">
+<div class="footercellcolumn3">{{ page.footercellcolumn3 }}</div>
+</div>
+{% else %}
+<div class="cell3 col-xl-4 col-lg-4 col-md-4 col-sm-4  col-xs-4  col-4" style="background-color:transparent;"></div>
+{% endif %}
+<div class="visible-lg-block d-xl-block d-lg-block visible-md-block d-md-block visible-sm-block d-sm-block visible-xs-block d-block" style="clear:both;"></div>
+<div class="visible-lg-block d-xl-block d-lg-block visible-md-block d-md-block visible-sm-block d-sm-block visible-xs-block d-block" style="clear:both;"></div>
+</div>
+</div>
+<div style="clear: both;"></div>
+{% endif %}
+<div id="ttr_footer_top_for_widgets">
+<div class="ttr_footer_top_for_widgets_inner">
+{% if page.leftfooterarea or page.centerfooterarea or page.rightfooterarea %}
+<div class="footer-widget-area_fixed row">
+<div style="margin:0 auto;"></div>
+{% if page.leftfooterarea %}
+<div id="first" class="widget-area col-xl-4 col-lg-4 col-md-4 col-sm-12 col-xs-12 col-12">{{ page.leftfooterarea }}</div>
+<div class="visible-xs d-block" style="clear:both;"></div>
+{% else %}
+<div id="first" class="widget-area col-xl-4 col-lg-4 col-md-4 col-sm-12 col-xs-12 col-12"></div>
+<div class="visible-xs d-block"></div>
+{% endif %}
+{% if page.centerfooterarea %}
+<div id="second" class="widget-area col-xl-4 col-lg-4 col-md-4 col-sm-12 col-xs-12 col-12">{{ page.centerfooterarea }}</div>
+<div class="visible-xs d-block" style="clear:both;"></div>
+{% else %}
+<div id="second" class="widget-area col-xl-4 col-lg-4 col-md-4 col-sm-12 col-xs-12 col-12"></div>
+<div class="visible-xs d-block" style="clear:both;"></div>
+{% endif %}
+{% if page.rightfooterarea %}
+<div id="third" class="widget-area col-xl-4 col-lg-4 col-md-4 col-sm-12 col-xs-12 col-12">{{ page.rightfooterarea }}</div>
+<div class="visible-lg visible-md visible-sm visible-xs d-xl-block d-lg-block d-md-block d-sm-block d-block" style="clear:both;"></div>
+{% else %}
+<div id="third" class="widget-area col-xl-4 col-lg-4 col-md-4 col-sm-12 col-xs-12 col-12"></div>
+<div class="visible-lg visible-md visible-sm visible-xs d-xl-block d-lg-block d-md-block d-sm-block d-block" style="clear:both;"></div>
+{% endif %}
+</div>
+{% endif %}
+</div>
+</div>
+<div class="ttr_footer_bottom_footer">
+<div class="ttr_footer_bottom_footer_inner">
+<div class="ttr_footer_element_alignment container"></div>
+<div id="ttr_footer_designed_by_links">
+<a href="https://www.instagram.com/sweettpineapple/" target="_blank" rel="noopener noreferrer">Sweet Pineapple</a>
+<span id="ttr_footer_designed_by"> American Pastry </span>
+</div>
+{{ feed_icons }}
+<a href="https://www.instagram.com/sweettpineapple/" class="ttr_footer_instagram" target="_blank" rel="noopener noreferrer"></a>
+</div>
+</div>
+</div>
+</footer>
+<div class="margin_collapsetop"></div>
+<div class="footer-widget-area"></div>

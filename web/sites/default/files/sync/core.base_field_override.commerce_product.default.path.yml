@@ -1,0 +1,20 @@
+uuid: e5da68c0-2e22-4e51-b02e-7ae6c2941098
+langcode: es
+status: true
+dependencies:
+  config:
+    - commerce_product.commerce_product_type.default
+  module:
+    - path
+id: commerce_product.default.path
+field_name: path
+entity_type: commerce_product
+bundle: default
+label: 'Alias de URL'
+description: 'Alias del URL del producto.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: path

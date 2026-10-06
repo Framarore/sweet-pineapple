@@ -1,0 +1,101 @@
+{%
+set classes = [
+'block',
+'block-' ~ configuration.provider|clean_class,
+'block-' ~ plugin_id|clean_class,
+ ]
+%}
+{% set theme_path = base_path ~ active_theme_path() %} 
+ {% if (region == 'leftfooterarea' and style_leftfooterarea == 0) or (region == 'centerfooterarea' and style_centerfooterarea == 0) or ( region == 'rightfooterarea' and style_rightfooterarea == 0) 
+or (region == 'slideshowshape000' and style_slideshowshape000 == 0 ) 
+or (region == 'slideshowshape101' and style_slideshowshape101 == 0 ) 
+or (region == 'slideshowabovecolumn1' and  style_slideshowabovecolumn1 == 0) 
+or (region == 'slideshowabovecolumn2' and  style_slideshowabovecolumn2 == 0) 
+or (region == 'slideshowabovecolumn3' and  style_slideshowabovecolumn3 == 0) 
+or (region == 'slideshowabovecolumn4' and  style_slideshowabovecolumn4 == 0) 
+or (region == 'slideshowbelowcolumn1' and style_slideshowbelowcolumn1 == 0)
+or (region == 'slideshowbelowcolumn2' and style_slideshowbelowcolumn2 == 0)
+or (region == 'slideshowbelowcolumn3' and style_slideshowbelowcolumn3 == 0)
+or (region == 'slideshowbelowcolumn4' and style_slideshowbelowcolumn4 == 0)
+or (region == 'menuabovecolumn1' and style_menuabovecolumn1 == 0) 
+or (region == 'menuabovecolumn2' and style_menuabovecolumn2 == 0) 
+or (region == 'menuabovecolumn3' and style_menuabovecolumn3 == 0) 
+or (region == 'menuabovecolumn4' and style_menuabovecolumn4 == 0) 
+or (region == 'menubelowcolumn1' and style_menubelowcolumn1 == 0) 
+or (region == 'menubelowcolumn2' and style_menubelowcolumn2 == 0) 
+or (region == 'menubelowcolumn3' and style_menubelowcolumn3 == 0) 
+or (region == 'menubelowcolumn4' and style_menubelowcolumn4 == 0) 
+or (region == 'contenttopcolumn1' and style_contenttopcolumn1 == 0) 
+or (region == 'contenttopcolumn2' and style_contenttopcolumn2 == 0) 
+or (region == 'contenttopcolumn3' and style_contenttopcolumn3 == 0) 
+or (region == 'contenttopcolumn4' and style_contenttopcolumn4 == 0) 
+or (region == 'contentbottomcolumn1' and style_contentbottomcolumn1 == 0) 
+or (region == 'contentbottomcolumn2' and style_contentbottomcolumn2 == 0) 
+or (region == 'contentbottomcolumn3' and style_contentbottomcolumn3 == 0) 
+or (region == 'contentbottomcolumn4' and style_contentbottomcolumn4 == 0) 
+or (region == 'footerabovecolumn1' and style_footerabovecolumn1 == 0 ) 
+or (region == 'footerabovecolumn2' and style_footerabovecolumn2 == 0 ) 
+or (region == 'footerabovecolumn3' and style_footerabovecolumn3 == 0 ) 
+or (region == 'footerabovecolumn4' and style_footerabovecolumn4 == 0 ) 
+or (region == 'footercellcolumn1' and style_footercellcolumn1 == 0 ) 
+or (region == 'footercellcolumn2' and style_footercellcolumn2 == 0 ) 
+or (region == 'footercellcolumn3' and style_footercellcolumn3 == 0 ) 
+or (region == 'footerbelowcolumn1' and style_footerbelowcolumn1 == 0 ) 
+or (region == 'footerbelowcolumn2' and style_footerbelowcolumn2 == 0 ) 
+or (region == 'footerbelowcolumn3' and style_footerbelowcolumn3 == 0 ) 
+or (region == 'footerbelowcolumn4' and style_footerbelowcolumn4 == 0 ) 
+  %} 
+	{% if region =="sidebar_first"%} 
+<div class= "ttr_sidebar_left_padding" >
+{% else %} 
+{% if region =="sidebar_second"%} 
+<div class= "ttr_sidebar_right_padding" >
+{% endif %} 
+{% endif %} 
+{% if "shape" in region %}
+<div{{ attributes.addClass('ttr_shapes') }}> 
+{% else %} 
+{% if "footercellcolumn" in region %}
+<div{{ attributes.addClass('ttr_footer_block') }}> 
+{% else %} 
+<div{{ attributes.addClass('ttr_block') }}> 
+{% endif %} 
+{% endif %} 
+<div class="margin_collapsetop"></div> 
+{% if label %} 
+<div class="ttr_block_header"> 
+{{ title_prefix }} 
+<h3 {{ title_attributes.addClass('ttr_block_heading') }}> 
+{{ label }} </h3> 
+{{ title_suffix }} 
+{% else %} 
+<div class="ttr_block_without_header"> 
+{% endif %} 
+</div> 
+{% if "shape" in region %} 
+{{ content }} 
+{% else %} 
+{% if "footercellcolumn" in region %}
+{{ content }}
+{% else %}
+<div class = "ttr_block_content"> 
+{{ content }}
+</div> 
+{% endif %}
+{% endif %}
+<div class="margin_collapsetop"></div>
+</div>
+{% else %} 
+<div{{ attributes.addClass(classes) }}> 
+{{ title_prefix }} 
+{% if label %} 
+<h2{{ title_attributes }}>{{ label }}</h2> 
+{% endif %} 
+{{ title_suffix }} 
+{% block content %} 
+<div{{ content_attributes.addClass('content') }}> 
+{{ content }} 
+</div> 
+{% endblock %} 
+</div> 
+{% endif %} 

@@ -1,0 +1,21 @@
+uuid: 41a51af0-44fb-44ad-8750-0cff9b58a9fd
+langcode: es
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_sp_shift_start
+    - node.type.sp_shift
+  module:
+    - datetime
+id: node.sp_shift.field_sp_shift_start
+field_name: field_sp_shift_start
+entity_type: node
+bundle: sp_shift
+label: Inicio
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

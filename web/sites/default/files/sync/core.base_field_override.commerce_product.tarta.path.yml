@@ -1,0 +1,20 @@
+uuid: f314ef8d-d607-43b1-b1ec-22ed217eaa16
+langcode: es
+status: true
+dependencies:
+  config:
+    - commerce_product.commerce_product_type.tarta
+  module:
+    - path
+id: commerce_product.tarta.path
+field_name: path
+entity_type: commerce_product
+bundle: tarta
+label: 'Alias de URL'
+description: 'Alias del URL del producto.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: path

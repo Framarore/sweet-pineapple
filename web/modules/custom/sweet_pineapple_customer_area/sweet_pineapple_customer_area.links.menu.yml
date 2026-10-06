@@ -1,0 +1,6 @@
+sweet_pineapple_customer_area.dashboard:
+  title: 'Mi cuenta'
+  description: 'Preferencias, pedidos y recordatorios del cliente.'
+  route_name: sweet_pineapple_customer_area.dashboard
+  menu_name: account
+  weight: 10

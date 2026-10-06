@@ -1,0 +1,75 @@
+<?php
+
+declare(strict_types=1);
+
+use Drupal\Core\Entity\Entity\EntityFormDisplay;
+use Drupal\Core\Entity\Entity\EntityViewDisplay;
+use Drupal\field\Entity\FieldConfig;
+use Drupal\field\Entity\FieldStorageConfig;
+
+/**
+ * Crea los campos de usuario que sostienen el area personalizada.
+ */
+function sweet_pineapple_customer_area_install(): void {
+  sweet_pineapple_customer_area_create_user_fields();
+}
+
+/**
+ * Permite aplicar los campos si el modulo ya estaba habilitado en desarrollo.
+ */
+function sweet_pineapple_customer_area_update_10001(): void {
+  sweet_pineapple_customer_area_create_user_fields();
+}
+
+function sweet_pineapple_customer_area_create_user_fields(): void {
+  $lists = [
+    'field_sp_favorite_flavors' => ['Sabores favoritos', sweet_pineapple_customer_area_flavors()],
+    'field_sp_avoided_flavors' => ['Sabores a evitar', sweet_pineapple_customer_area_flavors()],
+    'field_sp_allergens' => ['Alergias o restricciones', sweet_pineapple_customer_area_allergens()],
+    'field_sp_customer_occasions' => ['Ocasiones habituales', sweet_pineapple_customer_area_occasions()],
+  ];
+
+  foreach ($lists as $field => [$label, $values]) {
+    sweet_pineapple_customer_area_field_storage('user', $field, 'list_string', ['allowed_values' => $values], -1);
+    sweet_pineapple_customer_area_field_config('user', 'user', $field, $label);
+  }
+
+  sweet_pineapple_customer_area_field_storage('user', 'field_sp_next_event', 'datetime', ['datetime_type' => 'date']);
+  sweet_pineapple_customer_area_field_config('user', 'user', 'field_sp_next_event', 'Proxima fecha importante');
+  sweet_pineapple_customer_area_configure_displays();
+}
+
+function sweet_pineapple_customer_area_field_storage(string $entity_type, string $field, string $type, array $settings = [], int $cardinality = 1): void {
+  if (!FieldStorageConfig::loadByName($entity_type, $field)) {
+    FieldStorageConfig::create(['field_name' => $field, 'entity_type' => $entity_type, 'type' => $type, 'settings' => $settings, 'cardinality' => $cardinality])->save();
+  }
+}
+
+function sweet_pineapple_customer_area_field_config(string $entity_type, string $bundle, string $field, string $label): void {
+  if (!FieldConfig::loadByName($entity_type, $bundle, $field)) {
+    FieldConfig::create(['field_name' => $field, 'entity_type' => $entity_type, 'bundle' => $bundle, 'label' => $label])->save();
+  }
+}
+
+function sweet_pineapple_customer_area_configure_displays(): void {
+  $form = EntityFormDisplay::load('user.user.default') ?: EntityFormDisplay::create(['targetEntityType' => 'user', 'bundle' => 'user', 'mode' => 'default', 'status' => TRUE]);
+  $view = EntityViewDisplay::load('user.user.default') ?: EntityViewDisplay::create(['targetEntityType' => 'user', 'bundle' => 'user', 'mode' => 'default', 'status' => TRUE]);
+  foreach (['field_sp_favorite_flavors', 'field_sp_avoided_flavors', 'field_sp_allergens', 'field_sp_customer_occasions'] as $weight => $field) {
+    $form->setComponent($field, ['type' => 'options_buttons', 'weight' => 30 + $weight]);
+    $view->setComponent($field, ['type' => 'list_default', 'weight' => 30 + $weight]);
+  }
+  $form->setComponent('field_sp_next_event', ['type' => 'datetime_default', 'weight' => 34])->save();
+  $view->setComponent('field_sp_next_event', ['type' => 'datetime_default', 'weight' => 34])->save();
+}
+
+function sweet_pineapple_customer_area_flavors(): array {
+  return ['chocolate' => 'Chocolate', 'pistacho' => 'Pistacho', 'caramelo' => 'Caramelo/Lotus', 'fruta' => 'Fruta', 'citricos' => 'Citricos', 'cafe' => 'Cafe', 'galleta' => 'Galleta', 'clasico' => 'Clasico'];
+}
+
+function sweet_pineapple_customer_area_allergens(): array {
+  return ['gluten' => 'Gluten', 'lactosa' => 'Lactosa', 'frutos_secos' => 'Frutos secos', 'huevo' => 'Huevo', 'soja' => 'Soja', 'vegano' => 'Preferencia vegana'];
+}
+
+function sweet_pineapple_customer_area_occasions(): array {
+  return ['cumpleanos' => 'Cumpleanos', 'regalo' => 'Regalos', 'oficina' => 'Oficina', 'familia' => 'Familia', 'capricho' => 'Caprichos'];
+}

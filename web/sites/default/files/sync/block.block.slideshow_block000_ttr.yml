@@ -1,0 +1,38 @@
+uuid: ca627e13-e5b1-41ea-8c22-c7ad5b1c5864
+langcode: es
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:7657ea90-a5d7-490f-a717-f336efef9ccb'
+  module:
+    - block_content
+    - system
+  theme:
+    - theme__100260
+id: slideshow_block000_ttr
+theme: theme__100260
+region: slideshowshape000
+weight: 0
+provider: block_content
+plugin: 'block_content:7657ea90-a5d7-490f-a717-f336efef9ccb'
+settings:
+  id: 'block_content:7657ea90-a5d7-490f-a717-f336efef9ccb'
+  label: slideshow_block000
+  label_display: ''
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: |-
+
+      /home
+      /about-us
+      /contact
+      /services
+      /shop
+      /blog
+      /node/*

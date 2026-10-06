@@ -1,0 +1,6 @@
+services:
+  sweet_pineapple_customer_area.profile:
+    class: Drupal\sweet_pineapple_customer_area\Service\CustomerProfile
+    arguments:
+      - '@entity_type.manager'
+      - '@current_user'

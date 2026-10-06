@@ -1,0 +1,11 @@
+uuid: 20ee8b5e-faf3-48cd-b661-5dfbf8157d11
+langcode: es
+status: true
+dependencies:
+  module:
+    - commerce_order
+id: commerce_order.order_details
+label: 'Order details'
+description: ''
+targetEntityType: commerce_order
+cache: true

@@ -1,0 +1,22 @@
+uuid: 934b75c3-67ce-445d-a4e1-1b4cb30a8503
+langcode: en
+status: false
+dependencies:
+  module:
+    - system
+  theme:
+    - sweet_pineapple
+_core:
+  default_config_hash: VShtwe72J2j41BJzApoNbs8l554EpngM5RTObxM7yiw
+id: sweet_pineapple_breadcrumbs
+theme: sweet_pineapple
+region: header
+weight: 0
+provider: null
+plugin: system_breadcrumb_block
+settings:
+  id: system_breadcrumb_block
+  label: Breadcrumbs
+  label_display: '0'
+  provider: system
+visibility: {  }

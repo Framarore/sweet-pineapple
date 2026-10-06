@@ -1,0 +1,22 @@
+uuid: 4d546f49-1554-4289-9568-75232d57fcc1
+langcode: en
+status: true
+dependencies:
+  theme:
+    - sweet_pineapple
+_core:
+  default_config_hash: yX9o6NcntZnXRDfbJoHY1pJwuXlumW44m5AMs347NN4
+id: sweet_pineapple_local_tasks
+theme: sweet_pineapple
+region: content
+weight: -4
+provider: null
+plugin: local_tasks_block
+settings:
+  id: local_tasks_block
+  label: Tabs
+  label_display: '0'
+  provider: core
+  primary: true
+  secondary: true
+visibility: {  }

@@ -1,0 +1,25 @@
+uuid: 546c3dc9-5f33-4586-89df-e818985274a8
+langcode: es
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:6196985f-c9d2-4c43-8ef0-702ec2258d4c'
+  module:
+    - block_content
+  theme:
+    - sweet_pineapple
+id: sweet_pineapple_slider_inicio
+theme: sweet_pineapple
+region: slideshowshape000
+weight: null
+provider: null
+plugin: 'block_content:6196985f-c9d2-4c43-8ef0-702ec2258d4c'
+settings:
+  id: 'block_content:6196985f-c9d2-4c43-8ef0-702ec2258d4c'
+  label: 'Slider Inicio'
+  label_display: ''
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility: {  }

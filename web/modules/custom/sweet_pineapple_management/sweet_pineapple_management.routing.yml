@@ -1,0 +1,15 @@
+sweet_pineapple_management.dashboard:
+  path: '/admin/sweet-pineapple/dashboard'
+  defaults:
+    _controller: '\Drupal\sweet_pineapple_management\Controller\OwnerDashboardController::dashboard'
+    _title: 'Panel de tiendas'
+  requirements:
+    _permission: 'access sweet pineapple dashboard'
+
+sweet_pineapple_management.team:
+  path: '/admin/sweet-pineapple/team'
+  defaults:
+    _controller: '\Drupal\sweet_pineapple_management\Controller\TeamAdminController::overview'
+    _title: 'Gestión de equipo'
+  requirements:
+    _permission: 'manage sweet pineapple team'

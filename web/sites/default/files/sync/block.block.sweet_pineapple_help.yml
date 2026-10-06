@@ -1,0 +1,22 @@
+uuid: 0024a537-14b7-47cb-a919-544511305908
+langcode: en
+status: true
+dependencies:
+  module:
+    - help
+  theme:
+    - sweet_pineapple
+_core:
+  default_config_hash: S0Y16qIQfKiOEzWlddOGk3u_BKwAruAheA8VVFfGbLc
+id: sweet_pineapple_help
+theme: sweet_pineapple
+region: content
+weight: -3
+provider: null
+plugin: help_block
+settings:
+  id: help_block
+  label: Help
+  label_display: '0'
+  provider: help
+visibility: {  }

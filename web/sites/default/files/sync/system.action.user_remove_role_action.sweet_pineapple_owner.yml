@@ -1,0 +1,14 @@
+uuid: 76c82f3c-dc8c-4f03-ba26-83d34b368a3b
+langcode: es
+status: true
+dependencies:
+  config:
+    - user.role.sweet_pineapple_owner
+  module:
+    - user
+id: user_remove_role_action.sweet_pineapple_owner
+label: 'Elimina el rol Dueño de tienda al(los) usuario(s) seleccionado(s)'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: sweet_pineapple_owner

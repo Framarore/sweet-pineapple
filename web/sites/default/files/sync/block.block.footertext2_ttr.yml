@@ -1,0 +1,36 @@
+uuid: 69bcdba7-1f61-4433-9c9d-159c756554be
+langcode: es
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:f7bb9ff7-8d9a-4cfa-8476-787939544e5c'
+  module:
+    - block_content
+    - system
+  theme:
+    - theme__100260
+id: footertext2_ttr
+theme: theme__100260
+region: footercellcolumn2
+weight: 0
+provider: block_content
+plugin: 'block_content:f7bb9ff7-8d9a-4cfa-8476-787939544e5c'
+settings:
+  id: 'block_content:f7bb9ff7-8d9a-4cfa-8476-787939544e5c'
+  label: footertext2
+  label_display: ''
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: |-
+
+      /home
+      /about-us
+      /contact
+      /services
+      /shop

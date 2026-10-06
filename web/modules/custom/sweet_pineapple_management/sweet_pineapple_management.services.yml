@@ -1,0 +1,11 @@
+services:
+  sweet_pineapple_management.metrics:
+    class: Drupal\sweet_pineapple_management\Service\DashboardMetrics
+    arguments:
+      - '@entity_type.manager'
+      - '@date.formatter'
+  sweet_pineapple_management.store_insights:
+    class: Drupal\sweet_pineapple_management\Service\StoreInsights
+    arguments:
+      - '@entity_type.manager'
+      - '@datetime.time'

@@ -1,0 +1,205 @@
+{% set theme_path = base_path ~ active_theme_path() %}
+{% set theme_path1 = theme_path ~ '/content' %}
+<div class="ttr_banner_menu">
+</div>
+<div id="ttr_menu"> 
+<div class="margin_collapsetop"></div>
+<nav class="navbar-default navbar-expand-md navbar">
+<div id="ttr_menu_inner_in"> 
+<div class="ttr_menu_element_alignment container">
+<div class="ttr_images_container">
+<div class="ttr_menu_logo">
+<a href="">
+<img src="{{ theme_path  ~ '/images/sweet-pineapple-profile.jpg' }}" alt="{{ 'Home'|t }}"class="" />
+</a>
+</div>
+</div>
+<div id="navigationmenu">
+<div class="navbar-header">
+<button id="nav-expander" data-target=".navbar-collapse" data-toggle="collapse" class="navbar-toggle" type="button">
+<span class="ttr_menu_toggle_button">
+<span class="sr-only">
+</span>
+<span class="icon-bar">
+</span>
+<span class="icon-bar">
+</span>
+<span class="icon-bar">
+</span>
+</span>
+<span class="ttr_menu_button_text">
+Menu
+</span>
+</button>
+</div>
+<div class="menu-center collapse navbar-collapse">
+{{ page.primary_menu }}
+</div>
+<div class="ttr_images_container">
+</div>
+</div>
+</div>
+</div>
+</nav>
+</div>
+<div class="ttr_banner_menu">
+</div>
+<div class="margin_collapsetop"></div>
+<div id="ttr_page" class="container">
+<div id="ttr_content_and_sidebar_container">
+<div id="ttr_content">
+{% set type =  node.getType %}
+{% if type == "page" %}
+<div id="ttr_html_content_margin" class="container-fluid">
+{% else %}
+<div id="ttr_content_margin" class="container-fluid">
+{% endif %}
+<div class="margin_collapsetop"></div>
+{% if breadcrumb %}
+{{ breadcrumb }}
+{% endif %}
+<div style="clear:both;">
+</div>
+{% if tabs %}
+<div style="clear:both;" class="tabs">{{ tabs }}</div>
+{% endif %}
+{{ page.help }}
+{{ page.messages }}
+{% if (action_links) %}
+<ul class="action-links">{{ action_links }}</ul>{% endif %}
+{{ page.content }}
+<div class="margin_collapsetop"></div>
+</div> 
+</div> 
+<div style="clear:both;">
+</div>
+</div>
+</div>
+<div class="footer-widget-area">
+<div class="footer-widget-area_left_border_image">
+<div class="footer-widget-area_right_border_image">
+<div class="footer-widget-area_inner">
+</div>
+</div>
+</div>
+</div>
+<div class="margin_collapsetop"></div>
+<footer id="ttr_footer">
+<div class="margin_collapsetop"></div>
+ <div id="ttr_footer_inner">
+{% 
+if page.footercellcolumn1 or page.footercellcolumn2 or page.footercellcolumn3
+ %}
+<div class="ttr_footer-widget-cell_inner_widget_container">
+<div class="ttr_footer-widget-cell_inner0 container row">
+{% set showcolumn = page.footercellcolumn1 %}
+{% if showcolumn %}
+<div class="cell1 col-xl-4 col-lg-4 col-md-4 col-sm-4  col-xs-4  col-4">
+<div class="footercellcolumn1">
+{{ page.footercellcolumn1 }}
+</div>
+</div>
+{% else %}
+<div class="cell1 col-xl-4 col-lg-4 col-md-4 col-sm-4  col-xs-4  col-4"  style="background-color:transparent;">
+ 
+</div>
+{% endif %}
+{% set showcolumn = page.footercellcolumn2 %}
+{% if showcolumn %}
+<div class="cell2 col-xl-4 col-lg-4 col-md-4 col-sm-4  col-xs-4  col-4">
+<div class="footercellcolumn2">
+{{ page.footercellcolumn2 }}
+</div>
+</div>
+{% else %}
+<div class="cell2 col-xl-4 col-lg-4 col-md-4 col-sm-4  col-xs-4  col-4"  style="background-color:transparent;">
+ 
+</div>
+{% endif %}
+{% set showcolumn = page.footercellcolumn3 %}
+{% if showcolumn %}
+<div class="cell3 col-xl-4 col-lg-4 col-md-4 col-sm-4  col-xs-4  col-4">
+<div class="footercellcolumn3">
+{{ page.footercellcolumn3 }}
+</div>
+</div>
+{% else %}
+<div class="cell3 col-xl-4 col-lg-4 col-md-4 col-sm-4  col-xs-4  col-4"  style="background-color:transparent;">
+ 
+</div>
+{% endif %}
+<div class=" visible-lg-block d-xl-block d-lg-block visible-md-block d-md-block visible-sm-block d-sm-block visible-xs-block d-block" style="clear:both;"></div>
+<div class=" visible-lg-block d-xl-block d-lg-block visible-md-block d-md-block visible-sm-block d-sm-block visible-xs-block d-block" style="clear:both;"></div>
+</div>
+</div>
+<div style="clear: both;"></div>
+{% endif %}
+<div id="ttr_footer_top_for_widgets">
+<div  class="ttr_footer_top_for_widgets_inner">
+{% if page.leftfooterarea or page.centerfooterarea or page.rightfooterarea %}
+<div class="footer-widget-area_fixed row">
+<div style="margin:0 auto;"></div>
+{% if page.leftfooterarea %}
+<div  id="first" class="widget-area col-xl-4 col-lg-4 col-md-4 col-sm-12 col-xs-12 col-12">
+{{ page.leftfooterarea }}
+</div>
+<div class=" visible-xs d-block" style="clear:both;"></div>
+{% else %}
+<div  id="first" class="widget-area  col-xl-4 col-lg-4 col-md-4 col-sm-12 col-xs-12 col-12">
+ 
+</div>
+<div class=" visible-xs d-block"></div>
+{% endif %}
+{% if page.centerfooterarea %}
+<div  id="second" class="widget-area  col-xl-4 col-lg-4 col-md-4 col-sm-12 col-xs-12 col-12">
+{{ page.centerfooterarea }}
+</div>
+<div class=" visible-xs d-block" style="clear:both;"></div>
+{% else %}
+<div  id="second" class="widget-area  col-xl-4 col-lg-4 col-md-4 col-sm-12 col-xs-12 col-12">
+ 
+</div>
+<div class=" visible-xs d-block" style="clear:both;"></div>
+{%  endif %}
+{% if page.rightfooterarea %}
+<div  id="third" class="widget-area  col-xl-4 col-lg-4 col-md-4 col-sm-12 col-xs-12 col-12">
+{{ page.rightfooterarea }}
+</div>
+<div class=" visible-lg visible-md visible-sm visible-xs d-xl-block d-lg-block d-md-block d-sm-block d-block" style="clear:both;"></div>
+{% else %}
+<div  id="third" class="widget-area  col-xl-4 col-lg-4 col-md-4 col-sm-12 col-xs-12 col-12">
+ 
+</div>
+<div class=" visible-lg visible-md visible-sm visible-xs d-xl-block d-lg-block d-md-block d-sm-block d-block" style="clear:both;"></div>
+{% endif %}
+</div>
+{% endif %}
+</div>
+</div>
+<div class="ttr_footer_bottom_footer">
+<div class="ttr_footer_bottom_footer_inner">
+<div class="ttr_footer_element_alignment container">
+</div>
+<div id="ttr_footer_designed_by_links">
+<a href="http://templatetoaster.com" target="_self"> Drupal Theme </a>
+<span id="ttr_footer_designed_by"> Designed With TemplateToaster </span>
+</div>
+{{ feed_icons }}
+<a href="http://www.facebook.com/TemplateToaster" class="ttr_footer_facebook " target="_self" >
+</a>
+<a href="https://www.linkedin.com/company/templatetoaster/" class="ttr_footer_linkedin " target="_self" >
+</a>
+<a href="http://twitter.com/templatetoaster" class="ttr_footer_twitter " target="_self" >
+</a>
+<a href="https://www.instagram.com/templatetoaster/" class="ttr_footer_instagram " target="_self" >
+</a>
+<a href="https://www.youtube.com/templatetoaster" class="ttr_footer_youtube " target="_self" >
+</a>
+</div>
+</div>
+</div>
+</footer>
+<div class="margin_collapsetop"></div>
+<div class="footer-widget-area">
+</div>
+</div>

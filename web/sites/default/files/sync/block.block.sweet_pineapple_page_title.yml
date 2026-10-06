@@ -1,0 +1,26 @@
+uuid: 74955bf5-7659-4e97-9e22-730d731a7068
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - sweet_pineapple
+_core:
+  default_config_hash: qYppfxaWSy6BwGNKdMch1PeUA24PlRTt39jQft6A6Kg
+id: sweet_pineapple_page_title
+theme: sweet_pineapple
+region: content
+weight: -6
+provider: null
+plugin: page_title_block
+settings:
+  id: page_title_block
+  label: 'Page title'
+  label_display: '0'
+  provider: core
+visibility:
+  request_path:
+    id: request_path
+    negate: true
+    pages: '<front>'

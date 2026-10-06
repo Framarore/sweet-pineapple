@@ -1,0 +1,69 @@
+{% if options.columns  is defined  %}
+{% set lg = options.columns %}
+{% else %}
+{% set lg = 4 %}
+{% endif %}
+{% set md = 4 %}
+{% set xs = 1 %}
+{% set class_suffix_lg  = (12 / lg)|round %}
+{% set class_suffix_md  = (12 / md)|round %}
+{% set class_suffix_xs  = (12 / xs)|round %}
+{% set classes = ['views-view-grid', options.alignment,'cols-' ~ options.columns,'clearfix', 'row',]%}
+{% if options.row_class_default %}
+{% 
+set row_classes = [
+'views-row',
+options.alignment == 'horizontal' ? 'clearfix',
+]
+%}
+{% endif %}
+{% if options.col_class_default %}
+{%
+set col_classes = [
+'views-col',
+options.alignment == 'vertical' ? 'clearfix',]
+%}
+{% endif %}
+{% if title %}
+<h3>{{ title }}</h3>
+{% endif %}
+<div{{ attributes.addClass(classes) }}>
+{% set columncounter = 0 %}
+{% for column in items %}
+{% if loop.first %}
+{% set first_col_item = true %}
+{% else %}
+{% set first_col_item = false %}
+{% endif %}
+{% for row in column.content %}
+{% if loop.first %}
+{% set first_row_item = true %}
+{% else %}
+{% set first_row_item = false %}
+{% endif %}
+{% set data  = row.content|render|render %}
+{% if 'ttnode--sticky' in data %}
+<div class="col-xl-12 col-lg-12 col-md-12 col-xs-12 col-12">
+{% else %}
+<div class="col-xl-{{ class_suffix_lg }} col-lg-{{ class_suffix_lg }} col-md-{{ class_suffix_md }} col-sm-{{ class_suffix_xs }} col-xs-{{ class_suffix_xs }} col-{{ class_suffix_xs }}">
+{% endif %}
+ {{ row.content }}
+</div>
+{% set columncounter =  columncounter + 1 %}
+{% if options.columns is defined %}
+{% if((columncounter) % (options.columns) == 0 ) %}
+<div class=" visible-lg-block d-xl-block d-lg-block" style="clear:both;"></div>
+{% endif %}
+{% elseif((columncounter) % lg == 0) %}
+<div class=" visible-sm-block d-sm-block visible-xs-block d-block" style="clear:both;"></div>
+<div class=" visible-lg-block d-lg-block" style="clear:both;"></div>
+{% endif %}
+{% if((columncounter) % md == 0) %}
+<div class=" visible-md-block d-md-block" style="clear:both;"></div>
+{% endif %}
+{% if((columncounter) % xs == 0) %}
+<div class=" visible-xs-block d-block" style="clear:both;"></div>
+{% endif %}
+{% endfor %}
+{% endfor %}
+</div>

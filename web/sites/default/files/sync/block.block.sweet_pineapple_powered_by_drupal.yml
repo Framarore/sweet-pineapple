@@ -1,0 +1,22 @@
+uuid: b87b25f4-ae4a-4130-bc60-2a84eb8b0a0a
+langcode: en
+status: false
+dependencies:
+  module:
+    - system
+  theme:
+    - sweet_pineapple
+_core:
+  default_config_hash: 2_xxaOb8b_0AUgYFdJLxIBDDwufyh6YozhGfBd97p38
+id: sweet_pineapple_powered_by_drupal
+theme: sweet_pineapple
+region: header
+weight: 0
+provider: null
+plugin: system_powered_by_block
+settings:
+  id: system_powered_by_block
+  label: 'Powered by Drupal'
+  label_display: '0'
+  provider: system
+visibility: {  }

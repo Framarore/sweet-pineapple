@@ -1,0 +1,38 @@
+uuid: 6a090ad2-0fc8-4185-877d-945efdf5fcc1
+langcode: es
+status: true
+dependencies:
+  config:
+    - commerce_product.commerce_product_type.tarta
+    - field.storage.commerce_product.field_imagen
+  module:
+    - image
+id: commerce_product.tarta.field_imagen
+field_name: field_imagen
+entity_type: commerce_product
+bundle: tarta
+label: 'Imagen '
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:file'
+  handler_settings: {  }
+  file_directory: '[date:custom:Y]-[date:custom:m]'
+  file_extensions: 'png gif jpg jpeg webp'
+  max_filesize: ''
+  max_resolution: ''
+  min_resolution: ''
+  alt_field: true
+  alt_field_required: true
+  title_field: false
+  title_field_required: false
+  default_image:
+    uuid: ''
+    alt: ''
+    title: ''
+    width: null
+    height: null
+field_type: image

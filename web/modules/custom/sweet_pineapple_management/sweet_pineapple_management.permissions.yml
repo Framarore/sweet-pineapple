@@ -1,0 +1,14 @@
+access sweet pineapple dashboard:
+  title: 'Access Sweet Pineapple owner dashboard'
+  description: 'View multi-store sales, product and employee indicators.'
+  restrict access: true
+
+manage sweet pineapple team:
+  title: 'Manage Sweet Pineapple team'
+  description: 'Access the employee and shift administration page.'
+  restrict access: true
+
+access sweet pineapple store admin toolbar:
+  title: 'Access Sweet Pineapple store admin toolbar'
+  description: 'View store administration shortcuts in the Drupal toolbar.'
+  restrict access: true

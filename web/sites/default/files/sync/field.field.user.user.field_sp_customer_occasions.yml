@@ -1,0 +1,21 @@
+uuid: 0e74e13e-7ce4-443c-8e44-f50a5d35ecc8
+langcode: es
+status: true
+dependencies:
+  config:
+    - field.storage.user.field_sp_customer_occasions
+  module:
+    - options
+    - user
+id: user.user.field_sp_customer_occasions
+field_name: field_sp_customer_occasions
+entity_type: user
+bundle: user
+label: 'Ocasiones habituales'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

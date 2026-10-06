@@ -1,0 +1,19 @@
+uuid: 1e5e32aa-ce7c-4acb-bf97-2516833d0913
+langcode: es
+status: true
+dependencies:
+  config:
+    - commerce_product.commerce_product_variation_type.tarta
+    - field.storage.commerce_product_variation.field_sku
+id: commerce_product_variation.tarta.field_sku
+field_name: field_sku
+entity_type: commerce_product_variation
+bundle: tarta
+label: SKU
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

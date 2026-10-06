@@ -1,0 +1,11 @@
+recommender:
+  version: 1.x
+  css:
+    theme:
+      css/recommender.css: {}
+  js:
+    js/recommender-chat.js: {}
+  dependencies:
+    - core/drupal
+    - core/drupalSettings
+    - core/once

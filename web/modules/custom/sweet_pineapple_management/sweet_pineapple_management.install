@@ -1,0 +1,345 @@
+<?php
+
+declare(strict_types=1);
+
+use Drupal\Core\Entity\Entity\EntityFormDisplay;
+use Drupal\Core\Entity\Entity\EntityViewDisplay;
+use Drupal\field\Entity\FieldConfig;
+use Drupal\field\Entity\FieldStorageConfig;
+use Drupal\node\Entity\NodeType;
+use Drupal\user\Entity\Role;
+use Drupal\user\Entity\User;
+
+/**
+ * Instala roles, campos y tipo de contenido del modulo.
+ */
+function sweet_pineapple_management_install(): void {
+  _sweet_pineapple_management_create_roles();
+  _sweet_pineapple_management_create_user_fields();
+  _sweet_pineapple_management_create_shift_type();
+}
+
+/**
+ * Repara roles y campos si una instalacion anterior quedo a medias.
+ */
+function sweet_pineapple_management_update_10001(): void {
+  _sweet_pineapple_management_create_roles();
+  _sweet_pineapple_management_create_user_fields();
+  _sweet_pineapple_management_create_shift_type();
+}
+
+/**
+ * Añade permisos y acceso a la página de gestión de equipo.
+ */
+function sweet_pineapple_management_update_10002(): void {
+  _sweet_pineapple_management_create_roles();
+}
+
+/**
+ * Crea el rol limitado de administrador de tienda y su menú superior.
+ */
+function sweet_pineapple_management_update_10003(): void {
+  _sweet_pineapple_management_create_roles();
+}
+
+/**
+ * Crea una cuenta demo para el rol Administrador de tienda.
+ */
+function sweet_pineapple_management_update_10004(): void {
+  _sweet_pineapple_management_create_roles();
+  _sweet_pineapple_management_create_store_admin_user();
+}
+
+/**
+ * Permite al administrador de tienda usar el tema de administración.
+ */
+function sweet_pineapple_management_update_10005(): void {
+  _sweet_pineapple_management_create_roles();
+}
+
+/**
+ * Crea los roles usados por el flujo de gestion.
+ */
+function _sweet_pineapple_management_create_roles(): void {
+  $roles = [
+    'sweet_pineapple_owner' => 'Dueño de tienda',
+    'sweet_pineapple_store_admin' => 'Administrador de tienda',
+    'sweet_pineapple_store_manager' => 'Responsable de tienda',
+    'sweet_pineapple_employee' => 'Empleado',
+  ];
+
+  foreach ($roles as $id => $label) {
+    $role = Role::load($id) ?: Role::create([
+      'id' => $id,
+      'label' => $label,
+    ]);
+    if ($id === 'sweet_pineapple_owner') {
+      $role->grantPermission('access sweet pineapple dashboard');
+      $role->grantPermission('manage sweet pineapple team');
+      $role->grantPermission('access sweet pineapple store admin toolbar');
+      $role->grantPermission('administer commerce_store');
+      $role->grantPermission('administer commerce_order');
+      $role->grantPermission('administer users');
+      $role->grantPermission('access content overview');
+      $role->grantPermission('create sp_shift content');
+      $role->grantPermission('edit any sp_shift content');
+      $role->grantPermission('delete any sp_shift content');
+    }
+    if ($id === 'sweet_pineapple_store_admin') {
+      $role->grantPermission('access toolbar');
+      $role->grantPermission('access administration pages');
+      $role->grantPermission('access content overview');
+      $role->grantPermission('view the administration theme');
+      $role->grantPermission('access sweet pineapple dashboard');
+      $role->grantPermission('manage sweet pineapple team');
+      $role->grantPermission('access sweet pineapple store admin toolbar');
+      $role->grantPermission('create sp_shift content');
+      $role->grantPermission('edit any sp_shift content');
+      $role->grantPermission('delete any sp_shift content');
+    }
+    $role->save();
+  }
+
+  $owner = User::load(1);
+  if ($owner && !$owner->hasRole('sweet_pineapple_owner')) {
+    $owner->addRole('sweet_pineapple_owner');
+    $owner->save();
+  }
+}
+
+/**
+ * Crea o actualiza un usuario demo con acceso limitado de tienda.
+ */
+function _sweet_pineapple_management_create_store_admin_user(): void {
+  $storage = \Drupal::entityTypeManager()->getStorage('user');
+  $existing = $storage->loadByProperties(['name' => 'admin.tienda']);
+  $account = $existing ? reset($existing) : NULL;
+  $store_ids = \Drupal::entityTypeManager()->getStorage('commerce_store')->getQuery()
+    ->accessCheck(FALSE)
+    ->sort('store_id', 'ASC')
+    ->range(0, 1)
+    ->execute();
+  $store_id = $store_ids ? (int) reset($store_ids) : NULL;
+
+  if (!$account) {
+    $values = [
+      'name' => 'admin.tienda',
+      'mail' => 'admin.tienda@sweetpineapple.local',
+      'pass' => 'SweetPineapple2026!',
+      'status' => 1,
+      'roles' => ['sweet_pineapple_store_admin'],
+      'field_sp_position' => 'manager',
+      'field_sp_phone' => '600100000',
+      'field_sp_hire_date' => date('Y-m-d'),
+    ];
+    if ($store_id !== NULL) {
+      $values['field_sp_store'] = $store_id;
+    }
+    User::create($values)->save();
+    return;
+  }
+
+  if (!$account->hasRole('sweet_pineapple_store_admin')) {
+    $account->addRole('sweet_pineapple_store_admin');
+  }
+  $account->setPassword('SweetPineapple2026!');
+  $account->activate();
+  if ($account->hasField('field_sp_position')) {
+    $account->set('field_sp_position', 'manager');
+  }
+  if ($store_id !== NULL && $account->hasField('field_sp_store') && $account->get('field_sp_store')->isEmpty()) {
+    $account->set('field_sp_store', $store_id);
+  }
+  $account->save();
+}
+
+/**
+ * Anade tienda y puesto a los usuarios.
+ */
+function _sweet_pineapple_management_create_user_fields(): void {
+  _sweet_pineapple_management_ensure_field_storage('user', 'field_sp_store', 'entity_reference', [
+    'target_type' => 'commerce_store',
+  ]);
+  _sweet_pineapple_management_ensure_field_config('user', 'user', 'field_sp_store', 'Tienda asignada', [
+    'handler' => 'default:commerce_store',
+  ]);
+
+  _sweet_pineapple_management_ensure_field_storage('user', 'field_sp_position', 'list_string', [
+    'allowed_values' => [
+      'owner' => 'Dueño',
+      'manager' => 'Responsable',
+      'pastry_chef' => 'Pastelero/a',
+      'sales' => 'Atención al cliente',
+      'delivery' => 'Reparto',
+    ],
+  ]);
+  _sweet_pineapple_management_ensure_field_config('user', 'user', 'field_sp_position', 'Puesto');
+
+  _sweet_pineapple_management_ensure_field_storage('user', 'field_sp_phone', 'string', [
+    'max_length' => 32,
+  ]);
+  _sweet_pineapple_management_ensure_field_config('user', 'user', 'field_sp_phone', 'Teléfono');
+
+  _sweet_pineapple_management_ensure_field_storage('user', 'field_sp_hire_date', 'datetime', [
+    'datetime_type' => 'date',
+  ]);
+  _sweet_pineapple_management_ensure_field_config('user', 'user', 'field_sp_hire_date', 'Fecha de alta');
+
+  _sweet_pineapple_management_configure_user_displays();
+}
+
+/**
+ * Crea el tipo de contenido de turnos y sus campos.
+ */
+function _sweet_pineapple_management_create_shift_type(): void {
+  if (!NodeType::load('sp_shift')) {
+    $type = NodeType::create([
+      'type' => 'sp_shift',
+      'name' => 'Turno de empleado',
+      'description' => 'Planifica horarios de empleados por tienda.',
+    ]);
+    $type->setNewRevision(FALSE);
+    $type->save();
+  }
+
+  _sweet_pineapple_management_ensure_field_storage('node', 'field_sp_store', 'entity_reference', [
+    'target_type' => 'commerce_store',
+  ]);
+  _sweet_pineapple_management_ensure_field_config('node', 'sp_shift', 'field_sp_store', 'Tienda', [
+    'handler' => 'default:commerce_store',
+  ]);
+
+  _sweet_pineapple_management_ensure_field_storage('node', 'field_sp_employee', 'entity_reference', [
+    'target_type' => 'user',
+  ]);
+  _sweet_pineapple_management_ensure_field_config('node', 'sp_shift', 'field_sp_employee', 'Empleado', [
+    'handler' => 'default:user',
+  ]);
+
+  _sweet_pineapple_management_ensure_field_storage('node', 'field_sp_shift_start', 'datetime', [
+    'datetime_type' => 'datetime',
+  ]);
+  _sweet_pineapple_management_ensure_field_config('node', 'sp_shift', 'field_sp_shift_start', 'Inicio');
+
+  _sweet_pineapple_management_ensure_field_storage('node', 'field_sp_shift_end', 'datetime', [
+    'datetime_type' => 'datetime',
+  ]);
+  _sweet_pineapple_management_ensure_field_config('node', 'sp_shift', 'field_sp_shift_end', 'Fin');
+
+  _sweet_pineapple_management_ensure_field_storage('node', 'field_sp_shift_status', 'list_string', [
+    'allowed_values' => [
+      'planned' => 'Planificado',
+      'completed' => 'Completado',
+      'absence' => 'Ausencia',
+    ],
+  ]);
+  _sweet_pineapple_management_ensure_field_config('node', 'sp_shift', 'field_sp_shift_status', 'Estado');
+
+  _sweet_pineapple_management_configure_shift_displays();
+}
+
+/**
+ * Asegura que exista el almacenamiento reutilizable de un campo.
+ */
+function _sweet_pineapple_management_ensure_field_storage(string $entity_type, string $field_name, string $type, array $settings = []): void {
+  if (FieldStorageConfig::loadByName($entity_type, $field_name)) {
+    return;
+  }
+
+  FieldStorageConfig::create([
+    'field_name' => $field_name,
+    'entity_type' => $entity_type,
+    'type' => $type,
+    'settings' => $settings,
+    'cardinality' => 1,
+  ])->save();
+}
+
+/**
+ * Asegura que exista la instancia de campo en un bundle.
+ */
+function _sweet_pineapple_management_ensure_field_config(string $entity_type, string $bundle, string $field_name, string $label, array $handler_settings = []): void {
+  if (FieldConfig::loadByName($entity_type, $bundle, $field_name)) {
+    return;
+  }
+
+  $settings = [];
+  if ($handler_settings !== []) {
+    $settings = [
+      'handler' => $handler_settings['handler'],
+      'handler_settings' => [],
+    ];
+  }
+
+  FieldConfig::create([
+    'field_name' => $field_name,
+    'entity_type' => $entity_type,
+    'bundle' => $bundle,
+    'label' => $label,
+    'settings' => $settings,
+  ])->save();
+}
+
+/**
+ * Configura widgets y presentacion compacta para usuarios.
+ */
+function _sweet_pineapple_management_configure_user_displays(): void {
+  $form = EntityFormDisplay::load('user.user.default') ?: EntityFormDisplay::create([
+    'targetEntityType' => 'user',
+    'bundle' => 'user',
+    'mode' => 'default',
+    'status' => TRUE,
+  ]);
+  $form
+    ->setComponent('field_sp_store', ['type' => 'options_select', 'weight' => 20])
+    ->setComponent('field_sp_position', ['type' => 'options_select', 'weight' => 21])
+    ->setComponent('field_sp_phone', ['type' => 'string_textfield', 'weight' => 22])
+    ->setComponent('field_sp_hire_date', ['type' => 'datetime_default', 'weight' => 23])
+    ->save();
+
+  $view = EntityViewDisplay::load('user.user.default') ?: EntityViewDisplay::create([
+    'targetEntityType' => 'user',
+    'bundle' => 'user',
+    'mode' => 'default',
+    'status' => TRUE,
+  ]);
+  $view
+    ->setComponent('field_sp_store', ['type' => 'entity_reference_label', 'weight' => 20])
+    ->setComponent('field_sp_position', ['type' => 'list_default', 'weight' => 21])
+    ->setComponent('field_sp_phone', ['type' => 'string', 'weight' => 22])
+    ->setComponent('field_sp_hire_date', ['type' => 'datetime_default', 'weight' => 23])
+    ->save();
+}
+
+/**
+ * Configura widgets y presentacion compacta para turnos.
+ */
+function _sweet_pineapple_management_configure_shift_displays(): void {
+  $form = EntityFormDisplay::load('node.sp_shift.default') ?: EntityFormDisplay::create([
+    'targetEntityType' => 'node',
+    'bundle' => 'sp_shift',
+    'mode' => 'default',
+    'status' => TRUE,
+  ]);
+  $form
+    ->setComponent('field_sp_store', ['type' => 'options_select', 'weight' => 1])
+    ->setComponent('field_sp_employee', ['type' => 'options_select', 'weight' => 2])
+    ->setComponent('field_sp_shift_start', ['type' => 'datetime_default', 'weight' => 3])
+    ->setComponent('field_sp_shift_end', ['type' => 'datetime_default', 'weight' => 4])
+    ->setComponent('field_sp_shift_status', ['type' => 'options_select', 'weight' => 5])
+    ->save();
+
+  $view = EntityViewDisplay::load('node.sp_shift.default') ?: EntityViewDisplay::create([
+    'targetEntityType' => 'node',
+    'bundle' => 'sp_shift',
+    'mode' => 'default',
+    'status' => TRUE,
+  ]);
+  $view
+    ->setComponent('field_sp_store', ['type' => 'entity_reference_label', 'weight' => 1])
+    ->setComponent('field_sp_employee', ['type' => 'entity_reference_label', 'weight' => 2])
+    ->setComponent('field_sp_shift_start', ['type' => 'datetime_default', 'weight' => 3])
+    ->setComponent('field_sp_shift_end', ['type' => 'datetime_default', 'weight' => 4])
+    ->setComponent('field_sp_shift_status', ['type' => 'list_default', 'weight' => 5])
+    ->save();
+}

@@ -1,0 +1,14 @@
+uuid: 46d312cb-8ba5-466f-a79c-7ff18609690c
+langcode: es
+status: true
+dependencies:
+  config:
+    - user.role.sweet_pineapple_owner
+  module:
+    - user
+id: user_add_role_action.sweet_pineapple_owner
+label: 'Add the Dueño de tienda role to the selected user(s)'
+type: user
+plugin: user_add_role_action
+configuration:
+  rid: sweet_pineapple_owner

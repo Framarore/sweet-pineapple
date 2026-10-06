@@ -1,0 +1,7 @@
+sweet_pineapple_customer_area.dashboard:
+  path: '/mi-cuenta'
+  defaults:
+    _controller: '\Drupal\sweet_pineapple_customer_area\Controller\CustomerAreaController::dashboard'
+    _title: 'Mi cuenta Sweet Pineapple'
+  requirements:
+    _user_is_logged_in: 'TRUE'

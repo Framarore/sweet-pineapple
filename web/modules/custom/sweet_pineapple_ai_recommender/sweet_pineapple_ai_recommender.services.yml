@@ -1,0 +1,17 @@
+services:
+  sweet_pineapple_ai_recommender.recommender:
+    class: Drupal\sweet_pineapple_ai_recommender\Service\ProductRecommender
+    arguments:
+      - '@entity_type.manager'
+      - '@entity.repository'
+      - '@path_alias.manager'
+      - '@file_url_generator'
+      - '@commerce_price.currency_formatter'
+      - '@sweet_pineapple_management.store_insights'
+  sweet_pineapple_ai_recommender.history:
+    class: Drupal\sweet_pineapple_ai_recommender\Service\RecommenderHistory
+    arguments:
+      - '@current_user'
+      - '@user.data'
+      - '@tempstore.private'
+      - '@datetime.time'

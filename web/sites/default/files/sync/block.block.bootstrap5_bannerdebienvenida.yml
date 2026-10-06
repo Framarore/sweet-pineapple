@@ -1,0 +1,30 @@
+uuid: c94c69e3-585d-4e1f-aef7-f16dab88fab4
+langcode: es
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:8c06e876-c3fd-4f50-bf90-8e5e73a0af4a'
+  module:
+    - block_content
+    - system
+  theme:
+    - bootstrap5
+id: bootstrap5_bannerdebienvenida
+theme: bootstrap5
+region: content
+weight: 0
+provider: null
+plugin: 'block_content:8c06e876-c3fd-4f50-bf90-8e5e73a0af4a'
+settings:
+  id: 'block_content:8c06e876-c3fd-4f50-bf90-8e5e73a0af4a'
+  label: 'Banner de Bienvenida'
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: /node/1

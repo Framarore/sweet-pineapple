@@ -1,0 +1,67 @@
+{#
+/**
+ * @file
+ * Theme override for the "tienda" page display field output.
+ *
+ * Builds the real Commerce product card with a Sweet Pineapple look while
+ * keeping the add-to-cart form and variation selector intact.
+ */
+#}
+{% set title_text = fields.title is defined ? fields.title.content|render|striptags|trim : '' %}
+{% set normalized = title_text|lower %}
+{% set family = 'tartas' %}
+{% if 'cheesecake' in normalized or 'tarta' in normalized or 'layer cake' in normalized %}
+  {% set family = 'tartas' %}
+{% elseif 'cupcake' in normalized %}
+  {% set family = 'mini' %}
+{% elseif 'roll' in normalized or 'brioche' in normalized %}
+  {% set family = 'bolleria' %}
+{% elseif 'megacookie' in normalized or 'n.y cookie' in normalized or 'ny cookie' in normalized %}
+  {% set family = 'cookies' %}
+{% elseif 'brownie' in normalized or 'blondie' in normalized %}
+  {% set family = 'brownies' %}
+{% endif %}
+{% set flavors = [] %}
+{% if 'choc' in normalized or 'cacao' in normalized or 'hippo' in normalized or 'brownie' in normalized or 'dubai' in normalized or 'kinder' in normalized or 'red velvet' in normalized %}{% set flavors = flavors|merge(['chocolate']) %}{% endif %}
+{% if 'pistac' in normalized or 'dubai' in normalized %}{% set flavors = flavors|merge(['pistacho', 'premium']) %}{% endif %}
+{% if 'lotus' in normalized or 'caramel' in normalized or 'toffee' in normalized or 'dulce de leche' in normalized %}{% set flavors = flavors|merge(['caramelo']) %}{% endif %}
+{% if 'cookie' in normalized or 'oreo' in normalized or 'cookies' in normalized %}{% set flavors = flavors|merge(['galleta']) %}{% endif %}
+{% if 'fresa' in normalized or 'frutos rojos' in normalized or 'mango' in normalized %}{% set flavors = flavors|merge(['fruta']) %}{% endif %}
+{% if 'limon' in normalized or 'lemon' in normalized or 'naranja' in normalized %}{% set flavors = flavors|merge(['citricos']) %}{% endif %}
+{% if 'coco' in normalized %}{% set flavors = flavors|merge(['coco']) %}{% endif %}
+{% if 'cafe' in normalized or 'tiramisu' in normalized %}{% set flavors = flavors|merge(['cafe']) %}{% endif %}
+{% if 'almendra' in normalized or 'avellana' in normalized or 'nuez' in normalized %}{% set flavors = flavors|merge(['frutos-secos']) %}{% endif %}
+{% if flavors is empty %}{% set flavors = ['clasico'] %}{% endif %}
+{% set occasions = family == 'tartas' ? ['cumpleanos', 'compartir', 'regalo'] : (family == 'cookies' ? ['capricho', 'regalo', 'compartir'] : (family == 'mini' ? ['regalo', 'capricho', 'compartir'] : ['capricho', 'compartir'])) %}
+{% set styles = [] %}
+{% if family == 'tartas' or 'dubai' in normalized %}{% set styles = styles|merge(['premium']) %}{% endif %}
+{% if family == 'cookies' or family == 'mini' or family == 'bolleria' %}{% set styles = styles|merge(['original']) %}{% endif %}
+{% if 'choc' in normalized or family == 'brownies' %}{% set styles = styles|merge(['intenso']) %}{% endif %}
+{% set styles = styles|merge(['clasico']) %}
+
+<article class="sp-store-card" data-sp-product-card data-sp-family="{{ family }}" data-sp-flavors="{{ flavors|join(' ') }}" data-sp-occasions="{{ occasions|join(' ') }}" data-sp-styles="{{ styles|join(' ') }}" data-sp-stores="{{ sp_store_ids|default('') }}">
+  <div class="sp-store-card__media">
+    {% if fields.field_imagen is defined %}
+      {{ fields.field_imagen.content }}
+    {% endif %}
+  </div>
+
+  <div class="sp-store-card__body">
+    {% if fields.title is defined %}
+      <h3 class="sp-store-card__title">{{ fields.title.content }}</h3>
+    {% endif %}
+
+    <div class="sp-store-card__tags">
+      <span>{{ family == 'tartas' ? 'Tartas' : (family == 'cookies' ? 'Cookies' : (family == 'brownies' ? 'Brownies' : (family == 'mini' ? 'Mini dulces' : 'Bollería'))) }}</span>
+      <span>{{ flavors|first|replace({'-': ' '})|capitalize }}</span>
+    </div>
+
+    <p class="sp-store-card__copy">Elige tu tamaño favorito y añade tu pedido directamente al carrito.</p>
+
+    {% if fields.variations_target_id is defined %}
+      <div class="sp-store-card__purchase">
+        {{ fields.variations_target_id.content }}
+      </div>
+    {% endif %}
+  </div>
+</article>

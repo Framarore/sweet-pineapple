@@ -1,0 +1,15 @@
+sweet_pineapple_ai_recommender.page:
+  path: '/tienda/recomendador'
+  defaults:
+    _form: '\Drupal\sweet_pineapple_ai_recommender\Form\ProductRecommenderForm'
+    _title: 'Asistente inteligente de Sweet Pineapple'
+  requirements:
+    _permission: 'access content'
+
+sweet_pineapple_ai_recommender.chat:
+  path: '/tienda/recomendador/chat'
+  defaults:
+    _controller: '\Drupal\sweet_pineapple_ai_recommender\Controller\RecommenderChatController::reply'
+  methods: [GET, POST]
+  requirements:
+    _permission: 'access content'

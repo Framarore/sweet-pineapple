@@ -1,0 +1,11 @@
+uuid: 6e31e407-22e9-4397-be2d-0e2c7583238f
+langcode: es
+status: true
+dependencies: {  }
+name: 'Turno de empleado'
+type: sp_shift
+description: 'Planifica horarios de empleados por tienda.'
+help: null
+new_revision: false
+preview_mode: 1
+display_submitted: true
